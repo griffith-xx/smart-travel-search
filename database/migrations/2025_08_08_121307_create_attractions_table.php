@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('provinces', function (Blueprint $table) {
+        Schema::create('attractions', function (Blueprint $table) {
             $table->id();
-            $table->string('name_th', 100);
-            $table->string('name_en', 100);
-            $table->enum('region', ['north', 'south', 'northeast', 'central', 'east', 'west']);
-            $table->decimal('latitude', 10, 8)->nullable();
-            $table->decimal('longitude', 11, 8)->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('provinces');
+        Schema::dropIfExists('attractions');
     }
 };

@@ -23,11 +23,19 @@ class ProvinceSeeder extends Seeder
         $json = file_get_contents($filePath);
         $provinces = json_decode($json, true);
 
+        // Truncate the provinces table before seeding
+        DB::table('provinces')->truncate();
+
+        //Check if Table exists
+        if (!DB::getSchemaBuilder()->hasTable('provinces')) {
+            throw new Exception('Table provinces does not exist.');
+        }
+
         // Create the provinces in the database
         foreach ($provinces as $province) {
             DB::table('provinces')->insert([
-                'province_name_th' => $province['province_name_th'],
-                'province_name_en' => $province['province_name_en'],
+                'name_th' => $province['name_th'],
+                'name_en' => $province['name_en'],
                 'region' => $province['region'],
                 'latitude' => $province['latitude'] ?? null,
                 'longitude' => $province['longitude'] ?? null,
