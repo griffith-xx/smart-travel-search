@@ -32,4 +32,23 @@ class Category extends Model
     {
         return $this->hasMany(Attraction::class);
     }
+
+    // Recursive all children
+    public function allChildren()
+    {
+        $this->children()->with('allChildren');
+    }
+
+    // Recursive all parents
+    public function ancestors(){
+        $anscestors = collect();
+        $parent = $this->parent;
+        
+        while ($parent) {
+            $anscestors->push($parent);
+            $parent = $parent->parent;  
+        }
+
+        return $anscestors;
+    }
 }
