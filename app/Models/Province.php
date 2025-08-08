@@ -6,13 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Province extends Model
 {
-    // Fillable attributes
+    // Fillable attributes for mass assignment
     protected $fillable = [
         'province_name_th',
         'province_name_en',
         'region',
         'latitude',
         'longitude',
+    ];
+
+    // Cast attributes to specific types
+    protected $casts = [
+        'latitude' => 'float',
+        'longitude' => 'float',
     ];
 
     // Scope to filter by region
