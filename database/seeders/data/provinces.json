@@ -1,0 +1,618 @@
+[
+  {
+    "id": 1,
+    "province_name_th": "กระบี่",
+    "province_name_en": "Krabi",
+    "region": "south",
+    "latitude": 8.0858,
+    "longitude": 98.9174
+  },
+  {
+    "id": 2,
+    "province_name_th": "กรุงเทพมหานคร",
+    "province_name_en": "Bangkok",
+    "region": "central",
+    "latitude": 13.7563,
+    "longitude": 100.5018
+  },
+  {
+    "id": 3,
+    "province_name_th": "กาญจนบุรี",
+    "province_name_en": "Kanchanaburi",
+    "region": "west",
+    "latitude": 14.0047,
+    "longitude": 99.5317
+  },
+  {
+    "id": 4,
+    "province_name_th": "กาฬสินธุ์",
+    "province_name_en": "Kalasin",
+    "region": "northeast",
+    "latitude": 16.4339,
+    "longitude": 103.5042
+  },
+  {
+    "id": 5,
+    "province_name_th": "กำแพงเพชร",
+    "province_name_en": "Kamphaeng Phet",
+    "region": "central",
+    "latitude": 16.4851,
+    "longitude": 99.5255
+  },
+  {
+    "id": 6,
+    "province_name_th": "ขอนแก่น",
+    "province_name_en": "Khon Kaen",
+    "region": "northeast",
+    "latitude": 16.4297,
+    "longitude": 102.8361
+  },
+  {
+    "id": 7,
+    "province_name_th": "จันทบุรี",
+    "province_name_en": "Chanthaburi",
+    "region": "east",
+    "latitude": 12.6105,
+    "longitude": 102.1102
+  },
+  {
+    "id": 8,
+    "province_name_th": "ฉะเชิงเทรา",
+    "province_name_en": "Chachoengsao",
+    "region": "east",
+    "latitude": 13.6823,
+    "longitude": 101.0717
+  },
+  {
+    "id": 9,
+    "province_name_th": "ชลบุรี",
+    "province_name_en": "Chonburi",
+    "region": "east",
+    "latitude": 13.3644,
+    "longitude": 100.9844
+  },
+  {
+    "id": 10,
+    "province_name_th": "ชัยนาท",
+    "province_name_en": "Chai Nat",
+    "region": "central",
+    "latitude": 15.1852,
+    "longitude": 100.125
+  },
+  {
+    "id": 11,
+    "province_name_th": "ชัยภูมิ",
+    "province_name_en": "Chaiyaphum",
+    "region": "northeast",
+    "latitude": 15.8236,
+    "longitude": 102.0463
+  },
+  {
+    "id": 12,
+    "province_name_th": "ชุมพร",
+    "province_name_en": "Chumphon",
+    "region": "south",
+    "latitude": 10.4907,
+    "longitude": 99.1802
+  },
+  {
+    "id": 13,
+    "province_name_th": "เชียงราย",
+    "province_name_en": "Chiang Rai",
+    "region": "north",
+    "latitude": 19.9079,
+    "longitude": 99.8338
+  },
+  {
+    "id": 14,
+    "province_name_th": "เชียงใหม่",
+    "province_name_en": "Chiang Mai",
+    "region": "north",
+    "latitude": 18.7883,
+    "longitude": 98.9853
+  },
+  {
+    "id": 15,
+    "province_name_th": "ตรัง",
+    "province_name_en": "Trang",
+    "region": "south",
+    "latitude": 7.5606,
+    "longitude": 99.6105
+  },
+  {
+    "id": 16,
+    "province_name_th": "ตราด",
+    "province_name_en": "Trat",
+    "region": "east",
+    "latitude": 12.2359,
+    "longitude": 102.5186
+  },
+  {
+    "id": 17,
+    "province_name_th": "ตาก",
+    "province_name_en": "Tak",
+    "region": "west",
+    "latitude": 16.8778,
+    "longitude": 99.1232
+  },
+  {
+    "id": 18,
+    "province_name_th": "นครนายก",
+    "province_name_en": "Nakhon Nayok",
+    "region": "central",
+    "latitude": 14.2045,
+    "longitude": 101.2001
+  },
+  {
+    "id": 19,
+    "province_name_th": "นครปฐม",
+    "province_name_en": "Nakhon Pathom",
+    "region": "central",
+    "latitude": 13.818,
+    "longitude": 100.0631
+  },
+  {
+    "id": 20,
+    "province_name_th": "นครพนม",
+    "province_name_en": "Nakhon Phanom",
+    "region": "northeast",
+    "latitude": 17.4042,
+    "longitude": 104.774
+  },
+  {
+    "id": 21,
+    "province_name_th": "นครราชสีมา",
+    "province_name_en": "Nakhon Ratchasima",
+    "region": "northeast",
+    "latitude": 14.9781,
+    "longitude": 102.0984
+  },
+  {
+    "id": 22,
+    "province_name_th": "นครศรีธรรมราช",
+    "province_name_en": "Nakhon Si Thammarat",
+    "region": "south",
+    "latitude": 8.4312,
+    "longitude": 99.9678
+  },
+  {
+    "id": 23,
+    "province_name_th": "นครสวรรค์",
+    "province_name_en": "Nakhon Sawan",
+    "region": "central",
+    "latitude": 15.6946,
+    "longitude": 100.1189
+  },
+  {
+    "id": 24,
+    "province_name_th": "นนทบุรี",
+    "province_name_en": "Nonthaburi",
+    "region": "central",
+    "latitude": 13.8651,
+    "longitude": 100.5229
+  },
+  {
+    "id": 25,
+    "province_name_th": "นราธิวาส",
+    "province_name_en": "Narathiwat",
+    "region": "south",
+    "latitude": 6.4255,
+    "longitude": 101.8152
+  },
+  {
+    "id": 26,
+    "province_name_th": "น่าน",
+    "province_name_en": "Nan",
+    "region": "north",
+    "latitude": 18.7844,
+    "longitude": 100.785
+  },
+  {
+    "id": 27,
+    "province_name_th": "บึงกาฬ",
+    "province_name_en": "Bueng Kan",
+    "region": "northeast",
+    "latitude": 18.3582,
+    "longitude": 103.6558
+  },
+  {
+    "id": 28,
+    "province_name_th": "บุรีรัมย์",
+    "province_name_en": "Buriram",
+    "region": "northeast",
+    "latitude": 14.9863,
+    "longitude": 103.1098
+  },
+  {
+    "id": 29,
+    "province_name_th": "ปทุมธานี",
+    "province_name_en": "Pathum Thani",
+    "region": "central",
+    "latitude": 14.0205,
+    "longitude": 100.542
+  },
+  {
+    "id": 30,
+    "province_name_th": "ประจวบคีรีขันธ์",
+    "province_name_en": "Prachuap Khiri Khan",
+    "region": "west",
+    "latitude": 11.8153,
+    "longitude": 99.8009
+  },
+  {
+    "id": 31,
+    "province_name_th": "ปราจีนบุรี",
+    "province_name_en": "Prachinburi",
+    "region": "east",
+    "latitude": 14.0436,
+    "longitude": 101.3853
+  },
+  {
+    "id": 32,
+    "province_name_th": "ปัตตานี",
+    "province_name_en": "Pattani",
+    "region": "south",
+    "latitude": 6.8776,
+    "longitude": 101.2514
+  },
+  {
+    "id": 33,
+    "province_name_th": "พระนครศรีอยุธยา",
+    "province_name_en": "Phra Nakhon Si Ayutthaya",
+    "region": "central",
+    "latitude": 14.3541,
+    "longitude": 100.5599
+  },
+  {
+    "id": 34,
+    "province_name_th": "พะเยา",
+    "province_name_en": "Phayao",
+    "region": "north",
+    "latitude": 19.1764,
+    "longitude": 99.8967
+  },
+  {
+    "id": 35,
+    "province_name_th": "พังงา",
+    "province_name_en": "Phang Nga",
+    "region": "south",
+    "latitude": 8.4485,
+    "longitude": 98.3976
+  },
+  {
+    "id": 36,
+    "province_name_th": "พัทลุง",
+    "province_name_en": "Phatthalung",
+    "region": "south",
+    "latitude": 7.6206,
+    "longitude": 100.076
+  },
+  {
+    "id": 37,
+    "province_name_th": "พิจิตร",
+    "province_name_en": "Phichit",
+    "region": "central",
+    "latitude": 16.4447,
+    "longitude": 100.3549
+  },
+  {
+    "id": 38,
+    "province_name_th": "พิษณุโลก",
+    "province_name_en": "Phitsanulok",
+    "region": "central",
+    "latitude": 16.8286,
+    "longitude": 100.264
+  },
+  {
+    "id": 39,
+    "province_name_th": "เพชรบุรี",
+    "province_name_en": "Phetchaburi",
+    "region": "west",
+    "latitude": 13.1118,
+    "longitude": 99.9329
+  },
+  {
+    "id": 40,
+    "province_name_th": "เพชรบูรณ์",
+    "province_name_en": "Phetchabun",
+    "region": "central",
+    "latitude": 16.4259,
+    "longitude": 101.1444
+  },
+  {
+    "id": 41,
+    "province_name_th": "แพร่",
+    "province_name_en": "Phrae",
+    "region": "north",
+    "latitude": 18.1478,
+    "longitude": 100.1471
+  },
+  {
+    "id": 42,
+    "province_name_th": "ภูเก็ต",
+    "province_name_en": "Phuket",
+    "region": "south",
+    "latitude": 7.8804,
+    "longitude": 98.3923
+  },
+  {
+    "id": 43,
+    "province_name_th": "มหาสารคาม",
+    "province_name_en": "Maha Sarakham",
+    "region": "northeast",
+    "latitude": 16.1834,
+    "longitude": 103.1812
+  },
+  {
+    "id": 44,
+    "province_name_th": "มุกดาหาร",
+    "province_name_en": "Mukdahan",
+    "region": "northeast",
+    "latitude": 16.5452,
+    "longitude": 104.7214
+  },
+  {
+    "id": 45,
+    "province_name_th": "แม่ฮ่องสอน",
+    "province_name_en": "Mae Hong Son",
+    "region": "north",
+    "latitude": 19.3006,
+    "longitude": 97.9621
+  },
+  {
+    "id": 46,
+    "province_name_th": "ยโสธร",
+    "province_name_en": "Yasothon",
+    "region": "northeast",
+    "latitude": 15.7891,
+    "longitude": 104.1481
+  },
+  {
+    "id": 47,
+    "province_name_th": "ยะลา",
+    "province_name_en": "Yala",
+    "region": "south",
+    "latitude": 6.5434,
+    "longitude": 101.2801
+  },
+  {
+    "id": 48,
+    "province_name_th": "ร้อยเอ็ด",
+    "province_name_en": "Roi Et",
+    "region": "northeast",
+    "latitude": 16.0504,
+    "longitude": 103.652
+  },
+  {
+    "id": 49,
+    "province_name_th": "ระนอง",
+    "province_name_en": "Ranong",
+    "region": "south",
+    "latitude": 9.9658,
+    "longitude": 98.6369
+  },
+  {
+    "id": 50,
+    "province_name_th": "ระยอง",
+    "province_name_en": "Rayong",
+    "region": "east",
+    "latitude": 12.6781,
+    "longitude": 101.2828
+  },
+  {
+    "id": 51,
+    "province_name_th": "ราชบุรี",
+    "province_name_en": "Ratchaburi",
+    "region": "west",
+    "latitude": 13.5358,
+    "longitude": 99.8159
+  },
+  {
+    "id": 52,
+    "province_name_th": "ลพบุรี",
+    "province_name_en": "Lopburi",
+    "region": "central",
+    "latitude": 14.7997,
+    "longitude": 100.6728
+  },
+  {
+    "id": 53,
+    "province_name_th": "ลำปาง",
+    "province_name_en": "Lampang",
+    "region": "north",
+    "latitude": 18.2928,
+    "longitude": 99.4925
+  },
+  {
+    "id": 54,
+    "province_name_th": "ลำพูน",
+    "province_name_en": "Lamphun",
+    "region": "north",
+    "latitude": 18.5779,
+    "longitude": 99.0097
+  },
+  {
+    "id": 55,
+    "province_name_th": "เลย",
+    "province_name_en": "Loei",
+    "region": "northeast",
+    "latitude": 17.4883,
+    "longitude": 101.7161
+  },
+  {
+    "id": 56,
+    "province_name_th": "ศรีสะเกษ",
+    "province_name_en": "Sisaket",
+    "region": "northeast",
+    "latitude": 15.1154,
+    "longitude": 104.321
+  },
+  {
+    "id": 57,
+    "province_name_th": "สกลนคร",
+    "province_name_en": "Sakon Nakhon",
+    "region": "northeast",
+    "latitude": 17.1594,
+    "longitude": 104.1481
+  },
+  {
+    "id": 58,
+    "province_name_th": "สงขลา",
+    "province_name_en": "Songkhla",
+    "region": "south",
+    "latitude": 7.1994,
+    "longitude": 100.5925
+  },
+  {
+    "id": 59,
+    "province_name_th": "สตูล",
+    "province_name_en": "Satun",
+    "region": "south",
+    "latitude": 6.8407,
+    "longitude": 100.0658
+  },
+  {
+    "id": 60,
+    "province_name_th": "สมุทรปราการ",
+    "province_name_en": "Samut Prakan",
+    "region": "central",
+    "latitude": 13.5997,
+    "longitude": 100.5902
+  },
+  {
+    "id": 61,
+    "province_name_th": "สมุทรสงคราม",
+    "province_name_en": "Samut Songkhram",
+    "region": "central",
+    "latitude": 13.4187,
+    "longitude": 99.9575
+  },
+  {
+    "id": 62,
+    "province_name_th": "สมุทรสาคร",
+    "province_name_en": "Samut Sakhon",
+    "region": "central",
+    "latitude": 13.5471,
+    "longitude": 100.2778
+  },
+  {
+    "id": 63,
+    "province_name_th": "สระแก้ว",
+    "province_name_en": "Sa Kaeo",
+    "region": "east",
+    "latitude": 13.7188,
+    "longitude": 102.0463
+  },
+  {
+    "id": 64,
+    "province_name_th": "สระบุรี",
+    "province_name_en": "Saraburi",
+    "region": "central",
+    "latitude": 14.5376,
+    "longitude": 100.9169
+  },
+  {
+    "id": 65,
+    "province_name_th": "สิงห์บุรี",
+    "province_name_en": "Sing Buri",
+    "region": "central",
+    "latitude": 14.8872,
+    "longitude": 100.3957
+  },
+  {
+    "id": 66,
+    "province_name_th": "สุโขทัย",
+    "province_name_en": "Sukhothai",
+    "region": "central",
+    "latitude": 17.0097,
+    "longitude": 99.8248
+  },
+  {
+    "id": 67,
+    "province_name_th": "สุพรรณบุรี",
+    "province_name_en": "Suphan Buri",
+    "region": "central",
+    "latitude": 14.4746,
+    "longitude": 100.1189
+  },
+  {
+    "id": 68,
+    "province_name_th": "สุราษฎร์ธานี",
+    "province_name_en": "Surat Thani",
+    "region": "south",
+    "latitude": 9.1415,
+    "longitude": 99.3242
+  },
+  {
+    "id": 69,
+    "province_name_th": "สุรินทร์",
+    "province_name_en": "Surin",
+    "region": "northeast",
+    "latitude": 14.8856,
+    "longitude": 103.4939
+  },
+  {
+    "id": 70,
+    "province_name_th": "หนองคาย",
+    "province_name_en": "Nong Khai",
+    "region": "northeast",
+    "latitude": 17.8863,
+    "longitude": 102.7483
+  },
+  {
+    "id": 71,
+    "province_name_th": "หนองบัวลำภู",
+    "province_name_en": "Nong Bua Lamphu",
+    "region": "northeast",
+    "latitude": 17.2086,
+    "longitude": 102.433
+  },
+  {
+    "id": 72,
+    "province_name_th": "อ่างทอง",
+    "province_name_en": "Ang Thong",
+    "region": "central",
+    "latitude": 14.5962,
+    "longitude": 100.466
+  },
+  {
+    "id": 73,
+    "province_name_th": "อุดรธานี",
+    "province_name_en": "Udon Thani",
+    "region": "northeast",
+    "latitude": 17.4173,
+    "longitude": 102.7845
+  },
+  {
+    "id": 74,
+    "province_name_th": "อุทัยธานี",
+    "province_name_en": "Uthai Thani",
+    "region": "central",
+    "latitude": 15.3742,
+    "longitude": 100.0384
+  },
+  {
+    "id": 75,
+    "province_name_th": "อุตรดิตถ์",
+    "province_name_en": "Uttaradit",
+    "region": "north",
+    "latitude": 17.6329,
+    "longitude": 100.0984
+  },
+  {
+    "id": 76,
+    "province_name_th": "อุบลราชธานี",
+    "province_name_en": "Ubon Ratchathani",
+    "region": "northeast",
+    "latitude": 15.2285,
+    "longitude": 104.856
+  },
+  {
+    "id": 77,
+    "province_name_th": "อำนาจเจริญ",
+    "province_name_en": "Amnat Charoen",
+    "region": "northeast",
+    "latitude": 15.8647,
+    "longitude": 104.6293
+  }
+]
