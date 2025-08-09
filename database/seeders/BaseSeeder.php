@@ -48,7 +48,7 @@ abstract class BaseSeeder extends Seeder
     {
         try {
             DB::table($tableName)->truncate();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             if (str_contains($e->getMessage(), 'foreign key constraint')) {
                 $this->command->warn("Cannot truncate {$tableName} due to foreign key constraints. Using DELETE instead.");
                 DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -69,10 +69,10 @@ abstract class BaseSeeder extends Seeder
 
         if (empty($mapping)) {
             $insertData = $item;
-        } else {
-            foreach ($mapping as $jsonField => $dbField) {
-                $insertData[$dbField] = $item[$jsonField] ?? null;
-            }
+        }
+        
+        foreach ($mapping as $jsonField => $dbField) {
+            $insertData[$dbField] = $item[$jsonField] ?? null;
         }
 
         $insertData['created_at'] = now();
