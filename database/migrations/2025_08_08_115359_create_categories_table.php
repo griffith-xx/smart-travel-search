@@ -15,12 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name_th', 100);
             $table->string('name_en', 100)->nullable();
-            $table->unsignedBigInteger('parent_category_id')->nullable();
+            $table->foreignId('parent_category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->string('icon', 10)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
 
-            $table->foreign('parent_category_id')->references('id')->on('categories')->onDelete('set null');
             $table->index('parent_category_id');
         });
     }
