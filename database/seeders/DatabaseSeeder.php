@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             ProvinceSeeder::class,
             CategorySeeder::class,
             TagSeeder::class,
+            AttractionSeeder::class,
         ]);
     }
 }

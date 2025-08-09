@@ -1,0 +1,122 @@
+[
+    {
+        "category_id": 1,
+        "province_id": 1,
+        "name_th": "วัดพระแก้ว",
+        "name_en": "Temple of the Emerald Buddha",
+        "slug": "wat-phra-kaew",
+        "description": "วัดพระแก้วเป็นวัดที่ศักดิ์สิทธิ์ที่สุดแห่งหนึ่งของประเทศไทย ตั้งอยู่ในพระบรมมหาราชวัง เป็นที่ประดิษฐานของพระพุทธมหามณีรัตนปฏิมากร",
+        "address": "พระนคร กรุงเทพมหานคร 10200",
+        "latitude": 13.7515,
+        "longitude": 100.4925,
+        "price_range": 3,
+        "pricing_info": "ผู้ใหญ่ 500 บาท, เด็ก 200 บาท",
+        "operating_hours": "08:30-15:30",
+        "best_visit_time": "morning",
+        "crowd_level": 4,
+        "accessibility_level": 3,
+        "featured_image": "https://example.com/wat-phra-kaew.jpg",
+        "gallery": [
+            "https://example.com/wat1.jpg",
+            "https://example.com/wat2.jpg"
+        ],
+        "rating": 4.8,
+        "review_count": 2350
+    },
+    {
+        "category_id": 1,
+        "province_id": 1,
+        "name_th": "ตลาดจตุจักร",
+        "name_en": "Chatuchak Weekend Market",
+        "slug": "chatuchak-market",
+        "description": "ตลาดนัดสุดสัปดาห์ที่ใหญ่ที่สุดในโลก มีสินค้านานาชนิดกว่า 15,000 ร้านค้า ตั้งแต่เสื้อผ้า อาหาร ของที่ระลึก และสินค้าโบราณ",
+        "address": "ถนนกำแพงเพชร 3 เขตจตุจักร กรุงเทพมหานคร 10900",
+        "latitude": 13.7998,
+        "longitude": 100.5501,
+        "price_range": 2,
+        "pricing_info": "เข้าฟรี, สินค้าราคา 50-1000 บาท",
+        "operating_hours": "09:00-18:00 (เสาร์-อาทิตย์)",
+        "best_visit_time": "morning",
+        "crowd_level": 5,
+        "accessibility_level": 2,
+        "featured_image": "https://example.com/chatuchak.jpg",
+        "gallery": [
+            "https://example.com/chatuchak1.jpg",
+            "https://example.com/chatuchak2.jpg"
+        ],
+        "rating": 4.3,
+        "review_count": 5680
+    },
+    {
+        "category_id": 1,
+        "province_id": 1,
+        "name_th": "สวนลุมพินี",
+        "name_en": "Lumpini Park",
+        "slug": "lumpini-park",
+        "description": "สวนสาธารณะขนาดใหญ่ใจกลางกรุงเทพฯ เหมาะสำหรับออกกำลังกาย ผ่อนคลาย และชมธรรมชาติ มีทะเลสาบและสัตว์น้ำต่างๆ",
+        "address": "ถนนราชดำริ เขตปทุมวัน กรุงเทพมหานคร 10330",
+        "latitude": 13.7307,
+        "longitude": 100.5418,
+        "price_range": 1,
+        "pricing_info": "เข้าฟรี",
+        "operating_hours": "04:30-21:00",
+        "best_visit_time": "morning",
+        "crowd_level": 3,
+        "accessibility_level": 5,
+        "featured_image": "https://example.com/lumpini.jpg",
+        "gallery": [
+            "https://example.com/lumpini1.jpg",
+            "https://example.com/lumpini2.jpg"
+        ],
+        "rating": 4.5,
+        "review_count": 3240
+    },
+    {
+        "category_id": 1,
+        "province_id": 1,
+        "name_th": "ตลาดน้ำดำเนินสะดุอก",
+        "name_en": "Damnoen Saduak Floating Market",
+        "slug": "damnoen-saduak-floating-market",
+        "description": "ตลาดน้ำที่มีชื่อเสียงระดับโลก ขายผลไม้สดใหม่และอาหารพื้นเมืองบนเรือ บรรยากาศดั้งเดิมของวิถีชีวิตริมคลอง",
+        "address": "ตำบลดำเนินสะดุอก อำเภอดำเนินสะดุอก จังหวัดราชบุรี 70130",
+        "latitude": 13.5186,
+        "longitude": 99.9547,
+        "price_range": 2,
+        "pricing_info": "เข้าฟรี, ค่าเรือ 200-500 บาท",
+        "operating_hours": "06:00-14:00",
+        "best_visit_time": "morning",
+        "crowd_level": 4,
+        "accessibility_level": 2,
+        "featured_image": "https://example.com/floating-market.jpg",
+        "gallery": [
+            "https://example.com/floating1.jpg",
+            "https://example.com/floating2.jpg"
+        ],
+        "rating": 4.2,
+        "review_count": 4150
+    },
+    {
+        "category_id": 1,
+        "province_id": 1,
+        "name_th": "ถนนข้าวสาร",
+        "name_en": "Khao San Road",
+        "slug": "khao-san-road",
+        "description": "ถนนสายแบ็คแพ็คเกอร์ที่มีชื่อเสียงโลก เต็มไปด้วยร้านอาหารริมทาง บาร์ โรงแรมราคาประหยัด และร้านของที่ระลึก",
+        "address": "ถนนข้าวสาร เขตพระนคร กรุงเทพมหานคร 10200",
+        "latitude": 13.7589,
+        "longitude": 100.4977,
+        "price_range": 2,
+        "pricing_info": "อาหาร 50-200 บาท, เครื่องดื่ม 100-300 บาท",
+        "operating_hours": "18:00-02:00",
+        "best_visit_time": "night",
+        "crowd_level": 5,
+        "accessibility_level": 4,
+        "featured_image": "https://example.com/khao-san.jpg",
+        "gallery": [
+            "https://example.com/khaosan1.jpg",
+            "https://example.com/khaosan2.jpg"
+        ],
+        "rating": 4.0,
+        "review_count": 2890
+    }
+]
