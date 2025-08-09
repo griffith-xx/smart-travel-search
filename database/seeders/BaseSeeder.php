@@ -70,9 +70,15 @@ abstract class BaseSeeder extends Seeder
         if (empty($mapping)) {
             $insertData = $item;
         }
-        
-        foreach ($mapping as $jsonField => $dbField) {
-            $insertData[$dbField] = $item[$jsonField] ?? null;
+
+        foreach ($item as $key => $value) {
+            $mappedKey = $mapping[$key] ?? $key;
+
+            if (is_array($value)) {
+                $insertData[$mappedKey] = json_encode($value);
+            } else {
+                $insertData[$mappedKey] = $value;
+            }
         }
 
         $insertData['created_at'] = now();
