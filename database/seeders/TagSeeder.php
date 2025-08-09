@@ -2,13 +2,14 @@
 
 namespace Database\Seeders;
 
-class CategorySeeder extends BaseSeeder
+
+class TagSeeder extends BaseSeeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $this->seedFromJson('categories.json', 'categories');
+        $this->seedFromJson('tags.json', 'tags');
     }
 }

@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             ProvinceSeeder::class,
-            CategorySeeder::class
+            CategorySeeder::class,
+            TagSeeder::class,
         ]);
     }
 }

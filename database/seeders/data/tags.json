@@ -1,0 +1,227 @@
+[
+    {
+        "id": 1,
+        "name": "cultural",
+        "display_name_th": "วัฒนธรรม",
+        "display_name_en": "Cultural",
+        "group": "type",
+        "icon": "🏛️",
+        "color": "#8B5CF6"
+    },
+    {
+        "id": 2,
+        "name": "historic",
+        "display_name_th": "ประวัติศาสตร์",
+        "display_name_en": "Historic",
+        "group": "type",
+        "icon": "📜",
+        "color": "#92400E"
+    },
+    {
+        "id": 3,
+        "name": "photo_spot",
+        "display_name_th": "จุดถ่ายรูปสวย",
+        "display_name_en": "Photo Spot",
+        "group": "feature",
+        "icon": "📸",
+        "color": "#EC4899"
+    },
+    {
+        "id": 4,
+        "name": "must_visit",
+        "display_name_th": "ต้องไป",
+        "display_name_en": "Must Visit",
+        "group": "popularity",
+        "icon": "⭐",
+        "color": "#F59E0B"
+    },
+    {
+        "id": 5,
+        "name": "crowded",
+        "display_name_th": "คนเยอะ",
+        "display_name_en": "Crowded",
+        "group": "atmosphere",
+        "icon": "👥",
+        "color": "#EF4444"
+    },
+    {
+        "id": 6,
+        "name": "peaceful",
+        "display_name_th": "เงียบสงบ",
+        "display_name_en": "Peaceful",
+        "group": "atmosphere",
+        "icon": "🧘",
+        "color": "#10B981"
+    },
+    {
+        "id": 7,
+        "name": "family_friendly",
+        "display_name_th": "เหมาะกับครอบครัว",
+        "display_name_en": "Family Friendly",
+        "group": "audience",
+        "icon": "👨‍👩‍👧‍👦",
+        "color": "#3B82F6"
+    },
+    {
+        "id": 8,
+        "name": "romantic",
+        "display_name_th": "โรแมนติก",
+        "display_name_en": "Romantic",
+        "group": "audience",
+        "icon": "💕",
+        "color": "#F43F5E"
+    },
+    {
+        "id": 9,
+        "name": "adventure",
+        "display_name_th": "ผจญภัย",
+        "display_name_en": "Adventure",
+        "group": "activity",
+        "icon": "🏔️",
+        "color": "#059669"
+    },
+    {
+        "id": 10,
+        "name": "relaxing",
+        "display_name_th": "ผ่อนคลาย",
+        "display_name_en": "Relaxing",
+        "group": "activity",
+        "icon": "🌅",
+        "color": "#06B6D4"
+    },
+    {
+        "id": 11,
+        "name": "nature",
+        "display_name_th": "ธรรมชาติ",
+        "display_name_en": "Nature",
+        "group": "type",
+        "icon": "🌿",
+        "color": "#22C55E"
+    },
+    {
+        "id": 12,
+        "name": "beach",
+        "display_name_th": "ชายหาด",
+        "display_name_en": "Beach",
+        "group": "type",
+        "icon": "🏖️",
+        "color": "#0EA5E9"
+    },
+    {
+        "id": 13,
+        "name": "mountain",
+        "display_name_th": "ภูเขา",
+        "display_name_en": "Mountain",
+        "group": "type",
+        "icon": "⛰️",
+        "color": "#64748B"
+    },
+    {
+        "id": 14,
+        "name": "free",
+        "display_name_th": "ฟรี",
+        "display_name_en": "Free",
+        "group": "budget",
+        "icon": "💰",
+        "color": "#16A34A"
+    },
+    {
+        "id": 15,
+        "name": "budget_friendly",
+        "display_name_th": "ราคาไม่แพง",
+        "display_name_en": "Budget Friendly",
+        "group": "budget",
+        "icon": "💵",
+        "color": "#65A30D"
+    },
+    {
+        "id": 16,
+        "name": "luxury",
+        "display_name_th": "หรูหรา",
+        "display_name_en": "Luxury",
+        "group": "budget",
+        "icon": "💎",
+        "color": "#7C3AED"
+    },
+    {
+        "id": 17,
+        "name": "accessible",
+        "display_name_th": "เข้าถึงง่าย",
+        "display_name_en": "Accessible",
+        "group": "accessibility",
+        "icon": "♿",
+        "color": "#6366F1"
+    },
+    {
+        "id": 18,
+        "name": "local_food",
+        "display_name_th": "อาหารท้องถิ่น",
+        "display_name_en": "Local Food",
+        "group": "feature",
+        "icon": "🍽️",
+        "color": "#DC2626"
+    },
+    {
+        "id": 19,
+        "name": "shopping",
+        "display_name_th": "ช้อปปิ้ง",
+        "display_name_en": "Shopping",
+        "group": "activity",
+        "icon": "🛍️",
+        "color": "#BE185D"
+    },
+    {
+        "id": 20,
+        "name": "nightlife",
+        "display_name_th": "ไนท์ไลฟ์",
+        "display_name_en": "Nightlife",
+        "group": "activity",
+        "icon": "🌃",
+        "color": "#4338CA"
+    },
+    {
+        "id": 21,
+        "name": "sunrise",
+        "display_name_th": "พระอาทิตย์ขึ้น",
+        "display_name_en": "Sunrise",
+        "group": "feature",
+        "icon": "🌅",
+        "color": "#F97316"
+    },
+    {
+        "id": 22,
+        "name": "sunset",
+        "display_name_th": "พระอาทิตย์ตก",
+        "display_name_en": "Sunset",
+        "group": "feature",
+        "icon": "🌇",
+        "color": "#EA580C"
+    },
+    {
+        "id": 23,
+        "name": "festival",
+        "display_name_th": "เทศกาล",
+        "display_name_en": "Festival",
+        "group": "activity",
+        "icon": "🎉",
+        "color": "#C026D3"
+    },
+    {
+        "id": 24,
+        "name": "spiritual",
+        "display_name_th": "จิตวิญญาณ",
+        "display_name_en": "Spiritual",
+        "group": "type",
+        "icon": "🙏",
+        "color": "#7C2D12"
+    },
+    {
+        "id": 25,
+        "name": "wellness",
+        "display_name_th": "สุขภาพ",
+        "display_name_en": "Wellness",
+        "group": "activity",
+        "icon": "💆‍♀️",
+        "color": "#059669"
+    }
+]
