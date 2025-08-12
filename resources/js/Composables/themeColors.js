@@ -3,30 +3,21 @@ import { primaryColors } from "../Constants/primaryColors";
 
 const STORAGE_KEY = 'theme_colors';
 
-export function setPrimaryColors(colorName) {
+export const setPrimaryColors = (colorName) => {
     const color = primaryColors.find(c => c.name === colorName);
-    if (color) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(color.palette));
-        updatePrimaryPalette(color.palette);
-    }
-}
+    if (!color) return;
 
-export function getPrimaryColors() {
-    const storedColors = localStorage.getItem(STORAGE_KEY);
-    if (storedColors) {
-        return JSON.parse(storedColors);
-    }
-    return primaryColors[0].palette;
-}
-
-export function intilializeThemeColors() {
-    const storedColors = getPrimaryColors();
-    updatePrimaryPalette(storedColors);
-}
-
-export default {
-    setPrimaryColors,
-    getPrimaryColors,
-    intilializeThemeColors
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(color.palette));
+    updatePrimaryPalette(color.palette);
 };
 
+export const getPrimaryColors = () => {
+    const storedColors = localStorage.getItem(STORAGE_KEY);
+    return storedColors ? JSON.parse(storedColors) : null;
+};
+
+export const initializeDefaultTheme = () => {
+    const storedColors = getPrimaryColors();
+    const palette = storedColors || primaryColors[0].palette;
+    updatePrimaryPalette(palette);
+};
