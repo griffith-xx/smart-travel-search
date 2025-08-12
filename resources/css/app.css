@@ -5,7 +5,6 @@
 
 @import "tailwindcss-primeui";
 @import "primeicons/primeicons.css";
-@custom-variant dark (&:where(.p-dark, .p-dark *));
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../vendor/laravel/jetstream/**/*.blade.php';
