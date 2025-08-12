@@ -1,5 +1,5 @@
 import { updatePrimaryPalette } from "@primeuix/themes";
-import { primaryColors } from "../Constants/primaryColors";
+import { primaryColors } from "../Constants/theme-colors";
 
 const STORAGE_KEY = 'theme_colors';
 
