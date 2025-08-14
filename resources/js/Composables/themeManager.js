@@ -13,11 +13,10 @@ export const setPrimaryColors = (colorName) => {
 
 export const getPrimaryColors = () => {
     const storedColors = localStorage.getItem(STORAGE_KEY);
-    return storedColors ? JSON.parse(storedColors) : null;
+    return storedColors ? JSON.parse(storedColors) : primaryColors[0];
 };
 
 export const initializeDefaultTheme = () => {
     const storedColors = getPrimaryColors();
-    const palette = storedColors || primaryColors[0].palette;
-    updatePrimaryPalette(palette);
+    updatePrimaryPalette(storedColors);
 };

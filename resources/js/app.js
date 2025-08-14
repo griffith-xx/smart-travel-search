@@ -7,11 +7,8 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
-import { initializeDefaultTheme } from './Composables/themeManager';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-
-initializeDefaultTheme();
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -31,3 +28,4 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
+

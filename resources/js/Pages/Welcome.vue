@@ -1,5 +1,8 @@
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
+import { setPrimaryColors } from "@/Composables/themeManager";
+import Button from "primevue/button";
+import { primaryColors } from "@/Constants/theme-colors";
 </script>
 
 <template>
@@ -13,6 +16,16 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
                 Feel free to explore the content and contact us if you have any
                 questions.
             </p>
+
+            <div class="flex flex-col w-fit gap-4">
+                <Button
+                    v-for="color in primaryColors"
+                    :label="color.name"
+                    @click="setPrimaryColors(color.name)"
+                    class="!border-none"
+                    :style="{ backgroundColor: color.palette['500'] }"
+                />
+            </div>
         </div>
     </GuestLayout>
 </template>

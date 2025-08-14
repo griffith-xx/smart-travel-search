@@ -1,4 +1,5 @@
 <script setup>
+import ThemeLayout from "./ThemeLayout.vue";
 import { Head } from "@inertiajs/vue3";
 defineProps({
     title: {
@@ -10,5 +11,7 @@ defineProps({
 
 <template>
     <Head :title="title" />
-    <slot></slot>
+    <ThemeLayout>
+        <slot></slot>
+    </ThemeLayout>
 </template>
