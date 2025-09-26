@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('user_preferences', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            
+            // Wellness Features - Multiple selections (JSON arrays)
+            $table->json('wellness_goals')->nullable(); // สามารถมีหลายเป้าหมาย
+            $table->json('activities')->nullable(); // สามารถมีหลายกิจกรรม
+            $table->json('environments')->nullable(); // สามารถมีหลายสภาพแวดล้อม
+            $table->json('health_restrictions')->nullable(); // สามารถมีหลายข้อจำกัด
+
+            // Single selections (Foreign Keys)
+            $table->foreignId('duration_intensity_id')->nullable()->constrained('feature_duration_intensities'); // มีระยะเวลาได้แค่แบบเดียว
+            $table->foreignId('budget_accommodation_id')->nullable()->constrained('feature_budget_accommodations'); // มีระดับราคาได้แค่แบบเดียว
+            $table->foreignId('travel_companion_id')->nullable()->constrained('feature_travel_companions'); // เหมาะกับกลุ่มเป้าหมายแค่แบบเดียว
+            $table->foreignId('wellness_experience_id')->nullable()->constrained('feature_wellness_experiences'); // มีระดับประสบการณ์ได้แค่แบบเดียว
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('user_preferences');
+    }
+};

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FeatureWellnessGoal extends Model
+class FeatureDurationIntensity extends Model
 {
     protected $fillable = [
         'name',

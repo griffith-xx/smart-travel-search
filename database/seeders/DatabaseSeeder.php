@@ -12,8 +12,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            FeatureWellnessGoalSeeder::class,
+            AdminSeeder::class,
+            UserSeeder::class,
             ProvinceSeeder::class,
+            FeatureWellnessGoalSeeder::class,
+            FeatureActivitySeeder::class,
+            FeatureBudgetAccommodationSeeder::class,
+            FeatureDurationIntensitySeeder::class,
+            FeatureEnvironmentSeeder::class,
+            FeatureHealthRestrictionSeeder::class,
+            FeatureTravelCompanionSeeder::class,
+            FeatureWellnessExperienceSeeder::class,
         ]);
     }
 }
