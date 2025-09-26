@@ -43,4 +43,9 @@ class Destination extends Model
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
     ];
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
 }

@@ -22,4 +22,9 @@ class Province extends Model
         'latitude' => 'decimal:8',
         'longitude' => 'decimal:8',
     ];
+
+    public function destinations()
+    {
+        return $this->hasMany(Destination::class);
+    }
 }
