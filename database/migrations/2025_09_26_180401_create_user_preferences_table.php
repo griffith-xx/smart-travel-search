@@ -19,12 +19,10 @@ return new class extends Migration
             $table->json('wellness_goals')->nullable(); // สามารถมีหลายเป้าหมาย
             $table->json('activities')->nullable(); // สามารถมีหลายกิจกรรม
             $table->json('environments')->nullable(); // สามารถมีหลายสภาพแวดล้อม
-            $table->json('health_restrictions')->nullable(); // สามารถมีหลายข้อจำกัด
 
             // Single selections (Foreign Keys)
             $table->foreignId('duration_intensity_id')->nullable()->constrained('feature_duration_intensities'); // มีระยะเวลาได้แค่แบบเดียว
             $table->foreignId('budget_accommodation_id')->nullable()->constrained('feature_budget_accommodations'); // มีระดับราคาได้แค่แบบเดียว
-            $table->foreignId('travel_companion_id')->nullable()->constrained('feature_travel_companions'); // เหมาะกับกลุ่มเป้าหมายแค่แบบเดียว
             $table->foreignId('wellness_experience_id')->nullable()->constrained('feature_wellness_experiences'); // มีระดับประสบการณ์ได้แค่แบบเดียว
             $table->timestamps();
         });

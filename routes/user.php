@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\DestinationController;
 use App\Http\Controllers\User\UserPreferenceController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,8 +9,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+    Route::get('/destinations', [DestinationController::class,'index'])->name('destinations.index');
 
-    Route::get('/preferences', [UserPreferenceController::class, 'create'])->name('preferences.create');
-    Route::post('/preferences', [UserPreferenceController::class, 'store'])->name('preferences.store');
+    Route::get('/preferences', [UserPreferenceController::class, 'index'])->name('preferences.index');
+    Route::get('/preferences/create', [UserPreferenceController::class, 'create'])->name('preferences.create');
+    Route::post('/preferences/store', [UserPreferenceController::class, 'store'])->name('preferences.store');
 });

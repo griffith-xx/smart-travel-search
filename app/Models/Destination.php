@@ -20,10 +20,8 @@ class Destination extends Model
         'wellness_goals',
         'activities',
         'environments',
-        'health_restrictions',
         'duration_intensity_id',
         'budget_accommodation_id',
-        'travel_companion_id',
         'wellness_experience_id',
         'price_from',
         'price_to',
@@ -39,7 +37,6 @@ class Destination extends Model
         'wellness_goals' => 'array',
         'activities' => 'array',
         'environments' => 'array',
-        'health_restrictions' => 'array',
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
     ];

@@ -1,11 +1,7 @@
 <script setup>
-defineProps({
-    'recommendedDestinations': Object,
-})
+import UserLayout from "@/Layouts/UserLayout.vue";
 </script>
 
 <template>
-    <pre>
-        {{ recommendedDestinations }}
-    </pre>
+    <UserLayout title="ยินดีต้อนรับสู่แดชบอร์ด"> dashboard </UserLayout>
 </template>

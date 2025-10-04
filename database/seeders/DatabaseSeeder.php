@@ -20,8 +20,6 @@ class DatabaseSeeder extends Seeder
             FeatureBudgetAccommodationSeeder::class,
             FeatureDurationIntensitySeeder::class,
             FeatureEnvironmentSeeder::class,
-            FeatureHealthRestrictionSeeder::class,
-            FeatureTravelCompanionSeeder::class,
             FeatureWellnessExperienceSeeder::class,
         ]);
     }
