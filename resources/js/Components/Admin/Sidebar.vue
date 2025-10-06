@@ -1,36 +1,35 @@
 <script setup>
 import { Menu } from "primevue";
 import { ref } from "vue";
+import { Link } from "@inertiajs/vue3";
 
-const items = ref([
+const navigations = ref([
     {
-        label: "สถานที่ท่องเที่ยว",
-        items: [
-            {
-                label: "New",
-                icon: "pi pi-plus",
-            },
-            {
-                label: "Search",
-                icon: "pi pi-search",
-            },
-        ],
+        label: "หน้าแรก",
+        icon: "pi pi-home",
+        route: "admin.dashboard",
     },
     {
-        label: "โปรไฟล์",
-        items: [
-            {
-                label: "Settings",
-                icon: "pi pi-cog",
-            },
-            {
-                label: "Logout",
-                icon: "pi pi-sign-out",
-            },
-        ],
+        label: "จังหวัด",
+        icon: "pi pi-map",
+        route: "admin.provinces.index",
     },
 ]);
 </script>
 <template>
-    <Menu :model="items" />
+    <Menu class="h-fit" :model="navigations">
+        <template #item="{ item, props }">
+            <Link
+                v-bind="props.action"
+                :href="route(item.route)"
+                :class="{
+                    'text-primary!': route().current(item.route),
+                }"
+                class="flex items-center"
+            >
+                <span :class="item.icon" />
+                <span>{{ item.label }}</span>
+            </Link>
+        </template>
+    </Menu>
 </template>

@@ -7,7 +7,7 @@ const { theme, setTheme } = useTheme();
 
 <template>
     <nav
-        class="bg-[var(--p-content-background)] px-10 py-4 border-b border-[var(--p-menu-border-color)] flex items-center justify-between"
+        class="bg-[var(--p-content-background)] border-b border-[var(--p-menu-border-color)] px-10 py-4 flex items-center justify-between"
     >
         <h1 class="font-bold text-3xl uppercase opacity-80">
             <span class="mr-2"> 🚀 </span>

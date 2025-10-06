@@ -2,6 +2,7 @@
 import AppLayout from "./AppLayout.vue";
 import Sidebar from "@/Components/Admin/Sidebar.vue";
 import Navigation from "@/Components/Admin/Navigation.vue";
+
 defineProps({
     title: {
         type: String,
@@ -12,12 +13,14 @@ defineProps({
 
 <template>
     <AppLayout :title="title">
-        <Navigation />
-        <div class="flex p-10 gap-10">
-            <div>
+        <div class="max-h-screen overflow-hidden">
+            <Navigation />
+            <div class="flex p-5 gap-5">
                 <Sidebar />
+                <div class="card max-h-screen overflow-y-auto">
+                    <slot></slot>
+                </div>
             </div>
-            <slot></slot>
         </div>
     </AppLayout>
 </template>

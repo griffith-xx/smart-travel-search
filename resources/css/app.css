@@ -37,6 +37,10 @@
     display: none;
 }
 
+.card {
+    @apply w-full p-5 bg-[var(--p-content-background)] border border-[var(--p-menu-border-color)] rounded-[var(--p-menu-border-radius)];
+}
+
 .pulse-green {
     animation: pulse-green 3s infinite;
 }
