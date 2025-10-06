@@ -1,5 +1,7 @@
 <script setup>
 import AppLayout from "./AppLayout.vue";
+import Sidebar from "@/Components/Admin/Sidebar.vue";
+import Navigation from "@/Components/Admin/Navigation.vue";
 defineProps({
     title: {
         type: String,
@@ -10,6 +12,12 @@ defineProps({
 
 <template>
     <AppLayout :title="title">
-        <slot></slot>
+        <Navigation />
+        <div class="flex p-10 gap-10">
+            <div>
+                <Sidebar />
+            </div>
+            <slot></slot>
+        </div>
     </AppLayout>
 </template>

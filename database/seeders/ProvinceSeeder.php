@@ -20,7 +20,7 @@ class ProvinceSeeder extends Seeder
                 'latitude' => 16.4322,
                 'longitude' => 102.8236,
                 'region' => 'northeast',
-                'image_url' => 'https://example.com/khonkaen.jpg',
+                'image_url' => 'https://i.ytimg.com/vi/fF_QQ91wa4w/maxresdefault.jpg',
                 'is_popular' => true,
                 'sort_order' => 1
             ],
@@ -31,21 +31,10 @@ class ProvinceSeeder extends Seeder
                 'latitude' => 17.8782,
                 'longitude' => 102.7412,
                 'region' => 'northeast',
-                'image_url' => 'https://example.com/nongkhai.jpg',
+                'image_url' => 'https://www.ktc.co.th/pub/media/Article/11/nong-4.webp',
                 'is_popular' => true,
                 'sort_order' => 2
             ],
-            [
-                'name' => 'อุดรธานี',
-                'name_en' => 'Udon Thani',
-                'description' => 'เมืองสำคัญของภาคอีสานตอนบน มีสนามบินนานาชาติ เป็นศูนย์กลางการค้าขายกับประเทศเพื่อนบ้าน มีแหล่งโบราณคดีบ้านเชียง และทะเลสาบหนองประจักษ์',
-                'latitude' => 17.4138,
-                'longitude' => 102.7878,
-                'region' => 'northeast',
-                'image_url' => 'https://example.com/udonthani.jpg',
-                'is_popular' => true,
-                'sort_order' => 3
-            ]
         ];
 
         foreach ($provinces as $province) {

@@ -3,5 +3,5 @@ import UserLayout from "@/Layouts/UserLayout.vue";
 </script>
 
 <template>
-    <UserLayout title="ยินดีต้อนรับสู่แดชบอร์ด"> dashboard </UserLayout>
+    <UserLayout title="ยินดีต้อนรับสู่แดชบอร์ด"> dashboard user </UserLayout>
 </template>
