@@ -29,7 +29,7 @@ const rewards = [
 
 <template>
     <UserLayout title="เริ่มต้นการเดินทางสู่สุขภาพที่ดี">
-        <div>
+        <div class="p-10">
             <div class="text-center mb-6">
                 <h1 class="text-3xl lg:text-4xl font-bold mb-4">
                     ค้นหาโปรแกรมท่องเที่ยว <br />

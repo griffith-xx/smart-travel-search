@@ -4,5 +4,9 @@ import { Head, Link } from "@inertiajs/vue3";
 
 <template>
     <Head title="Welcome" />
-    <div>Hello World!</div>
+    <div class="flex flex-col">
+        Hello World!
+        <Link href="/login">Login</Link>
+        <Link href="/register">Register</Link>
+    </div>
 </template>
