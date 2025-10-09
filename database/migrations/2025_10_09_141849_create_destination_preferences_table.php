@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_preferences', function (Blueprint $table) {
+        Schema::create('destination_preferences', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('destination_id')->constrained()->onDelete('cascade');
 
             // Wellness Features - Multiple selections (JSON arrays)
-            $table->json('wellness_goals'); // สามารถมีหลายเป้าหมาย
-            $table->json('activities'); // สามารถมีหลายกิจกรรม
-            $table->json('environments'); // สามารถมีหลายสภาพแวดล้อม
+            $table->json('wellness_goals'); // [1,2,3]
+            $table->json('activities'); // [1,2,3]
+            $table->json('environments'); // [1,2,3]
 
             // Single selections (Foreign Keys)
             $table->foreignId('duration_intensity_id')->constrained('feature_duration_intensities'); // มีระยะเวลาได้แค่แบบเดียว
@@ -27,7 +27,6 @@ return new class extends Migration
 
             // Search & Recommendation Features
             $table->json('keywords')->nullable(); // คำค้นหาที่เกี่ยวข้อง เช่น ["detox", "organic", "natural healing"]
-
             $table->timestamps();
         });
     }
@@ -37,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_preferences');
+        Schema::dropIfExists('destination_preferences');
     }
 };

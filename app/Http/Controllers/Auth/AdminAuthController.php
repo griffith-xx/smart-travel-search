@@ -11,6 +11,22 @@ class AdminAuthController extends Controller
 {
     public function showLoginPage()
     {
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        if (app()->environment('local')) {
+            $email = env('TEST_ADMIN_EMAIL');
+            $password = env('TEST_ADMIN_PASSWORD');
+
+            if ($email && $password) {
+                if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $password], true)) {
+                    request()->session()->regenerate();
+                    return redirect()->intended(route('admin.dashboard'));
+                }
+            }
+        }
+
         return Inertia::render('Auth/AdminLogin');
     }
 

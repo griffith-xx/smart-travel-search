@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserPreference extends Model
+class DestinationPreference extends Model
 {
     protected $fillable = [
-        'user_id',
+        'destination_id',
         'wellness_goals',
         'activities',
         'environments',
@@ -22,10 +22,8 @@ class UserPreference extends Model
         'activities' => 'array',
         'environments' => 'array',
         'keywords' => 'array',
+        'duration_intensity_id' => 'integer',
+        'budget_accommodation_id' => 'integer',
+        'wellness_experience_id' => 'integer',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }
