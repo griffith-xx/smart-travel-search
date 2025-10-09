@@ -13,11 +13,17 @@ defineProps({
 
 <template>
     <AppLayout :title="title">
-        <div class="max-h-screen overflow-hidden">
-            <Navigation />
-            <div class="flex p-5 gap-5">
-                <Sidebar />
-                <div class="card max-h-screen overflow-y-auto">
+        <div class="h-screen flex flex-col overflow-hidden">
+            <div class="flex-shrink-0">
+                <Navigation />
+            </div>
+
+            <div class="flex flex-1 overflow-hidden">
+                <div class="flex-shrink-0 min-w-[250px]">
+                    <Sidebar />
+                </div>
+
+                <div class="flex-1 overflow-y-auto p-6">
                     <slot></slot>
                 </div>
             </div>

@@ -10,7 +10,13 @@ import {
 import InputSection from "@/Components/Admin/InputSection.vue";
 import FormControl from "@/Components/Admin/FormControl.vue";
 import { useForm } from "@inertiajs/vue3";
-import { ref } from "vue";
+
+defineProps({
+    regions: {
+        type: Object,
+        required: true,
+    },
+});
 
 const form = useForm({
     name: "",
@@ -21,16 +27,8 @@ const form = useForm({
     longitude: "",
     image_url: "",
     is_popular: false,
+    sort_order: 0,
 });
-
-const regions = ref([
-    { label: "🏔️ เหนือ", value: "north" },
-    { label: "🏙️ กลาง", value: "central" },
-    { label: "🏖️ ใต้", value: "south" },
-    { label: "🌾 อีสาน", value: "northeast" },
-    { label: "🌅 ตะวันออก", value: "east" },
-    { label: "🌄 ตะวันตก", value: "west" },
-]);
 
 const submit = () => {
     form.post(route("admin.provinces.store"), {
@@ -144,18 +142,36 @@ const submit = () => {
                     </Textarea>
                 </InputSection>
 
-                <InputSection
-                    class="col-span-2"
-                    name="is_popular"
-                    label="ยอดนิยม"
-                    :errorMessage="form.errors.is_popular"
-                >
-                    <ToggleSwitch
-                        id="is_popular"
+                <div class="col-span-2 flex gap-6 items-start">
+                    <InputSection
+                        class="col-span-2"
                         name="is_popular"
-                        v-model="form.is_popular"
-                    />
-                </InputSection>
+                        label="ยอดนิยม"
+                        :errorMessage="form.errors.is_popular"
+                    >
+                        <ToggleSwitch
+                            id="is_popular"
+                            name="is_popular"
+                            v-model="form.is_popular"
+                            size="small"
+                        />
+                    </InputSection>
+
+                    <InputSection
+                        name="sort_order"
+                        label="ลำดับการแสดง"
+                        :errorMessage="form.errors.sort_order"
+                    >
+                        <InputNumber
+                            id="sort_order"
+                            name="sort_order"
+                            v-model="form.sort_order"
+                            placeholder="1"
+                            class="w-fit"
+                            size="small"
+                        />
+                    </InputSection>
+                </div>
             </div>
 
             <FormControl

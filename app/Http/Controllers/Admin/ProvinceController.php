@@ -15,9 +15,10 @@ class ProvinceController extends Controller
     public function index()
     {
         $provinces = Province::with('destinations')->get();
-        
+
         return Inertia::render('Admin/Provinces/Index', [
-            'provinces' => $provinces
+            'provinces' => $provinces,
+            'regions' => config('regions'),
         ]);
     }
 
@@ -26,7 +27,9 @@ class ProvinceController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Provinces/Create');
+        return Inertia::render('Admin/Provinces/Create', [
+            'regions' => config('regions')
+        ]);
     }
 
     /**
@@ -43,6 +46,7 @@ class ProvinceController extends Controller
             'longitude' => 'nullable|numeric|between:-180,180',
             'image_url' => 'required|url|max:255',
             'is_popular' => 'boolean',
+            'sort_order' => 'nullable|integer',
         ]);
 
         Province::create($validated);
@@ -69,7 +73,8 @@ class ProvinceController extends Controller
     public function edit(string $id)
     {
         return Inertia::render('Admin/Provinces/Edit', [
-            'province' => Province::find($id)
+            'province' => Province::find($id),
+            'regions' => config('regions'),
         ]);
     }
 
@@ -79,17 +84,18 @@ class ProvinceController extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'name_en' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'region' => 'required|in:north,central,south,northeast,east,west',
-            'latitude' => 'nullable|numeric|between:-90,90',
-            'longitude' => 'nullable|numeric|between:-180,180',
-            'image_url' => 'required|url|max:255',
-            'is_popular' => 'boolean',
+            'name' => 'sometimes|required|string|max:255',
+            'name_en' => 'sometimes|required|string|max:255',
+            'description' => 'sometimes|nullable|string',
+            'region' => 'sometimes|required|in:north,central,south,northeast,east,west',
+            'latitude' => 'sometimes|nullable|numeric|between:-90,90',
+            'longitude' => 'sometimes|nullable|numeric|between:-180,180',
+            'image_url' => 'sometimes|required|url|max:255',
+            'is_popular' => 'sometimes|boolean',
+            'sort_order' => 'sometimes|integer',
         ]);
 
-        $province = Province::find($id);
+        $province = Province::findOrFail($id);
         $province->update($validated);
 
         return redirect()->route('admin.provinces.index')->with('flash', [

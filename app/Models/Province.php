@@ -19,6 +19,7 @@ class Province extends Model
     ];
 
     protected $casts = [
+        'is_popular' => 'boolean',
         'latitude' => 'decimal:8',
         'longitude' => 'decimal:8',
     ];
