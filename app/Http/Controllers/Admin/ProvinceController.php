@@ -14,11 +14,15 @@ class ProvinceController extends Controller
      */
     public function index()
     {
-        $provinces = Province::with('destinations')->get();
+        $provinces = Province::withCount('destinations')->get();
+        $regions = config('regions');
+
+        $regionsMap = collect($regions)->pluck('label', 'value')->toArray();
 
         return Inertia::render('Admin/Provinces/Index', [
             'provinces' => $provinces,
-            'regions' => config('regions'),
+            'regions' => $regions,
+            'regionsMap' => $regionsMap,
         ]);
     }
 

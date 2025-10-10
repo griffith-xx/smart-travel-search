@@ -4,9 +4,10 @@ import { Head, Link } from "@inertiajs/vue3";
 
 <template>
     <Head title="Welcome" />
-    <div class="flex flex-col">
+    <div class="flex flex-col gap-3 p-10">
         Hello World!
-        <Link href="/login">Login</Link>
-        <Link href="/register">Register</Link>
+        <Link class="underline text-blue-600" :href="route('login')">Login</Link>
+        <Link class="underline text-blue-600" :href="route('register')">Register</Link>
+        <Link class="underline text-blue-600" :href="route('admin.login')">Login Admin</Link>
     </div>
 </template>

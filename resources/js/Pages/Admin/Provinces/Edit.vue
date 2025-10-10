@@ -31,6 +31,7 @@ const form = useForm({
     longitude: props.province.longitude,
     image_url: props.province.image_url,
     is_popular: props.province.is_popular,
+    sort_order: props.province.sort_order,
 });
 
 const submit = () => {
@@ -45,118 +46,216 @@ const submit = () => {
 <template>
     <AdminLayout :title="'แก้ไขจังหวัด ' + props.province.name">
         <form @submit.prevent="submit">
-            <div class="grid grid-cols-2 gap-4">
-                <InputSection
-                    name="name"
-                    label="ชื่อจังหวัด"
-                    :errorMessage="form.errors.name"
+            <!-- Basic Information Section -->
+            <div class="mb-8">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
                 >
-                    <InputText
-                        id="name"
+                    <h2 class="text-xl font-semibold">
+                        <i class="pi pi-info-circle mr-2"></i>
+                        ข้อมูลพื้นฐาน
+                    </h2>
+                    <p class="text-sm opacity-75 mt-1">
+                        แก้ไขข้อมูลพื้นฐานของจังหวัด
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <InputSection
                         name="name"
-                        v-model="form.name"
-                        placeholder="ขอนแก่น"
-                    />
-                </InputSection>
+                        label="ชื่อจังหวัด"
+                        :errorMessage="form.errors.name"
+                        required
+                    >
+                        <InputText
+                            id="name"
+                            name="name"
+                            v-model="form.name"
+                            placeholder="ขอนแก่น"
+                        />
+                    </InputSection>
 
-                <InputSection
-                    name="name_en"
-                    label="ชื่อจังหวัด (อังกฤษ)"
-                    :errorMessage="form.errors.name_en"
-                >
-                    <InputText
-                        id="name_en"
+                    <InputSection
                         name="name_en"
-                        v-model="form.name_en"
-                        placeholder="Khon Khen"
-                    />
-                </InputSection>
+                        label="ชื่อจังหวัด (อังกฤษ)"
+                        :errorMessage="form.errors.name_en"
+                        required
+                    >
+                        <InputText
+                            id="name_en"
+                            name="name_en"
+                            v-model="form.name_en"
+                            placeholder="Khon Kaen"
+                        />
+                    </InputSection>
 
-                <InputSection
-                    name="description"
-                    label="รายละเอียดจังหวัด"
-                    :errorMessage="form.errors.description"
-                >
-                    <Textarea
-                        id="description"
+                    <InputSection
+                        class="col-span-2"
                         name="description"
-                        v-model="form.description"
-                        rows="5"
-                        placeholder="จังหวัดขอนแก่น เป็นจังหวัดที่ตั้งอยู่ในภาคตะวันออกเฉียงเหนือของประเทศไทย..."
+                        label="รายละเอียดจังหวัด"
+                        :errorMessage="form.errors.description"
                     >
-                    </Textarea>
-                </InputSection>
+                        <Textarea
+                            id="description"
+                            name="description"
+                            v-model="form.description"
+                            rows="5"
+                            placeholder="จังหวัดขอนแก่น เป็นจังหวัดที่ตั้งอยู่ในภาคตะวันออกเฉียงเหนือของประเทศไทย..."
+                        >
+                        </Textarea>
+                    </InputSection>
 
-                <InputSection
-                    class="col-span-2"
-                    name="region"
-                    label="ภูมิภาค"
-                    :errorMessage="form.errors.region"
-                >
-                    <Select
-                        id="region"
+                    <InputSection
+                        class="col-span-2"
                         name="region"
-                        v-model="form.region"
-                        placeholder="เลือกภูมิภาค"
-                        :options="regions"
-                        optionLabel="label"
-                        optionValue="value"
-                    />
-                </InputSection>
-
-                <InputSection
-                    name="latitude"
-                    label="ละติจูด"
-                    :errorMessage="form.errors.latitude"
-                >
-                    <InputNumber
-                        id="latitude"
-                        name="latitude"
-                        v-model="form.latitude"
-                        placeholder="20.4419"
-                    />
-                </InputSection>
-
-                <InputSection
-                    name="longitude"
-                    label="ลองจิจูด"
-                    :errorMessage="form.errors.longitude"
-                >
-                    <InputNumber
-                        id="longitude"
-                        name="longitude"
-                        v-model="form.longitude"
-                        placeholder="20.4419"
-                    />
-                </InputSection>
-
-                <InputSection
-                    name="image_url"
-                    label="รูปภาพจังหวัด"
-                    :errorMessage="form.errors.image_url"
-                >
-                    <Textarea
-                        id="image_url"
-                        name="image_url"
-                        v-model="form.image_url"
-                        rows="5"
-                        placeholder="https://example.com/image.jpg"
+                        label="ภูมิภาค"
+                        :errorMessage="form.errors.region"
+                        required
                     >
-                    </Textarea>
-                </InputSection>
+                        <Select
+                            id="region"
+                            name="region"
+                            v-model="form.region"
+                            placeholder="เลือกภูมิภาค"
+                            :options="regions"
+                            optionLabel="label"
+                            optionValue="value"
+                        />
+                    </InputSection>
+                </div>
+            </div>
 
-                <InputSection
-                    class="col-span-2"
-                    name="is_popular"
-                    label="ยอดนิยม"
-                    :errorMessage="form.errors.is_popular"
+            <!-- Location Section -->
+            <div class="mb-8">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
                 >
-                    <ToggleSwitch
-                        id="is_popular"
+                    <h2 class="text-xl font-semibold">
+                        <i class="pi pi-map-marker mr-2"></i>
+                        ตำแหน่งที่ตั้ง
+                    </h2>
+                    <p class="text-sm opacity-75 mt-1">
+                        ระบุพิกัดทางภูมิศาสตร์ของจังหวัด
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <InputSection
+                        name="latitude"
+                        label="ละติจูด"
+                        :errorMessage="form.errors.latitude"
+                    >
+                        <InputNumber
+                            id="latitude"
+                            name="latitude"
+                            v-model="form.latitude"
+                            placeholder="16.4419"
+                            :minFractionDigits="4"
+                            :maxFractionDigits="6"
+                        />
+                    </InputSection>
+
+                    <InputSection
+                        name="longitude"
+                        label="ลองจิจูด"
+                        :errorMessage="form.errors.longitude"
+                    >
+                        <InputNumber
+                            id="longitude"
+                            name="longitude"
+                            v-model="form.longitude"
+                            placeholder="102.8359"
+                            :minFractionDigits="4"
+                            :maxFractionDigits="6"
+                        />
+                    </InputSection>
+                </div>
+            </div>
+
+            <!-- Media Section -->
+            <div class="mb-8">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
+                >
+                    <h2 class="text-xl font-semibold">
+                        <i class="pi pi-image mr-2"></i>
+                        รูปภาพ
+                    </h2>
+                    <p class="text-sm opacity-75 mt-1">
+                        แก้ไขรูปภาพประกอบของจังหวัด
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4">
+                    <InputSection
+                        name="image_url"
+                        label="URL รูปภาพจังหวัด"
+                        :errorMessage="form.errors.image_url"
+                        required
+                    >
+                        <Textarea
+                            id="image_url"
+                            name="image_url"
+                            v-model="form.image_url"
+                            rows="3"
+                            placeholder="https://example.com/image.jpg"
+                        >
+                        </Textarea>
+                    </InputSection>
+
+                    <!-- Preview Image -->
+                    <div v-if="form.image_url" class="mt-2">
+                        <p class="text-sm opacity-75 mb-2">ตัวอย่างรูปภาพ:</p>
+                        <img
+                            :src="form.image_url"
+                            :alt="form.name"
+                            class="w-64 h-40 object-cover rounded-lg border"
+                            @error="$event.target.style.display = 'none'"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="mb-8">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
+                >
+                    <h2 class="text-xl font-semibold">
+                        <i class="pi pi-cog mr-2"></i>
+                        การตั้งค่า
+                    </h2>
+                    <p class="text-sm opacity-75 mt-1">
+                        ตั้งค่าการแสดงผลและลำดับความสำคัญ
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <InputSection
                         name="is_popular"
-                        v-model="form.is_popular"
-                    />
-                </InputSection>
+                        label="ยอดนิยม"
+                        :errorMessage="form.errors.is_popular"
+                    >
+                        <ToggleSwitch
+                            id="is_popular"
+                            name="is_popular"
+                            v-model="form.is_popular"
+                        />
+                    </InputSection>
+
+                    <InputSection
+                        name="sort_order"
+                        label="ลำดับการแสดง"
+                        :errorMessage="form.errors.sort_order"
+                    >
+                        <InputNumber
+                            id="sort_order"
+                            name="sort_order"
+                            v-model="form.sort_order"
+                            placeholder="1"
+                        />
+                    </InputSection>
+                </div>
             </div>
 
             <FormControl

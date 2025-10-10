@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DestinationController;
 use App\Http\Controllers\Admin\ProvinceController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'showLoginPage'])->name('login');
@@ -16,5 +17,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('/provinces', ProvinceController::class);
         Route::resource('/destinations', DestinationController::class);
+        Route::resource('/users', UserController::class);
     });
 });

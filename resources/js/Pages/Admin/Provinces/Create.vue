@@ -42,109 +42,181 @@ const submit = () => {
 <template>
     <AdminLayout title="เพิ่มจังหวัด">
         <form @submit.prevent="submit">
-            <div class="grid grid-cols-2 gap-4">
-                <InputSection
-                    name="name"
-                    label="ชื่อจังหวัด"
-                    :errorMessage="form.errors.name"
+            <!-- Basic Information Section -->
+            <div class="mb-8">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
                 >
-                    <InputText
-                        id="name"
+                    <h2 class="text-xl font-semibold">
+                        <i class="pi pi-info-circle mr-2"></i>
+                        ข้อมูลพื้นฐาน
+                    </h2>
+                    <p class="text-sm opacity-75 mt-1">
+                        กรอกข้อมูลพื้นฐานของจังหวัด
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <InputSection
                         name="name"
-                        v-model="form.name"
-                        placeholder="ขอนแก่น"
-                    />
-                </InputSection>
+                        label="ชื่อจังหวัด"
+                        :errorMessage="form.errors.name"
+                        required
+                    >
+                        <InputText
+                            id="name"
+                            name="name"
+                            v-model="form.name"
+                            placeholder="ขอนแก่น"
+                        />
+                    </InputSection>
 
-                <InputSection
-                    name="name_en"
-                    label="ชื่อจังหวัด (อังกฤษ)"
-                    :errorMessage="form.errors.name_en"
-                >
-                    <InputText
-                        id="name_en"
+                    <InputSection
                         name="name_en"
-                        v-model="form.name_en"
-                        placeholder="Khon Khen"
-                    />
-                </InputSection>
-
-                <InputSection
-                    name="description"
-                    label="รายละเอียดจังหวัด"
-                    :errorMessage="form.errors.description"
-                >
-                    <Textarea
-                        id="description"
-                        name="description"
-                        v-model="form.description"
-                        rows="5"
-                        placeholder="จังหวัดขอนแก่น เป็นจังหวัดที่ตั้งอยู่ในภาคตะวันออกเฉียงเหนือของประเทศไทย..."
+                        label="ชื่อจังหวัด (อังกฤษ)"
+                        :errorMessage="form.errors.name_en"
+                        required
                     >
-                    </Textarea>
-                </InputSection>
+                        <InputText
+                            id="name_en"
+                            name="name_en"
+                            v-model="form.name_en"
+                            placeholder="Khon Kaen"
+                        />
+                    </InputSection>
 
-                <InputSection
-                    class="col-span-2"
-                    name="region"
-                    label="ภูมิภาค"
-                    :errorMessage="form.errors.region"
-                >
-                    <Select
-                        id="region"
-                        name="region"
-                        v-model="form.region"
-                        placeholder="เลือกภูมิภาค"
-                        :options="regions"
-                        optionLabel="label"
-                        optionValue="value"
-                    />
-                </InputSection>
-
-                <InputSection
-                    name="latitude"
-                    label="ละติจูด"
-                    :errorMessage="form.errors.latitude"
-                >
-                    <InputNumber
-                        id="latitude"
-                        name="latitude"
-                        v-model="form.latitude"
-                        placeholder="20.4419"
-                    />
-                </InputSection>
-
-                <InputSection
-                    name="longitude"
-                    label="ลองจิจูด"
-                    :errorMessage="form.errors.longitude"
-                >
-                    <InputNumber
-                        id="longitude"
-                        name="longitude"
-                        v-model="form.longitude"
-                        placeholder="20.4419"
-                    />
-                </InputSection>
-
-                <InputSection
-                    name="image_url"
-                    label="รูปภาพจังหวัด"
-                    :errorMessage="form.errors.image_url"
-                >
-                    <Textarea
-                        id="image_url"
-                        name="image_url"
-                        v-model="form.image_url"
-                        rows="5"
-                        placeholder="https://example.com/image.jpg"
-                    >
-                    </Textarea>
-                </InputSection>
-
-                <div class="col-span-2 flex gap-6 items-start">
                     <InputSection
                         class="col-span-2"
+                        name="description"
+                        label="รายละเอียดจังหวัด"
+                        :errorMessage="form.errors.description"
+                    >
+                        <Textarea
+                            id="description"
+                            name="description"
+                            v-model="form.description"
+                            rows="5"
+                            placeholder="จังหวัดขอนแก่น เป็นจังหวัดที่ตั้งอยู่ในภาคตะวันออกเฉียงเหนือของประเทศไทย..."
+                        >
+                        </Textarea>
+                    </InputSection>
+
+                    <InputSection
+                        class="col-span-2"
+                        name="region"
+                        label="ภูมิภาค"
+                        :errorMessage="form.errors.region"
+                        required
+                    >
+                        <Select
+                            id="region"
+                            name="region"
+                            v-model="form.region"
+                            placeholder="เลือกภูมิภาค"
+                            :options="regions"
+                            optionLabel="label"
+                            optionValue="value"
+                        />
+                    </InputSection>
+                </div>
+            </div>
+
+            <!-- Location Section -->
+            <div class="mb-8">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
+                >
+                    <h2 class="text-xl font-semibold">
+                        <i class="pi pi-map-marker mr-2"></i>
+                        ตำแหน่งที่ตั้ง
+                    </h2>
+                    <p class="text-sm opacity-75 mt-1">
+                        ระบุพิกัดทางภูมิศาสตร์ของจังหวัด
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <InputSection
+                        name="latitude"
+                        label="ละติจูด"
+                        :errorMessage="form.errors.latitude"
+                    >
+                        <InputNumber
+                            id="latitude"
+                            name="latitude"
+                            v-model="form.latitude"
+                            placeholder="16.4419"
+                            :minFractionDigits="4"
+                            :maxFractionDigits="6"
+                        />
+                    </InputSection>
+
+                    <InputSection
+                        name="longitude"
+                        label="ลองจิจูด"
+                        :errorMessage="form.errors.longitude"
+                    >
+                        <InputNumber
+                            id="longitude"
+                            name="longitude"
+                            v-model="form.longitude"
+                            placeholder="102.8359"
+                            :minFractionDigits="4"
+                            :maxFractionDigits="6"
+                        />
+                    </InputSection>
+                </div>
+            </div>
+
+            <!-- Media Section -->
+            <div class="mb-8">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
+                >
+                    <h2 class="text-xl font-semibold">
+                        <i class="pi pi-image mr-2"></i>
+                        รูปภาพ
+                    </h2>
+                    <p class="text-sm opacity-75 mt-1">
+                        เพิ่มรูปภาพประกอบของจังหวัด
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4">
+                    <InputSection
+                        name="image_url"
+                        label="URL รูปภาพจังหวัด"
+                        :errorMessage="form.errors.image_url"
+                        required
+                    >
+                        <Textarea
+                            id="image_url"
+                            name="image_url"
+                            v-model="form.image_url"
+                            rows="3"
+                            placeholder="https://example.com/image.jpg"
+                        >
+                        </Textarea>
+                    </InputSection>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="mb-8">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
+                >
+                    <h2 class="text-xl font-semibold">
+                        <i class="pi pi-cog mr-2"></i>
+                        การตั้งค่า
+                    </h2>
+                    <p class="text-sm opacity-75 mt-1">
+                        ตั้งค่าการแสดงผลและลำดับความสำคัญ
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <InputSection
                         name="is_popular"
                         label="ยอดนิยม"
                         :errorMessage="form.errors.is_popular"
@@ -153,7 +225,6 @@ const submit = () => {
                             id="is_popular"
                             name="is_popular"
                             v-model="form.is_popular"
-                            size="small"
                         />
                     </InputSection>
 
@@ -167,8 +238,6 @@ const submit = () => {
                             name="sort_order"
                             v-model="form.sort_order"
                             placeholder="1"
-                            class="w-fit"
-                            size="small"
                         />
                     </InputSection>
                 </div>

@@ -22,6 +22,12 @@ const navigations = ref([
         route: "admin.destinations.index",
         badge: page.props.adminStats.destinations_count,
     },
+    {
+        label: "ผู้ใช้งาน",
+        icon: "pi pi-user",
+        route: "admin.users.index",
+        badge: page.props.adminStats.users_count,
+    },
 ]);
 
 const adminInitials = computed(() => {
@@ -29,11 +35,9 @@ const adminInitials = computed(() => {
     const words = name.trim().split(/\s+/);
 
     if (words.length >= 2) {
-        // ถ้ามี 2 คำขึ้นไป เอาตัวแรกของแต่ละคำ
         return (words[0][0] + words[1][0]).toUpperCase();
     }
 
-    // ถ้ามีคำเดียว เอา 2 ตัวแรก
     return name.substring(0, 2).toUpperCase();
 });
 const logout = () => {
@@ -47,20 +51,24 @@ const logout = () => {
         class="flex flex-col h-full border-r! border-[var(--p-menu-border-color)]"
     >
         <Menu
-            class="border-0! rounded-none! flex-1 w-full"
+            class="border-0! rounded-none! flex-1 w-full p-1.5"
             :model="navigations"
         >
             <template #item="{ item, props }">
                 <Link
                     v-bind="props.action"
                     :href="route(item.route)"
-                    class="flex items-center"
+                    class="flex items-center text-lg! rounded-md!"
+                    :class="{
+                        'text-[var(--p-menu-item-focus-color)] bg-[var(--p-menu-item-focus-background)]':
+                            route().current(item.route) || false,
+                    }"
                 >
                     <span :class="item.icon" />
                     <span>{{ item.label }}</span>
                     <Badge
-                        severity="contrast"
                         v-if="item.badge"
+                        severity="contrast"
                         class="ml-auto"
                         :value="item.badge"
                     />
@@ -68,7 +76,9 @@ const logout = () => {
             </template>
         </Menu>
 
-        <div class="p-4 border-t border-[var(--p-menu-border-color)]">
+        <div
+            class="p-4 bg-[var(--p-content-background)] border-t border-[var(--p-menu-border-color)]"
+        >
             <div class="flex items-center gap-3 mb-4">
                 <Avatar :label="adminInitials" shape="circle" size="large" />
                 <div class="flex-1 min-w-0">
@@ -90,6 +100,10 @@ const logout = () => {
                 size="small"
                 class="w-full"
             />
+
+            <div class="text-center mt-0.5">
+                <span class="text-xs opacity-50 italic"> by Trust </span>
+            </div>
         </div>
     </div>
 </template>

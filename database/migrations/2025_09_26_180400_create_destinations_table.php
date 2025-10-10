@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('name_en')->nullable();
-            $table->text('description')->nullable();
             $table->text('short_description')->nullable(); // คำอธิบายสั้นสำหรับแสดงในรายการ
+            $table->text('description')->nullable();
 
             // Location & Contact
             $table->decimal('latitude', 10, 8)->nullable();

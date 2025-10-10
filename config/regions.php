@@ -1,10 +1,28 @@
 <?php
 
 return [
-    'north' => "🏔️ เหนือ",
-    'central' => "🏙️ กลาง",
-    'south' => "🏖️ ใต้",
-    'northeast' => "🌾 อีสาน",
-    'east' => "🌅 ตะวันออก",
-    'west' => "🌄 ตะวันตก",
+    [
+        'value' => 'north',
+        'label' => '🏔️ เหนือ',
+    ],
+    [
+        'value' => 'central',
+        'label' => '🏙️ กลาง',
+    ],
+    [
+        'value' => 'south',
+        'label' => '🏖️ ใต้',
+    ],
+    [
+        'value' => 'northeast',
+        'label' => '🌾 อีสาน',
+    ],
+    [
+        'value' => 'east',
+        'label' => '🌅 ตะวันออก',
+    ],
+    [
+        'value' => 'west',
+        'label' => '🌄 ตะวันตก',
+    ],
 ];

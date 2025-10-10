@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Destination;
+use App\Models\Province;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class DestinationController extends Controller
 {
@@ -12,7 +15,11 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        //
+        $destinations  = Destination::with('province')->get();
+
+        return Inertia::render('Admin/Destinations/Index', [
+            'destinations' => $destinations,
+        ]);
     }
 
     /**
@@ -20,7 +27,11 @@ class DestinationController extends Controller
      */
     public function create()
     {
-        //
+        $provinces = Province::get();
+
+        return Inertia::render('Admin/Destinations/Create', [
+            'provinces' => $provinces,
+        ]);
     }
 
     /**
@@ -28,7 +39,29 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+
+            // Basic Information
+            'province_id' => 'required|exists:provinces,id',
+            'name' => 'required|string|max:255',
+            'name_en' => 'required|string|max:255',
+            'short_description' => 'required|string',
+            'description' => 'nullable|string',
+
+            // Location & Contact
+            'latitude' => 'nullable|numeric|between:-90,90',
+            'longitude' => 'nullable|numeric|between:-180,180',
+            'address' => 'nullable|string',
+            'district' => 'nullable|string',
+            'subdistrict' => 'nullable|string',
+            'postal_code' => 'nullable|string|max:10',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email',
+            'website' => 'nullable|url',
+            'line_id' => 'nullable|string|max:255',
+            'facebook' => 'nullable|string|max:255',
+            'instagram' => 'nullable|string|max:255',
+        ]);
     }
 
     /**

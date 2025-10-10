@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\Province;
 use App\Models\Destination;
+use App\Models\User;
 
 class ShareAdminDataMiddleware
 {
@@ -22,6 +23,7 @@ class ShareAdminDataMiddleware
             'inertia_admin_stats' => [
                 'provinces_count' => Province::count(),
                 'destinations_count' => Destination::count(),
+                'users_count' => User::count(), 
             ]
         ]);
 
