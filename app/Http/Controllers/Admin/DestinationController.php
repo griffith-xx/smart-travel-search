@@ -62,6 +62,7 @@ class DestinationController extends Controller
             'facebook' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
         ]);
+
     }
 
     /**

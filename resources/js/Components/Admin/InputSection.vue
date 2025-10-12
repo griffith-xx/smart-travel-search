@@ -24,15 +24,14 @@ defineProps({
 <template>
     <div class="flex flex-col gap-2">
         <label class="flex items-center gap-2" :for="name">
+            <slot name="image"> </slot>
             <span class="opacity-80 font-medium">
                 {{ label }}
             </span>
             <Badge v-if="required" severity="danger" size="small">
                 Required
             </Badge>
-            <Badge v-else severity="secondary" size="small">
-                Optional
-            </Badge>
+            <Badge v-else severity="secondary" size="small"> Optional </Badge>
         </label>
         <slot></slot>
         <InputError :message="errorMessage" />
