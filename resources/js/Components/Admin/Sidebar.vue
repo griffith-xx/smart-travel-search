@@ -77,7 +77,7 @@ const logout = () => {
         </Menu>
 
         <div
-            class="p-4 bg-[var(--p-content-background)] border-t border-[var(--p-menu-border-color)]"
+            class="p-4 pb-0 bg-[var(--p-content-background)] border-t border-[var(--p-menu-border-color)]"
         >
             <div class="flex items-center gap-3">
                 <Avatar :label="adminInitials" shape="circle" size="large" />

@@ -106,10 +106,6 @@ class DestinationController extends Controller
             'province',
         ]);
 
-        if ($destination->preference) {
-            $destination->preference->allFeatures = $destination->preference->loadAllFeatures();
-        }
-
         return Inertia::render('Admin/Destinations/Show', [
             'destination' => $destination,
             'regions' => collect(config('regions'))->pluck('label', 'value'),

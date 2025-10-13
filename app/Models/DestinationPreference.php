@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class DestinationPreference extends Model
 {
@@ -26,64 +27,59 @@ class DestinationPreference extends Model
         'keywords' => 'array',
     ];
 
+    /**
+     * Get the destination that owns the preference.
+     */
     public function destination(): BelongsTo
     {
         return $this->belongsTo(Destination::class);
     }
 
-    public function getWellnessGoalFeaturesAttribute()
+    /**
+     * Get wellness goals details.
+     */
+    public function wellnessGoalsDetails(): Attribute
     {
-        if (empty($this->wellness_goals)) {
-            return collect();
-        }
+        return Attribute::make(
+            get: function () {
+                if (empty($this->wellness_goals)) {
+                    return collect([]);
+                }
 
-        return FeatureWellnessGoal::whereIn('id', $this->wellness_goals)->get();
+                return FeatureWellnessGoal::whereIn('id', $this->wellness_goals)->get();
+            }
+        );
     }
 
-    public function getActivityFeaturesAttribute()
+    /**
+     * Get activities details.
+     */
+    public function activitiesDetails(): Attribute
     {
-        if (empty($this->activities)) {
-            return collect();
-        }
+        return Attribute::make(
+            get: function () {
+                if (empty($this->activities)) {
+                    return collect([]);
+                }
 
-        return FeatureActivity::whereIn('id', $this->activities)->get();
+                return FeatureActivity::whereIn('id', $this->activities)->get();
+            }
+        );
     }
 
-    public function getEnvironmentFeaturesAttribute()
+    /**
+     * Get environments details.
+     */
+    public function environmentsDetails(): Attribute
     {
-        if (empty($this->environments)) {
-            return collect();
-        }
+        return Attribute::make(
+            get: function () {
+                if (empty($this->environments)) {
+                    return collect([]);
+                }
 
-        return FeatureEnvironment::whereIn('id', $this->environments)->get();
-    }
-
-    public function durationIntensity(): BelongsTo
-    {
-        return $this->belongsTo(FeatureDurationIntensity::class);
-    }
-
-    public function budgetAccommodation(): BelongsTo
-    {
-        return $this->belongsTo(FeatureBudgetAccommodation::class);
-    }
-
-    public function getAllFeatures()
-    {
-        return [
-            'wellness_goals' => $this->wellness_goal_features,
-            'activities' => $this->activity_features,
-            'environments' => $this->environment_features,
-            'duration_intensity' => $this->durationIntensity,
-            'budget_accommodation' => $this->budgetAccommodation,
-            'keywords' => $this->keywords,
-        ];
-    }
-
-    public function loadAllFeatures()
-    {
-        $this->load(['durationIntensity', 'budgetAccommodation']);
-
-        return $this->getAllFeatures();
+                return FeatureEnvironment::whereIn('id', $this->environments)->get();
+            }
+        );
     }
 }
