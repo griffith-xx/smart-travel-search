@@ -79,7 +79,7 @@ const logout = () => {
         <div
             class="p-4 bg-[var(--p-content-background)] border-t border-[var(--p-menu-border-color)]"
         >
-            <div class="flex items-center gap-3 mb-4">
+            <div class="flex items-center gap-3">
                 <Avatar :label="adminInitials" shape="circle" size="large" />
                 <div class="flex-1 min-w-0">
                     <p class="font-semibold text-sm truncate">
@@ -98,10 +98,11 @@ const logout = () => {
                 type="button"
                 severity="danger"
                 size="small"
-                class="w-full"
+                variant="text"
+                class="w-full mt-1"
             />
 
-            <div class="text-center mt-0.5">
+            <div class="text-center">
                 <span class="text-xs opacity-50 italic"> by Trust </span>
             </div>
         </div>

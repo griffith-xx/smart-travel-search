@@ -12,8 +12,12 @@ import FormControl from "@/Components/Admin/FormControl.vue";
 import { useForm } from "@inertiajs/vue3";
 import { computed } from "vue";
 
-defineProps({
+const props = defineProps({
     provinces: {
+        type: Object,
+        required: true,
+    },
+    destination: {
         type: Object,
         required: true,
     },
@@ -21,47 +25,47 @@ defineProps({
 
 const form = useForm({
     // Basic Information
-    province_id: null,
-    name: "",
-    name_en: "",
-    description: "",
-    short_description: "",
+    province_id: props.destination.province_id,
+    name: props.destination.name,
+    name_en: props.destination.name_en,
+    description: props.destination.description,
+    short_description: props.destination.short_description,
 
     // Location & Contact
-    latitude: null,
-    longitude: null,
-    address: "",
-    district: "",
-    subdistrict: "",
-    postal_code: "",
-    phone: "",
-    email: "",
-    website: "",
-    line_id: "",
-    facebook: "",
-    instagram: "",
+    latitude: props.destination.latitude,
+    longitude: props.destination.longitude,
+    address: props.destination.address,
+    district: props.destination.district,
+    subdistrict: props.destination.subdistrict,
+    postal_code: props.destination.postal_code,
+    phone: props.destination.phone,
+    email: props.destination.email,
+    website: props.destination.website,
+    line_id: props.destination.line_id,
+    facebook: props.destination.facebook,
+    instagram: props.destination.instagram,
 
     // Media
-    cover_image: "",
-    gallery_images: [],
-    video_url: "",
-    virtual_tour_url: "",
+    cover_image: props.destination.cover_image,
+    gallery_images: props.destination.gallery_images_array || [],
+    video_url: props.destination.video_url,
+    virtual_tour_url: props.destination.virtual_tour_url,
 
     // Pricing & Booking
-    price_from: null,
-    price_to: null,
-    pricing_note: "",
-    accepts_online_booking: false,
-    booking_url: "",
+    price_from: props.destination.price_from,
+    price_to: props.destination.price_to,
+    pricing_note: props.destination.pricing_note,
+    accepts_online_booking: props.destination.accepts_online_booking,
+    booking_url: props.destination.booking_url,
 
     // Special Features
-    has_parking: false,
-    has_wifi: false,
-    has_restaurant: false,
-    pet_friendly: false,
-    wheelchair_accessible: false,
-    family_friendly: false,
-    eco_friendly: false,
+    has_parking: props.destination.has_parking,
+    has_wifi: props.destination.has_wifi,
+    has_restaurant: props.destination.has_restaurant,
+    pet_friendly: props.destination.pet_friendly,
+    wheelchair_accessible: props.destination.wheelchair_accessible,
+    family_friendly: props.destination.family_friendly,
+    eco_friendly: props.destination.eco_friendly,
 });
 
 const galleryImagesText = computed({
@@ -83,16 +87,12 @@ const removeImage = (index) => {
 };
 
 const submit = () => {
-    form.post(route("admin.destinations.store"), {
-        onSuccess: () => {
-            form.reset();
-        },
-    });
+    form.patch(route("admin.destinations.update", props.destination.id));
 };
 </script>
 
 <template>
-    <AdminLayout title="เพิ่มสถานที่ท่องเที่ยว">
+    <AdminLayout :title="'แก้ไขสถานที่ท่องเที่ยว ' + props.destination.name">
         <form @submit.prevent="submit">
             <!-- Basic Information Section -->
             <div class="mb-8">
@@ -104,7 +104,7 @@ const submit = () => {
                         ข้อมูลพื้นฐาน
                     </h2>
                     <p class="text-sm opacity-75 mt-1">
-                        กรอกข้อมูลพื้นฐานของสถานที่ท่องเที่ยว
+                        แก้ไขข้อมูลพื้นฐานของสถานที่ท่องเที่ยว
                     </p>
                 </div>
 

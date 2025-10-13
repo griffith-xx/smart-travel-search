@@ -49,17 +49,6 @@ return new class extends Migration
             $table->text('pricing_note')->nullable(); // หมายเหตุราคา เช่น "ราคาต่อคืน" "รวมอาหาร"
             $table->boolean('accepts_online_booking')->default(false); // รับจองออนไลน์
             $table->string('booking_url')->nullable(); // URL สำหรับจอง
-            $table->integer('min_booking_days')->nullable(); // จำนวนวันขั้นต่ำในการจอง
-            $table->integer('advance_booking_days')->nullable(); // ต้องจองล่วงหน้ากี่วัน
-
-            // Capacity & Availability
-            $table->integer('total_rooms')->nullable(); // จำนวนห้องทั้งหมด
-            $table->integer('max_guests')->nullable(); // รับได้สูงสุดกี่คน
-            $table->json('operating_hours')->nullable(); // เวลาทำการ {"open": "08:00", "close": "20:00"}
-            $table->json('closed_days')->nullable(); // วันหยุด ["monday", "tuesday"]
-            $table->date('opening_date')->nullable(); // วันที่เปิดให้บริการ
-            $table->date('temporary_closed_from')->nullable(); // ปิดชั่วคราวตั้งแต่
-            $table->date('temporary_closed_to')->nullable(); // ปิดชั่วคราวถึง
 
             // Ratings & Reviews
             $table->decimal('average_rating', 3, 2)->default(0.00); // คะแนนเฉลี่ย 0.00-5.00
@@ -68,19 +57,12 @@ return new class extends Migration
             $table->integer('view_count')->default(0); // จำนวนการเข้าชม
             $table->integer('favorite_count')->default(0); // จำนวนคนที่บันทึกเป็นที่ชอบ
 
-            // Verification & Quality
-            $table->boolean('is_verified')->default(false); // ยืนยันตัวตนแล้ว
-            $table->timestamp('verified_at')->nullable(); // วันที่ยืนยัน
-            $table->foreignId('verified_by')->nullable()->constrained('admins'); // ยืนยันโดย admin คนไหน
-            $table->json('certifications')->nullable(); // ใบรับรองต่างๆ
-            $table->json('awards')->nullable(); // รางวัลที่ได้รับ
-
             // SEO & Marketing
             $table->string('meta_title')->nullable(); // SEO title
             $table->text('meta_description')->nullable(); // SEO description
             $table->json('meta_keywords')->nullable(); // SEO keywords
             $table->string('og_image')->nullable(); // Open Graph image สำหรับ social media
-            
+
             // Special Features
             $table->boolean('has_parking')->default(false); // มีที่จอดรถ
             $table->boolean('has_wifi')->default(false); // มี WiFi
@@ -101,7 +83,7 @@ return new class extends Migration
             $table->foreignId('updated_by')->nullable()->constrained('admins'); // แก้ไขล่าสุดโดย
 
             $table->timestamps();
-            $table->softDeletes(); // เพิ่ม soft delete
+            $table->softDeletes();
         });
 
         // เพิ่ม indexes สำหรับ performance
@@ -110,10 +92,9 @@ return new class extends Migration
             $table->index('slug');
             $table->index('is_active');
             $table->index('is_featured');
-            $table->index('is_verified');
             $table->index('average_rating');
             $table->index('published_at');
-            $table->index(['is_active', 'is_featured', 'sort_order']); // composite index
+            $table->index(['is_active', 'is_featured', 'sort_order']);
         });
     }
 

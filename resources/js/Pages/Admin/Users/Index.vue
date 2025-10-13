@@ -1,5 +1,6 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
+import { Tag } from "primevue";
 defineProps({
     users: {
         type: Object,
@@ -14,7 +15,7 @@ defineProps({
             <h1 class="text-3xl font-bold mb-1">จัดการผู้ใช้</h1>
             <p class="text-sm opacity-75">
                 จัดการผู้ใช้ทั้งหมด
-                {{ users.length }} คน
+                <Tag severity="info" class="ml-2"> {{ users.length }} คน </Tag>
             </p>
         </div>
     </AdminLayout>

@@ -107,7 +107,9 @@ const clearFilters = () => {
                     <h1 class="text-3xl font-bold mb-1">จัดการจังหวัด</h1>
                     <p class="text-sm opacity-75">
                         จัดการข้อมูลจังหวัดทั้งหมด
-                        {{ provinces.length }} จังหวัด
+                        <Tag severity="info" class="ml-2">
+                            {{ provinces.length }} จังหวัด
+                        </Tag>
                     </p>
                 </div>
                 <Button asChild size="large" v-slot="slotProps">

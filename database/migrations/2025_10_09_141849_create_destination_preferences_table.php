@@ -16,14 +16,13 @@ return new class extends Migration
             $table->foreignId('destination_id')->constrained()->onDelete('cascade');
 
             // Wellness Features - Multiple selections (JSON arrays)
-            $table->json('wellness_goals'); // [1,2,3]
-            $table->json('activities'); // [1,2,3]
-            $table->json('environments'); // [1,2,3]
+            $table->json('wellness_goals')->nullable(); // [1,2,3]
+            $table->json('activities')->nullable(); // [1,2,3]
+            $table->json('environments')->nullable(); // [1,2,3]
 
             // Single selections (Foreign Keys)
-            $table->foreignId('duration_intensity_id')->constrained('feature_duration_intensities'); // มีระยะเวลาได้แค่แบบเดียว
-            $table->foreignId('budget_accommodation_id')->constrained('feature_budget_accommodations'); // มีระดับราคาได้แค่แบบเดียว
-            $table->foreignId('wellness_experience_id')->constrained('feature_wellness_experiences'); // มีระดับประสบการณ์ได้แค่แบบเดียว
+            $table->foreignId('duration_intensity_id')->nullable()->constrained('feature_duration_intensities'); // มีระยะเวลาได้แค่แบบเดียว
+            $table->foreignId('budget_accommodation_id')->nullable()->constrained('feature_budget_accommodations'); // มีระดับราคาได้แค่แบบเดียว
 
             // Search & Recommendation Features
             $table->json('keywords')->nullable(); // คำค้นหาที่เกี่ยวข้อง เช่น ["detox", "organic", "natural healing"]

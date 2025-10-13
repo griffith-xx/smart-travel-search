@@ -8,11 +8,15 @@ defineProps({
     },
     label: {
         type: String,
-        required: true,
+        default: "",
     },
     errorMessage: {
         type: String,
         default: "",
+    },
+    noLabel: {
+        type: Boolean,
+        default: false,
     },
     required: {
         type: Boolean,
@@ -23,7 +27,7 @@ defineProps({
 
 <template>
     <div class="flex flex-col gap-2">
-        <label class="flex items-center gap-2" :for="name">
+        <label v-if="!noLabel" class="flex items-center gap-2" :for="name">
             <slot name="image"> </slot>
             <span class="opacity-80 font-medium">
                 {{ label }}
