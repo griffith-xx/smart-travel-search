@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Casts\FeatureDetailsCast;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class DestinationPreference extends Model
 {
@@ -19,9 +19,9 @@ class DestinationPreference extends Model
     ];
 
     protected $casts = [
-        'wellness_goals' => 'array',
-        'activities' => 'array',
-        'environments' => 'array',
+        'wellness_goals' => FeatureDetailsCast::class . ':' . \App\Models\FeatureWellnessGoal::class,
+        'activities' => FeatureDetailsCast::class . ':' . \App\Models\FeatureActivity::class,
+        'environments' => FeatureDetailsCast::class . ':' . \App\Models\FeatureEnvironment::class,
         'duration_intensity_id' => 'integer',
         'budget_accommodation_id' => 'integer',
         'keywords' => 'array',
@@ -36,50 +36,44 @@ class DestinationPreference extends Model
     }
 
     /**
-     * Get wellness goals details.
+     * Get wellness goals IDs only (for recommendation system)
      */
-    public function wellnessGoalsDetails(): Attribute
+    public function getWellnessGoalsIdsAttribute(): array
     {
-        return Attribute::make(
-            get: function () {
-                if (empty($this->wellness_goals)) {
-                    return collect([]);
-                }
+        $value = $this->attributes['wellness_goals'] ?? null;
 
-                return FeatureWellnessGoal::whereIn('id', $this->wellness_goals)->get();
-            }
-        );
+        if (empty($value)) {
+            return [];
+        }
+
+        return is_string($value) ? json_decode($value, true) : [];
     }
 
     /**
-     * Get activities details.
+     * Get activities IDs only (for recommendation system)
      */
-    public function activitiesDetails(): Attribute
+    public function getActivitiesIdsAttribute(): array
     {
-        return Attribute::make(
-            get: function () {
-                if (empty($this->activities)) {
-                    return collect([]);
-                }
+        $value = $this->attributes['activities'] ?? null;
 
-                return FeatureActivity::whereIn('id', $this->activities)->get();
-            }
-        );
+        if (empty($value)) {
+            return [];
+        }
+
+        return is_string($value) ? json_decode($value, true) : [];
     }
 
     /**
-     * Get environments details.
+     * Get environments IDs only (for recommendation system)
      */
-    public function environmentsDetails(): Attribute
+    public function getEnvironmentsIdsAttribute(): array
     {
-        return Attribute::make(
-            get: function () {
-                if (empty($this->environments)) {
-                    return collect([]);
-                }
+        $value = $this->attributes['environments'] ?? null;
 
-                return FeatureEnvironment::whereIn('id', $this->environments)->get();
-            }
-        );
+        if (empty($value)) {
+            return [];
+        }
+
+        return is_string($value) ? json_decode($value, true) : [];
     }
 }
