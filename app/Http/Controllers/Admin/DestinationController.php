@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Destination;
+use App\Models\FeatureActivity;
+use App\Models\FeatureBudgetAccommodation;
+use App\Models\FeatureDurationIntensity;
+use App\Models\FeatureEnvironment;
+use App\Models\FeatureWellnessGoal;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -104,7 +109,16 @@ class DestinationController extends Controller
     {
         $destination->load([
             'province',
+            'preference'
         ]);
+
+        if ($destination->preference) {
+            $destination->preference->wellness_goals = FeatureWellnessGoal::whereIn('id', $destination->preference->wellness_goals)->get();
+            $destination->preference->activities = FeatureActivity::whereIn('id', $destination->preference->activities)->get();
+            $destination->preference->environments = FeatureEnvironment::whereIn('id', $destination->preference->environments)->get();
+            $destination->preference->duration_intensity = FeatureDurationIntensity::find($destination->preference->duration_intensity_id);
+            $destination->preference->budget_accommodation = FeatureBudgetAccommodation::find($destination->preference->budget_accommodation_id);
+        }
 
         return Inertia::render('Admin/Destinations/Show', [
             'destination' => $destination,

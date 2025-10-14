@@ -63,7 +63,7 @@ class DestinationPreferenceController extends Controller
         return redirect()->route('admin.destinations.preferences.edit', $destination->id)
             ->with('flash', [
                 'style' => 'success',
-                'message' => 'เพิ่มสถานที่ท่องเที่ยวเรียบร้อยแล้ว',
+                'message' => 'เพิ่มความชอบสถานที่เรียบร้อยแล้ว',
             ]);
     }
 }
