@@ -121,119 +121,93 @@ const getRegionColor = (region) => {
 
         <Card v-if="destination.preference" class="mb-6">
             <template #title>
-                <div class="flex items-center gap-2">
-                    <i class="pi pi-heart text-2xl"></i>
-                    <span>Preference</span>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="pi pi-heart text-2xl"></i>
+                        <span>ความชอบของสถานที่</span>
+                    </div>
+                    <Button label="แก้ไข" icon="pi pi-pencil" size="small" severity="info"
+                        @click="router.get(route('admin.destinations.preferences.edit', destination.id))" />
                 </div>
             </template>
 
             <template #content>
-                <div class="space-y-6">
-        <!-- ข้อมูลความชอบของสถานที่ท่องเที่ยว -->
-        <div>
-            <div class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]">
-                <h2 class="text-xl font-semibold">
-                    <i class="pi pi-info-circle mr-2"></i>
-                    ข้อมูลความชอบของสถานที่ท่องเที่ยว
-                </h2>
-            </div>
-            <div class="flex flex-wrap gap-2">
-                <Tag 
-                    v-for="value in destination.preference.wellness_goals" 
-                    :key="value.id"
-                    :value="value.icon + ' ' + value.name" 
-                />
-            </div>
-        </div>
+                <div class="space-y-8">
+                    <!-- ข้อมูลความชอบของสถานที่ท่องเที่ยว -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+                            <i class="pi pi-heart-fill text-pink-500"></i>
+                            เป้าหมายด้านสุขภาพ
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <Tag v-for="value in destination.preference.wellness_goals" :key="value.id"
+                                :value="value.icon ? `${value.icon} ${value.name}` : value.name" severity="info"
+                                class="text-base px-4 py-2" />
+                        </div>
+                    </div>
 
-        <!-- กิจกรรมสุขภาพ -->
-        <div>
-            <div class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]">
-                <h2 class="text-xl font-semibold">
-                    <i class="pi pi-info-circle mr-2"></i>
-                    กิจกรรมสุขภาพ
-                </h2>
-            </div>
-            <div class="flex flex-wrap gap-2">
-                <Tag 
-                    v-for="value in destination.preference.activities" 
-                    :key="value.id"
-                    :value="value.icon + ' ' + value.name" 
-                />
-            </div>
-        </div>
+                    <!-- กิจกรรมสุขภาพ -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+                            <i class="pi pi-bolt text-orange-500"></i>
+                            กิจกรรมสุขภาพ
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <Tag v-for="value in destination.preference.activities" :key="value.id"
+                                :value="value.icon ? `${value.icon} ${value.name}` : value.name" severity="success"
+                                class="text-base px-4 py-2" />
+                        </div>
+                    </div>
 
-        <!-- สภาพแวดล้อมและบรรยากาศ -->
-        <div>
-            <div class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]">
-                <h2 class="text-xl font-semibold">
-                    <i class="pi pi-info-circle mr-2"></i>
-                    สภาพแวดล้อมและบรรยากาศ
-                </h2>
-            </div>
-            <div class="flex flex-wrap gap-2">
-                <Tag 
-                    v-for="value in destination.preference.environments" 
-                    :key="value.id"
-                    :value="value.icon + ' ' + value.name" 
-                />
-            </div>
-        </div>
+                    <!-- สภาพแวดล้อมและบรรยากาศ -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+                            <i class="pi pi-sun text-yellow-500"></i>
+                            สภาพแวดล้อมและบรรยากาศ
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <Tag v-for="value in destination.preference.environments" :key="value.id"
+                                :value="value.icon ? `${value.icon} ${value.name}` : value.name" severity="warn"
+                                class="text-base px-4 py-2" />
+                        </div>
+                    </div>
 
-        <!-- ระยะเวลาและความเข้มข้นของโปรแกรม -->
-        <div>
-            <div class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]">
-                <h2 class="text-xl font-semibold">
-                    <i class="pi pi-info-circle mr-2"></i>
-                    ระยะเวลาและความเข้มข้นของโปรแกรม
-                </h2>
-            </div>
-            <Tag
-                :value="destination.preference.duration_intensity.icon + ' ' + destination.preference.duration_intensity.name" 
-            />
-        </div>
+                    <!-- ระยะเวลาและความเข้มข้นของโปรแกรม -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+                            <i class="pi pi-clock text-blue-500"></i>
+                            ระยะเวลาและความเข้มข้นของโปรแกรม
+                        </h3>
+                        <Tag :value="destination.preference.duration_intensity.icon
+                            ? `${destination.preference.duration_intensity.icon} ${destination.preference.duration_intensity.name}`
+                            : destination.preference.duration_intensity.name" severity="contrast"
+                            class="text-base px-4 py-2" />
+                    </div>
 
-        <!-- งบประมาณและที่พัก -->
-        <div>
-            <div class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]">
-                <h2 class="text-xl font-semibold">
-                    <i class="pi pi-info-circle mr-2"></i>
-                    งบประมาณและที่พัก
-                </h2>
-            </div>
-            <Tag
-                :value="destination.preference.budget_accommodation.icon + ' ' + destination.preference.budget_accommodation.name" 
-            />
-        </div>
+                    <!-- งบประมาณและที่พัก -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+                            <i class="pi pi-wallet text-green-500"></i>
+                            งบประมาณและที่พัก
+                        </h3>
+                        <Tag :value="destination.preference.budget_accommodation.icon
+                            ? `${destination.preference.budget_accommodation.icon} ${destination.preference.budget_accommodation.name}`
+                            : destination.preference.budget_accommodation.name" severity="success"
+                            class="text-base px-4 py-2" />
+                    </div>
 
-        <!-- Keywords -->
-        <div v-if="destination.preference.keywords && destination.preference.keywords.length > 0">
-            <div class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]">
-                <h2 class="text-xl font-semibold">
-                    <i class="pi pi-info-circle mr-2"></i>
-                    Keywords
-                </h2>
-            </div>
-            <div class="flex flex-wrap gap-2">
-                <Tag 
-                    v-for="(keyword, index) in destination.preference.keywords" 
-                    :key="index"
-                    :value="keyword"
-                    severity="secondary"
-                />
-            </div>
-        </div>
-
-        <!-- Action Button -->
-        <div class="pt-4">
-            <Button 
-                label="จัดการความชอบ" 
-                icon="pi pi-heart" 
-                severity="info" 
-                @click="router.get(route('admin.destinations.preferences.edit', destination.id))" 
-            />
-        </div>
-    </div>
+                    <!-- Keywords -->
+                    <div v-if="destination.preference.keywords && destination.preference.keywords.length > 0">
+                        <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+                            <i class="pi pi-tags text-purple-500"></i>
+                            คำค้นหา (Keywords)
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <Tag v-for="(keyword, index) in destination.preference.keywords" :key="index"
+                                :value="keyword" severity="secondary" class="text-sm px-3 py-1" />
+                        </div>
+                    </div>
+                </div>
             </template>
         </Card>
 

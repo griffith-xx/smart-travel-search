@@ -60,7 +60,7 @@ class DestinationPreferenceController extends Controller
 
         $destination->preference()->update($preferences);
 
-        return redirect()->route('admin.destinations.preferences.edit', $destination->id)
+        return redirect()->route('admin.destinations.show', $destination->id)
             ->with('flash', [
                 'style' => 'success',
                 'message' => 'เพิ่มความชอบสถานที่เรียบร้อยแล้ว',
