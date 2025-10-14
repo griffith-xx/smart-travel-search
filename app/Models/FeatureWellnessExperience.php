@@ -10,6 +10,5 @@ class FeatureWellnessExperience extends Model
         'name',
         'slug',
         'description',
-        'icon',
     ];
 }

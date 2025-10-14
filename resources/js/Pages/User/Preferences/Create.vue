@@ -55,16 +55,11 @@ const submit = () => {
             </div>
             <form
                 class="md:border-l-[4px]md:border-primary md:shadow-lg p-2 lg:p-8 md:rounded-xl mt-4 max-w-4xl mx-auto"
-                @submit.prevent="submit"
-            >
+                @submit.prevent="submit">
                 <div class="space-y-8">
                     <div class="space-y-4">
-                        <div
-                            class="flex flex-col md:flex-row items-start md:items-center gap-2"
-                        >
-                            <div
-                                class="size-8 rounded-full bg-primary text-white flex justify-center items-center"
-                            >
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-2">
+                            <div class="size-8 rounded-full bg-primary text-white flex justify-center items-center">
                                 1
                             </div>
                             <h2 class="text-2xl font-semibold opacity-90">
@@ -78,41 +73,23 @@ const submit = () => {
                         </p>
 
                         <div class="space-y-2">
-                            <div
-                                v-for="feature in featureWellnessGoals"
-                                :key="feature.id"
-                                class="flex items-center gap-2"
-                            >
-                                <Checkbox
-                                    v-model="form.wellnessGoals"
-                                    :inputId="feature.slug"
-                                    :name="feature.name"
-                                    :value="feature.id"
-                                />
+                            <div v-for="feature in featureWellnessGoals" :key="feature.id"
+                                class="flex items-center gap-2">
+                                <Checkbox v-model="form.wellnessGoals" :inputId="feature.slug" :name="feature.name"
+                                    :value="feature.id" />
                                 <label :for="feature.slug">
                                     <span class="opacity-80">
                                         {{ feature.name }}
-                                    </span>
-
-                                    <span v-if="feature.icon" class="ml-2">
-                                        {{ feature.icon }}
                                     </span>
                                 </label>
                             </div>
                         </div>
 
-                        <InputError
-                            :message="form.errors.wellnessGoals"
-                            class="mt-2"
-                        />
+                        <InputError :message="form.errors.wellnessGoals" class="mt-2" />
                     </div>
                     <div class="space-y-4">
-                        <div
-                            class="flex flex-col md:flex-row items-start md:items-center gap-2"
-                        >
-                            <div
-                                class="size-8 rounded-full bg-primary text-white flex justify-center items-center"
-                            >
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-2">
+                            <div class="size-8 rounded-full bg-primary text-white flex justify-center items-center">
                                 2
                             </div>
                             <h2 class="text-2xl font-semibold opacity-90">
@@ -125,41 +102,22 @@ const submit = () => {
                         </p>
 
                         <div class="space-y-2">
-                            <div
-                                v-for="feature in featureActivities"
-                                :key="feature.id"
-                                class="flex items-center gap-2"
-                            >
-                                <Checkbox
-                                    v-model="form.activities"
-                                    :inputId="feature.slug"
-                                    :name="feature.name"
-                                    :value="feature.id"
-                                />
+                            <div v-for="feature in featureActivities" :key="feature.id" class="flex items-center gap-2">
+                                <Checkbox v-model="form.activities" :inputId="feature.slug" :name="feature.name"
+                                    :value="feature.id" />
                                 <label :for="feature.slug">
                                     <span class="opacity-80">
                                         {{ feature.name }}
-                                    </span>
-
-                                    <span v-if="feature.icon" class="ml-2">
-                                        {{ feature.icon }}
                                     </span>
                                 </label>
                             </div>
                         </div>
 
-                        <InputError
-                            :message="form.errors.activities"
-                            class="mt-2"
-                        />
+                        <InputError :message="form.errors.activities" class="mt-2" />
                     </div>
                     <div class="space-y-4">
-                        <div
-                            class="flex flex-col md:flex-row items-start md:items-center gap-2"
-                        >
-                            <div
-                                class="size-8 rounded-full bg-primary text-white flex justify-center items-center"
-                            >
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-2">
+                            <div class="size-8 rounded-full bg-primary text-white flex justify-center items-center">
                                 3
                             </div>
                             <h2 class="text-2xl font-semibold opacity-90">
@@ -172,48 +130,27 @@ const submit = () => {
                         </p>
 
                         <div class="space-y-2">
-                            <div
-                                v-for="feature in featureEnvironments"
-                                :key="feature.id"
-                                class="flex items-center gap-2"
-                            >
-                                <Checkbox
-                                    v-model="form.environments"
-                                    :inputId="feature.slug"
-                                    :name="feature.name"
-                                    :value="feature.id"
-                                />
+                            <div v-for="feature in featureEnvironments" :key="feature.id"
+                                class="flex items-center gap-2">
+                                <Checkbox v-model="form.environments" :inputId="feature.slug" :name="feature.name"
+                                    :value="feature.id" />
                                 <label :for="feature.slug">
                                     <span class="opacity-80">
                                         {{ feature.name }}
                                     </span>
 
-                                    <span v-if="feature.icon" class="ml-2">
-                                        {{ feature.icon }}
-                                    </span>
-
-                                    <span
-                                        v-if="feature.description"
-                                        class="ml-2 opacity-60 text-sm"
-                                    >
+                                    <span v-if="feature.description" class="ml-2 opacity-60 text-sm">
                                         {{ feature.description }}
                                     </span>
                                 </label>
                             </div>
                         </div>
 
-                        <InputError
-                            :message="form.errors.environments"
-                            class="mt-2"
-                        />
+                        <InputError :message="form.errors.environments" class="mt-2" />
                     </div>
                     <div class="space-y-4">
-                        <div
-                            class="flex flex-col md:flex-row items-start md:items-center gap-2"
-                        >
-                            <div
-                                class="size-8 rounded-full bg-primary text-white flex justify-center items-center"
-                            >
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-2">
+                            <div class="size-8 rounded-full bg-primary text-white flex justify-center items-center">
                                 4
                             </div>
                             <h2 class="text-2xl font-semibold opacity-90">
@@ -226,48 +163,27 @@ const submit = () => {
                         </p>
 
                         <div class="space-y-2">
-                            <div
-                                v-for="feature in featureDurationIntensities"
-                                :key="feature.id"
-                                class="flex items-center gap-2"
-                            >
-                                <RadioButton
-                                    v-model="form.durationIntensity"
-                                    :inputId="feature.slug"
-                                    :name="feature.name"
-                                    :value="feature.id"
-                                />
+                            <div v-for="feature in featureDurationIntensities" :key="feature.id"
+                                class="flex items-center gap-2">
+                                <RadioButton v-model="form.durationIntensity" :inputId="feature.slug"
+                                    :name="feature.name" :value="feature.id" />
                                 <label :for="feature.slug">
                                     <span class="opacity-80">
                                         {{ feature.name }}
                                     </span>
 
-                                    <span v-if="feature.icon" class="ml-2">
-                                        {{ feature.icon }}
-                                    </span>
-
-                                    <span
-                                        v-if="feature.description"
-                                        class="ml-2 opacity-60 text-sm"
-                                    >
+                                    <span v-if="feature.description" class="ml-2 opacity-60 text-sm">
                                         {{ feature.description }}
                                     </span>
                                 </label>
                             </div>
                         </div>
 
-                        <InputError
-                            :message="form.errors.durationIntensity"
-                            class="mt-2"
-                        />
+                        <InputError :message="form.errors.durationIntensity" class="mt-2" />
                     </div>
                     <div class="space-y-4">
-                        <div
-                            class="flex flex-col md:flex-row items-start md:items-center gap-2"
-                        >
-                            <div
-                                class="size-8 rounded-full bg-primary text-white flex justify-center items-center"
-                            >
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-2">
+                            <div class="size-8 rounded-full bg-primary text-white flex justify-center items-center">
                                 5
                             </div>
                             <h2 class="text-2xl font-semibold opacity-90">
@@ -281,48 +197,27 @@ const submit = () => {
                         </p>
 
                         <div class="space-y-2">
-                            <div
-                                v-for="feature in featureBudgetAccommodations"
-                                :key="feature.id"
-                                class="flex items-center gap-2"
-                            >
-                                <RadioButton
-                                    v-model="form.budgetAccommodation"
-                                    :inputId="feature.slug"
-                                    :name="feature.name"
-                                    :value="feature.id"
-                                />
+                            <div v-for="feature in featureBudgetAccommodations" :key="feature.id"
+                                class="flex items-center gap-2">
+                                <RadioButton v-model="form.budgetAccommodation" :inputId="feature.slug"
+                                    :name="feature.name" :value="feature.id" />
                                 <label :for="feature.slug">
                                     <span class="opacity-80">
                                         {{ feature.name }}
                                     </span>
 
-                                    <span v-if="feature.icon" class="ml-2">
-                                        {{ feature.icon }}
-                                    </span>
-
-                                    <span
-                                        v-if="feature.description"
-                                        class="ml-2 opacity-60 text-sm"
-                                    >
+                                    <span v-if="feature.description" class="ml-2 opacity-60 text-sm">
                                         {{ feature.description }}
                                     </span>
                                 </label>
                             </div>
                         </div>
 
-                        <InputError
-                            :message="form.errors.budgetAccommodation"
-                            class="mt-2"
-                        />
+                        <InputError :message="form.errors.budgetAccommodation" class="mt-2" />
                     </div>
                     <div class="space-y-4">
-                        <div
-                            class="flex flex-col md:flex-row items-start md:items-center gap-2"
-                        >
-                            <div
-                                class="size-8 rounded-full bg-primary text-white flex justify-center items-center"
-                            >
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-2">
+                            <div class="size-8 rounded-full bg-primary text-white flex justify-center items-center">
                                 6
                             </div>
                             <h2 class="text-2xl font-semibold opacity-90">
@@ -335,58 +230,32 @@ const submit = () => {
                         </p>
 
                         <div class="space-y-2">
-                            <div
-                                v-for="feature in featureWellnessExperiences"
-                                :key="feature.id"
-                                class="flex items-center gap-2"
-                            >
-                                <RadioButton
-                                    v-model="form.wellnessExperience"
-                                    :inputId="feature.slug"
-                                    :name="feature.name"
-                                    :value="feature.id"
-                                />
+                            <div v-for="feature in featureWellnessExperiences" :key="feature.id"
+                                class="flex items-center gap-2">
+                                <RadioButton v-model="form.wellnessExperience" :inputId="feature.slug"
+                                    :name="feature.name" :value="feature.id" />
                                 <label :for="feature.slug">
                                     <span class="opacity-80">
                                         {{ feature.name }}
                                     </span>
 
-                                    <span v-if="feature.icon" class="ml-2">
-                                        {{ feature.icon }}
-                                    </span>
-
-                                    <span
-                                        v-if="feature.description"
-                                        class="ml-2 opacity-60 text-sm"
-                                    >
+                                    <span v-if="feature.description" class="ml-2 opacity-60 text-sm">
                                         {{ feature.description }}
                                     </span>
                                 </label>
                             </div>
                         </div>
 
-                        <InputError
-                            :message="form.errors.wellnessExperience"
-                            class="mt-2"
-                        />
+                        <InputError :message="form.errors.wellnessExperience" class="mt-2" />
                     </div>
                 </div>
 
-                <div
-                    class="mt-10 flex items-center justify-between gap-4 w-full"
-                >
-                    <Button
-                        size="large"
-                        type="submit"
-                        label="🚀 ส่งแบบสอบถาม"
-                        :disabled="form.processing"
-                        :loading="form.processing"
-                    />
-                    <Link
-                        :href="route('destinations.index')"
-                        class="opacity-70 hover:opacity-100 underline transition-all"
-                    >
-                        ขอฉันข้ามตอนนี้ไปก่อน
+                <div class="mt-10 flex items-center justify-between gap-4 w-full">
+                    <Button size="large" type="submit" label="🚀 ส่งแบบสอบถาม" :disabled="form.processing"
+                        :loading="form.processing" />
+                    <Link :href="route('destinations.index')"
+                        class="opacity-70 hover:opacity-100 underline transition-all">
+                    ขอฉันข้ามตอนนี้ไปก่อน
                     </Link>
                 </div>
             </form>

@@ -10,6 +10,5 @@ class FeatureBudgetAccommodation extends Model
         'name',
         'slug',
         'description',
-        'icon',
     ];
 }

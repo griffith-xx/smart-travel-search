@@ -10,6 +10,5 @@ class FeatureDurationIntensity extends Model
         'name',
         'slug',
         'description',
-        'icon',
     ];
 }

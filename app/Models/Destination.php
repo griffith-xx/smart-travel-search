@@ -66,9 +66,6 @@ class Destination extends Model
         'has_wifi',
         'has_restaurant',
         'pet_friendly',
-        'wheelchair_accessible',
-        'family_friendly',
-        'eco_friendly',
 
         // Admin & Status
         'is_active',
@@ -170,7 +167,7 @@ class Destination extends Model
     {
         return $this->belongsTo(Province::class);
     }
- 
+
     /**
      * Get the admin who created this destination.
      */
@@ -203,7 +200,7 @@ class Destination extends Model
         if (is_string($this->gallery_images)) {
             return json_decode($this->gallery_images, true) ?? [];
         }
-        
+
         return $this->gallery_images ?? [];
     }
 }

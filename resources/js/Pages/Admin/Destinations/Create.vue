@@ -59,9 +59,6 @@ const form = useForm({
     has_wifi: false,
     has_restaurant: false,
     pet_friendly: false,
-    wheelchair_accessible: false,
-    family_friendly: false,
-    eco_friendly: false,
 });
 
 const galleryImagesText = computed({
@@ -689,42 +686,6 @@ const submit = () => {
                             id="pet_friendly"
                             name="pet_friendly"
                             v-model="form.pet_friendly"
-                        />
-                    </InputSection>
-
-                    <InputSection
-                        name="wheelchair_accessible"
-                        label="รองรับผู้พิการและรถเข็น"
-                        :errorMessage="form.errors.wheelchair_accessible"
-                    >
-                        <ToggleSwitch
-                            id="wheelchair_accessible"
-                            name="wheelchair_accessible"
-                            v-model="form.wheelchair_accessible"
-                        />
-                    </InputSection>
-
-                    <InputSection
-                        name="family_friendly"
-                        label="เหมาะสำหรับครอบครัว"
-                        :errorMessage="form.errors.family_friendly"
-                    >
-                        <ToggleSwitch
-                            id="family_friendly"
-                            name="family_friendly"
-                            v-model="form.family_friendly"
-                        />
-                    </InputSection>
-
-                    <InputSection
-                        name="eco_friendly"
-                        label="เป็นมิตรกับสิ่งแวดล้อม"
-                        :errorMessage="form.errors.eco_friendly"
-                    >
-                        <ToggleSwitch
-                            id="eco_friendly"
-                            name="eco_friendly"
-                            v-model="form.eco_friendly"
                         />
                     </InputSection>
                 </div>

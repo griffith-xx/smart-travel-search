@@ -73,9 +73,6 @@ class DestinationSeeder extends Seeder
                 'has_wifi' => true,
                 'has_restaurant' => true,
                 'pet_friendly' => false,
-                'wheelchair_accessible' => true,
-                'family_friendly' => true,
-                'eco_friendly' => true,
 
                 // Admin & Status
                 'is_active' => true,

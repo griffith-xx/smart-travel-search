@@ -10,6 +10,5 @@ class FeatureWellnessGoal extends Model
         'name',
         'slug',
         'description',
-        'icon',
     ];
 }

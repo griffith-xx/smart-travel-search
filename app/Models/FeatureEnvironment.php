@@ -10,6 +10,5 @@ class FeatureEnvironment extends Model
         'name',
         'slug',
         'description',
-        'icon',
     ];
 }

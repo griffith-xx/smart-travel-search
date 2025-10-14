@@ -68,9 +68,6 @@ return new class extends Migration
             $table->boolean('has_wifi')->default(false); // มี WiFi
             $table->boolean('has_restaurant')->default(false); // มีร้านอาหาร
             $table->boolean('pet_friendly')->default(false); // รับสัตว์เลี้ยง
-            $table->boolean('wheelchair_accessible')->default(false); // รองรับผู้พิการ
-            $table->boolean('family_friendly')->default(false); // เหมาะสำหรับครอบครัว
-            $table->boolean('eco_friendly')->default(false); // เป็นมิตรกับสิ่งแวดล้อม
 
             // Admin & Status
             $table->boolean('is_active')->default(true);

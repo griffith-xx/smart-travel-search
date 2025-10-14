@@ -538,7 +538,7 @@ const getRegionColor = (region) => {
                 </div>
             </template>
             <template #content>
-                <div class="grid grid-cols-3 gap-4">
+                <div class="grid grid-cols-4 gap-4">
                     <div class="flex items-center gap-3">
                         <i class="pi pi-car text-2xl text-primary"></i>
                         <div>
@@ -572,45 +572,6 @@ const getRegionColor = (region) => {
                         <div>
                             <p class="font-semibold text-sm">รับสัตว์เลี้ยง</p>
                             <Tag :value="getYesNoLabel(destination.pet_friendly)" :severity="getYesNoSeverity(destination.pet_friendly)
-                                " size="small" />
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-3">
-                        <span class="text-sm"> ♿ </span>
-                        <div>
-                            <p class="font-semibold text-sm">รองรับผู้พิการ</p>
-                            <Tag :value="getYesNoLabel(
-                                destination.wheelchair_accessible
-                            )
-                                " :severity="getYesNoSeverity(
-                                    destination.wheelchair_accessible
-                                )
-                                    " size="small" />
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-3">
-                        <i class="pi pi-users text-2xl text-primary"></i>
-                        <div>
-                            <p class="font-semibold text-sm">
-                                เหมาะสำหรับครอบครัว
-                            </p>
-                            <Tag :value="getYesNoLabel(destination.family_friendly)
-                                " :severity="getYesNoSeverity(
-                                    destination.family_friendly
-                                )
-                                    " size="small" />
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-3">
-                        <i class="pi pi-sun text-2xl text-primary"></i>
-                        <div>
-                            <p class="font-semibold text-sm">
-                                เป็นมิตรกับสิ่งแวดล้อม
-                            </p>
-                            <Tag :value="getYesNoLabel(destination.eco_friendly)" :severity="getYesNoSeverity(destination.eco_friendly)
                                 " size="small" />
                         </div>
                     </div>

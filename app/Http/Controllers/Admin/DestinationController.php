@@ -86,9 +86,6 @@ class DestinationController extends Controller
             'has_wifi' => 'nullable|boolean',
             'has_restaurant' => 'nullable|boolean',
             'pet_friendly' => 'nullable|boolean',
-            'wheelchair_accessible' => 'nullable|boolean',
-            'family_friendly' => 'nullable|boolean',
-            'eco_friendly' => 'nullable|boolean',
         ]);
 
         Destination::create(array_merge($validated, [
@@ -187,9 +184,6 @@ class DestinationController extends Controller
             'has_wifi' => 'nullable|boolean',
             'has_restaurant' => 'nullable|boolean',
             'pet_friendly' => 'nullable|boolean',
-            'wheelchair_accessible' => 'nullable|boolean',
-            'family_friendly' => 'nullable|boolean',
-            'eco_friendly' => 'nullable|boolean',
 
             // Admin & Status
             'is_active' => 'nullable|boolean',
