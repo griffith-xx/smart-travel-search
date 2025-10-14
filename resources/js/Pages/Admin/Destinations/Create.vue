@@ -17,11 +17,16 @@ defineProps({
         type: Object,
         required: true,
     },
+    categories: {
+        type: Object,
+        required: true,
+    },
 });
 
 const form = useForm({
     // Basic Information
     province_id: null,
+    category_id: null,
     name: "",
     name_en: "",
     description: "",
@@ -107,7 +112,6 @@ const submit = () => {
 
                 <div class="grid grid-cols-2 gap-5">
                     <InputSection
-                        class="col-span-2"
                         name="province_id"
                         label="จังหวัด"
                         :errorMessage="form.errors.province_id"
@@ -119,6 +123,25 @@ const submit = () => {
                             v-model="form.province_id"
                             placeholder="เลือกจังหวัด"
                             :options="provinces"
+                            optionLabel="name"
+                            optionValue="id"
+                            filter
+                            showClear
+                        />
+                    </InputSection>
+
+                    <InputSection
+                        name="category_id"
+                        label="หมวดหมู่"
+                        :errorMessage="form.errors.category_id"
+                        required
+                    >
+                        <Select
+                            id="category_id"
+                            name="category_id"
+                            v-model="form.category_id"
+                            placeholder="เลือกหมวดหมู่"
+                            :options="categories"
                             optionLabel="name"
                             optionValue="id"
                             filter

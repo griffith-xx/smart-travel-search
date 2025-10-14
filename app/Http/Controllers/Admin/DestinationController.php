@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Destination;
 use App\Models\FeatureActivity;
 use App\Models\FeatureBudgetAccommodation;
@@ -20,7 +21,7 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        $destinations  = Destination::with('province')->get();
+        $destinations  = Destination::with(['province', 'category'])->get();
 
         return Inertia::render('Admin/Destinations/Index', [
             'destinations' => $destinations,
@@ -33,9 +34,11 @@ class DestinationController extends Controller
     public function create()
     {
         $provinces = Province::get();
+        $categories = Category::get();
 
         return Inertia::render('Admin/Destinations/Create', [
             'provinces' => $provinces,
+            'categories' => $categories,
         ]);
     }
 
@@ -48,6 +51,7 @@ class DestinationController extends Controller
 
             // Basic Information
             'province_id' => 'required|exists:provinces,id',
+            'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
             'short_description' => 'required|string',
@@ -106,6 +110,7 @@ class DestinationController extends Controller
     {
         $destination->load([
             'province',
+            'category',
             'preference'
         ]);
 
@@ -129,12 +134,12 @@ class DestinationController extends Controller
     public function edit(Destination $destination)
     {
         $provinces = Province::orderBy('name')->get();
-
-        $destination->gallery_images_array;
+        $categories = Category::get();
 
         return Inertia::render('Admin/Destinations/Edit', [
             'destination' => $destination,
             'provinces' => $provinces,
+            'categories' => $categories,
         ]);
     }
 
@@ -146,6 +151,7 @@ class DestinationController extends Controller
         $validated = $request->validate([
             // Basic Information
             'province_id' => 'required|exists:provinces,id',
+            'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255',
             'name_en' => 'required|string|max:255',
             'short_description' => 'required|string',

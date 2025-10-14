@@ -17,6 +17,12 @@ const navigations = ref([
         badge: page.props.adminStats.provinces_count,
     },
     {
+        label:'หมวดหมู่',
+        icon: "pi pi-folder",
+        route: "admin.categories.index",
+        badge: page.props.adminStats.categories_count,
+    },
+    {
         label: "สถานที่ท่องเที่ยว",
         icon: "pi pi-globe",
         route: "admin.destinations.index",

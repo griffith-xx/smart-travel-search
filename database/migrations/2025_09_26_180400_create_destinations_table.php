@@ -16,6 +16,7 @@ return new class extends Migration
 
             // Basic Information
             $table->foreignId('province_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('name_en')->nullable();
@@ -86,6 +87,7 @@ return new class extends Migration
         // เพิ่ม indexes สำหรับ performance
         Schema::table('destinations', function (Blueprint $table) {
             $table->index('province_id');
+            $table->index('category_id');
             $table->index('slug');
             $table->index('is_active');
             $table->index('is_featured');

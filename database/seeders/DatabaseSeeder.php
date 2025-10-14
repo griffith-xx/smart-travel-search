@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             UserSeeder::class,
             ProvinceSeeder::class,
+            CategorySeeder::class,
             FeatureWellnessGoalSeeder::class,
             FeatureActivitySeeder::class,
             FeatureBudgetAccommodationSeeder::class,

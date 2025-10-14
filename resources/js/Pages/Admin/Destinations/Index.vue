@@ -269,11 +269,21 @@ const getFeaturedSeverity = (isFeatured) => {
             </Column>
 
             <!-- Province Column -->
-            <Column field="province.name" header="จังหวัด" sortable>
+            <Column header="จังหวัด" sortable>
                 <template #body="{ data }">
                     <div class="flex items-center gap-2">
                         <i class="pi pi-map text-blue-500"></i>
                         <span>{{ data.province.name }}</span>
+                    </div>
+                </template>
+            </Column>
+
+            <!-- Category Column -->
+            <Column header="หมวดหมู่" sortable>
+                <template #body="{ data }">
+                    <div class="flex items-center gap-2">
+                        <i class="pi pi-folder text-violet-500"></i>
+                        <span>{{ data.category.name }}</span>
                     </div>
                 </template>
             </Column>

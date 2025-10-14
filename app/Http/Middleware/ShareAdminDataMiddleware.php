@@ -2,12 +2,14 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\Province;
 use App\Models\Destination;
 use App\Models\User;
+use PhpParser\Node\Stmt\Catch_;
 
 class ShareAdminDataMiddleware
 {
@@ -23,7 +25,8 @@ class ShareAdminDataMiddleware
             'inertia_admin_stats' => [
                 'provinces_count' => Province::count(),
                 'destinations_count' => Destination::count(),
-                'users_count' => User::count(), 
+                'users_count' => User::count(),
+                'categories_count' => Category::count(),
             ]
         ]);
 

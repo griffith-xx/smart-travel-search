@@ -14,6 +14,7 @@ class Destination extends Model
     protected $fillable = [
         // Basic Information
         'province_id',
+        'category_id',
         'name',
         'slug',
         'name_en',
@@ -166,6 +167,11 @@ class Destination extends Model
     public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     /**
