@@ -11,7 +11,7 @@ const { theme, setTheme } = useTheme();
     >
         <h1 class="font-extrabold text-3xl uppercase opacity-80">
             <span class="mr-1"> 🚀 </span>
-            Nexus Travel
+            Nexus Wellness
         </h1>
         <div>
             <Button
