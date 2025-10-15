@@ -15,4 +15,5 @@ Route::prefix('destinations')->group(function () {
 
     Route::get('/history/scraper', [DestinationScraperController::class, 'index']);
     Route::post('/history/scraper', [DestinationScraperController::class, 'store']);
+    Route::delete('/history/scraper/{id}', [DestinationScraperController::class, 'destroy']);
 });
