@@ -9,5 +9,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::prefix('destinations')->group(function () {
+    Route::get('/', [DestinationController::class, 'index'])->name('destinations.index');
     Route::post('/', [DestinationController::class, 'store'])->name('destinations.store');;
 });
