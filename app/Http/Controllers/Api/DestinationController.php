@@ -10,14 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class DestinationController extends Controller
 {
-    // Display a listing of the destinations.
     public function index()
     {
         $destinations = Destination::with(['province', 'categories'])->get();
         return response()->json($destinations);
     }
 
-    // Store a newly created resource in storage.
     public function store(Request $request)
     {
         $validator = Validator::make(
@@ -90,5 +88,14 @@ class DestinationController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    }
+
+    public function destroy($id)
+    {
+        Destination::destroy($id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Destination deleted successfully'
+        ], 200);
     }
 }
