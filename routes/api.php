@@ -14,4 +14,5 @@ Route::prefix('destinations')->group(function () {
     Route::post('/', [DestinationController::class, 'store']);
 
     Route::get('/history/scraper', [DestinationScraperController::class, 'index']);
+    Route::post('/history/scraper', [DestinationScraperController::class, 'store']);
 });
