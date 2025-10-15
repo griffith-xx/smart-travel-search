@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\DestinationController;
+use App\Http\Controllers\Api\DestinationScraperController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,6 +10,8 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::prefix('destinations')->group(function () {
-    Route::get('/', [DestinationController::class, 'index'])->name('destinations.index');
-    Route::post('/', [DestinationController::class, 'store'])->name('destinations.store');;
+    Route::get('/', [DestinationController::class, 'index']);
+    Route::post('/', [DestinationController::class, 'store']);
+
+    Route::get('/history/scraper', [DestinationScraperController::class, 'index']);
 });

@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
+            \Illuminate\Http\Middleware\HandleCors::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
 
@@ -21,13 +22,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'share.admin' => \App\Http\Middleware\ShareAdminDataMiddleware::class,
         ]);
-
-        // เพิ่ม CORS middleware สำหรับ API routes
-        $middleware->api(prepend: [
-            \App\Http\Middleware\CorsMiddleware::class,
-        ]);
-
-        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

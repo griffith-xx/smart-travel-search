@@ -12,8 +12,16 @@ class DestinationController extends Controller
 {
     public function index()
     {
-        $destinations = Destination::with(['province', 'categories'])->get();
-        return response()->json($destinations);
+        try {
+            $destinations = Destination::with(['province', 'category'])->get();
+            return response()->json($destinations);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch destination',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function store(Request $request)
@@ -92,10 +100,18 @@ class DestinationController extends Controller
 
     public function destroy($id)
     {
-        Destination::destroy($id);
-        return response()->json([
-            'success' => true,
-            'message' => 'Destination deleted successfully'
-        ], 200);
+        try {
+            Destination::destroy($id);
+            return response()->json([
+                'success' => true,
+                'message' => 'Destination deleted successfully'
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete destination',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
