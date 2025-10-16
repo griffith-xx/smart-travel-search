@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Province;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 
 class ProvinceController extends Controller
@@ -55,6 +56,8 @@ class ProvinceController extends Controller
 
         Province::create($validated);
 
+        Cache::forget('provinces');
+
         return redirect()->route('admin.provinces.index')->with('flash', [
             'style' => 'success',
             'message' => 'เพิ่มข้อมูลจังหวัดเรียบร้อยแล้ว',
@@ -102,6 +105,8 @@ class ProvinceController extends Controller
         $province = Province::findOrFail($id);
         $province->update($validated);
 
+        Cache::forget('provinces');
+
         return redirect()->route('admin.provinces.index')->with('flash', [
             'style' => 'success',
             'message' => 'แก้ไขข้อมูลจังหวัดเรียบร้อยแล้ว',
@@ -115,6 +120,8 @@ class ProvinceController extends Controller
     {
         $province = Province::find($id);
         $province->delete();
+
+        Cache::forget('provinces');
 
         return redirect()->route('admin.provinces.index')->with('flash', [
             'style' => 'success',

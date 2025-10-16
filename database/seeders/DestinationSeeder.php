@@ -38,13 +38,13 @@ class DestinationSeeder extends Seeder
 
                 // Media
                 'cover_image' => 'https://www.ahstatic.com/photos/1877_ho_02_p_1024x768.jpg',
-                'gallery_images' => json_encode([
+                'gallery_images' => [
                     'https://ak-d.tripcdn.com/images/0223a12000ipzmcgxE447_R_600_400_R5.webp',
                     'https://ak-d.tripcdn.com/images/02261120009c8s3am07C5_R_600_400_R5.webp',
                     'https://ak-d.tripcdn.com/images/0222512000c37qt4gD3D9_R_600_400_R5.webp',
                     'https://ak-d.tripcdn.com/images/0224712000f1vaf58B752_R_600_400_R5.webp',
                     'https://ak-d.tripcdn.com/images/0586s12000ns05oyeAF3B_R_600_400_R5.webp',
-                ]),
+                ],
                 'video_url' => null,
                 'virtual_tour_url' => null,
 

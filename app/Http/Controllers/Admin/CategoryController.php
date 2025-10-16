@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -44,6 +45,7 @@ class CategoryController extends Controller
         ]);
 
         Category::create($validated);
+        Cache::forget('categories');
 
         return redirect()->route('admin.categories.index')->with('flash', [
             'style' => 'success',
@@ -86,6 +88,8 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->update($validated);
 
+        Cache::forget('categories');
+
         return redirect()->route('admin.categories.index')->with('flash', [
             'style' => 'success',
             'message' => 'แก้ไขข้อมูลหมวดหมู่เรียบร้อยแล้ว',
@@ -99,6 +103,8 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->delete();
+
+        Cache::forget('categories');
 
         return redirect()->route('admin.categories.index')->with('flash', [
             'style' => 'success',
