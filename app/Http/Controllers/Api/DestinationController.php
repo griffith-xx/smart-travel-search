@@ -18,7 +18,7 @@ class DestinationController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to fetch destination',
+                'message' => 'Failed to fetch destinations',
                 'error' => $e->getMessage()
             ], 500);
         }
