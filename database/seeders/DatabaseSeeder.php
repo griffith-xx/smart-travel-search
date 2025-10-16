@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             FeatureDurationIntensitySeeder::class,
             FeatureEnvironmentSeeder::class,
             FeatureWellnessExperienceSeeder::class,
-            DestinationSeeder::class,
         ]);
     }
 }
