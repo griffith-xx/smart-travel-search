@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            $categories = Cache::remember('provinces', 3600, function () {
+            $categories = Cache::remember('categories', 3600, function () {
                 return Category::select([
                     'id',
                     'name',

@@ -41,11 +41,7 @@ const form = useForm({
         props.destination.preference.duration_intensity_id || null,
     budgetAccommodation:
         props.destination.preference.budget_accommodation_id || null,
-    keywords: props.destination.preference.keywords || [
-        "ภูเขา",
-        "ท่องเที่ยว",
-        "ที่พัก",
-    ],
+    keywords: props.destination.preference.keywords,
 });
 
 const submit = () => {
@@ -71,7 +67,9 @@ const handleKeywords = computed({
     <AdminLayout :title="'จัดการความชอบ ' + props.destination.name">
         <form @submit.prevent="submit">
             <div class="mb-8">
-                <div class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
+                >
                     <h2 class="text-xl font-semibold">
                         <i class="pi pi-info-circle mr-2"></i>
                         ข้อมูลความชอบของสถานที่ท่องเที่ยว
@@ -82,11 +80,24 @@ const handleKeywords = computed({
                     </p>
                 </div>
                 <div class="grid grid-cols-2">
-                    <InputSection class="col-span-2" name="wellnessGoals" :errorMessage="form.errors.wellnessGoals"
-                        required noLabel>
-                        <div v-for="feature in featureWellnessGoals" :key="feature.id" class="flex items-center gap-2">
-                            <Checkbox v-model="form.wellnessGoals" :inputId="feature.slug" :name="feature.name"
-                                :value="feature.id" />
+                    <InputSection
+                        class="col-span-2"
+                        name="wellnessGoals"
+                        :errorMessage="form.errors.wellnessGoals"
+                        required
+                        noLabel
+                    >
+                        <div
+                            v-for="feature in featureWellnessGoals"
+                            :key="feature.id"
+                            class="flex items-center gap-2"
+                        >
+                            <Checkbox
+                                v-model="form.wellnessGoals"
+                                :inputId="feature.slug"
+                                :name="feature.name"
+                                :value="feature.id"
+                            />
                             <label :for="feature.slug">
                                 <span class="opacity-80">
                                     {{ feature.name }}
@@ -98,7 +109,9 @@ const handleKeywords = computed({
             </div>
 
             <div class="mb-8">
-                <div class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
+                >
                     <h2 class="text-xl font-semibold">
                         <i class="pi pi-info-circle mr-2"></i>
                         กิจกรรมสุขภาพ
@@ -109,11 +122,24 @@ const handleKeywords = computed({
                     </p>
                 </div>
                 <div class="grid grid-cols-2">
-                    <InputSection class="col-span-2" name="activities" :errorMessage="form.errors.activities" required
-                        noLabel>
-                        <div v-for="feature in featureActivities" :key="feature.id" class="flex items-center gap-2">
-                            <Checkbox v-model="form.activities" :inputId="feature.slug" :name="feature.name"
-                                :value="feature.id" />
+                    <InputSection
+                        class="col-span-2"
+                        name="activities"
+                        :errorMessage="form.errors.activities"
+                        required
+                        noLabel
+                    >
+                        <div
+                            v-for="feature in featureActivities"
+                            :key="feature.id"
+                            class="flex items-center gap-2"
+                        >
+                            <Checkbox
+                                v-model="form.activities"
+                                :inputId="feature.slug"
+                                :name="feature.name"
+                                :value="feature.id"
+                            />
                             <label :for="feature.slug">
                                 <span class="opacity-80">
                                     {{ feature.name }}
@@ -125,7 +151,9 @@ const handleKeywords = computed({
             </div>
 
             <div class="mb-8">
-                <div class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
+                >
                     <h2 class="text-xl font-semibold">
                         <i class="pi pi-info-circle mr-2"></i>
                         สภาพแวดล้อมและบรรยากาศ
@@ -136,11 +164,24 @@ const handleKeywords = computed({
                     </p>
                 </div>
                 <div class="grid grid-cols-2">
-                    <InputSection class="col-span-2" name="environments" :errorMessage="form.errors.environments"
-                        required noLabel>
-                        <div v-for="feature in featureEnvironments" :key="feature.id" class="flex items-center gap-2">
-                            <Checkbox v-model="form.environments" :inputId="feature.slug" :name="feature.name"
-                                :value="feature.id" />
+                    <InputSection
+                        class="col-span-2"
+                        name="environments"
+                        :errorMessage="form.errors.environments"
+                        required
+                        noLabel
+                    >
+                        <div
+                            v-for="feature in featureEnvironments"
+                            :key="feature.id"
+                            class="flex items-center gap-2"
+                        >
+                            <Checkbox
+                                v-model="form.environments"
+                                :inputId="feature.slug"
+                                :name="feature.name"
+                                :value="feature.id"
+                            />
                             <label :for="feature.slug">
                                 <span class="opacity-80">
                                     {{ feature.name }}
@@ -152,7 +193,9 @@ const handleKeywords = computed({
             </div>
 
             <div class="mb-8">
-                <div class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
+                >
                     <h2 class="text-xl font-semibold">
                         <i class="pi pi-info-circle mr-2"></i>
                         ระยะเวลาและความเข้มข้นของโปรแกรม
@@ -163,12 +206,24 @@ const handleKeywords = computed({
                     </p>
                 </div>
                 <div class="grid grid-cols-2">
-                    <InputSection class="col-span-2" name="durationIntensity"
-                        :errorMessage="form.errors.durationIntensity" required noLabel>
-                        <div v-for="feature in featureDurationIntensities" :key="feature.id"
-                            class="flex items-center gap-2">
-                            <RadioButton v-model="form.durationIntensity" :inputId="feature.slug" :name="feature.name"
-                                :value="feature.id" />
+                    <InputSection
+                        class="col-span-2"
+                        name="durationIntensity"
+                        :errorMessage="form.errors.durationIntensity"
+                        required
+                        noLabel
+                    >
+                        <div
+                            v-for="feature in featureDurationIntensities"
+                            :key="feature.id"
+                            class="flex items-center gap-2"
+                        >
+                            <RadioButton
+                                v-model="form.durationIntensity"
+                                :inputId="feature.slug"
+                                :name="feature.name"
+                                :value="feature.id"
+                            />
                             <label :for="feature.slug">
                                 <span class="opacity-80">
                                     {{ feature.name }}
@@ -180,7 +235,9 @@ const handleKeywords = computed({
             </div>
 
             <div class="mb-8">
-                <div class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
+                >
                     <h2 class="text-xl font-semibold">
                         <i class="pi pi-info-circle mr-2"></i>
                         งบประมาณและที่พัก
@@ -191,12 +248,24 @@ const handleKeywords = computed({
                     </p>
                 </div>
                 <div class="grid grid-cols-2">
-                    <InputSection class="col-span-2" name="budgetAccommodation"
-                        :errorMessage="form.errors.budgetAccommodation" required noLabel>
-                        <div v-for="feature in featureBudgetAccommodations" :key="feature.id"
-                            class="flex items-center gap-2">
-                            <RadioButton v-model="form.budgetAccommodation" :inputId="feature.slug" :name="feature.name"
-                                :value="feature.id" />
+                    <InputSection
+                        class="col-span-2"
+                        name="budgetAccommodation"
+                        :errorMessage="form.errors.budgetAccommodation"
+                        required
+                        noLabel
+                    >
+                        <div
+                            v-for="feature in featureBudgetAccommodations"
+                            :key="feature.id"
+                            class="flex items-center gap-2"
+                        >
+                            <RadioButton
+                                v-model="form.budgetAccommodation"
+                                :inputId="feature.slug"
+                                :name="feature.name"
+                                :value="feature.id"
+                            />
                             <label :for="feature.slug">
                                 <span class="opacity-80">
                                     {{ feature.name }}
@@ -208,7 +277,9 @@ const handleKeywords = computed({
             </div>
 
             <div class="mb-8">
-                <div class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]">
+                <div
+                    class="mb-4 pb-2 border-b border-[var(--p-menu-border-color)]"
+                >
                     <h2 class="text-xl font-semibold">
                         <i class="pi pi-info-circle mr-2"></i>
                         Keywords
@@ -219,16 +290,31 @@ const handleKeywords = computed({
                 </div>
 
                 <div class="grid grid-cols-2">
-                    <InputSection class="col-span-2" name="keywords" :errorMessage="form.errors.keywords" required
-                        noLabel>
-                        <Textarea id="keywords" name="keywords" v-model="handleKeywords" rows="10"
-                            placeholder="ภูเขา, ท่องเที่ยว, ที่พัก" />
+                    <InputSection
+                        class="col-span-2"
+                        name="keywords"
+                        :errorMessage="form.errors.keywords"
+                        required
+                        noLabel
+                    >
+                        <Textarea
+                            id="keywords"
+                            name="keywords"
+                            v-model="handleKeywords"
+                            rows="10"
+                            placeholder="ภูเขา, ท่องเที่ยว, ที่พัก"
+                        />
                     </InputSection>
                 </div>
             </div>
 
-            <FormControl :backRoute="route('admin.destinations.show', props.destination.id)
-                " :processing="form.processing" @reset="form.reset()" />
+            <FormControl
+                :backRoute="
+                    route('admin.destinations.show', props.destination.id)
+                "
+                :processing="form.processing"
+                @reset="form.reset()"
+            />
         </form>
     </AdminLayout>
 </template>

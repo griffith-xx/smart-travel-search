@@ -37,6 +37,7 @@ class DestinationController extends Controller
             [
                 // Basic Information
                 'province_id' => 'required|exists:provinces,id',
+                'category_id' => 'required|exists:categories,id',
                 'name' => 'required|string|max:255',
                 'name_en' => 'required|string|max:255',
                 'short_description' => 'required|string',

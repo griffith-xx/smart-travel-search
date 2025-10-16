@@ -110,9 +110,6 @@ class Destination extends Model
         'has_wifi' => 'boolean',
         'has_restaurant' => 'boolean',
         'pet_friendly' => 'boolean',
-        'wheelchair_accessible' => 'boolean',
-        'family_friendly' => 'boolean',
-        'eco_friendly' => 'boolean',
 
         // Admin & Status
         'is_active' => 'boolean',

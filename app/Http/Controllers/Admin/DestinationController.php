@@ -21,7 +21,7 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        $destinations  = Destination::with(['province', 'category'])->get();
+        $destinations  = Destination::with(['province', 'category'])->orderByDesc('id')->get();
 
         return Inertia::render('Admin/Destinations/Index', [
             'destinations' => $destinations,
@@ -115,11 +115,11 @@ class DestinationController extends Controller
         ]);
 
         if ($destination->preference) {
-            $destination->preference->wellness_goals = FeatureWellnessGoal::whereIn('id', $destination->preference->wellness_goals)->get();
-            $destination->preference->activities = FeatureActivity::whereIn('id', $destination->preference->activities)->get();
-            $destination->preference->environments = FeatureEnvironment::whereIn('id', $destination->preference->environments)->get();
-            $destination->preference->duration_intensity = FeatureDurationIntensity::find($destination->preference->duration_intensity_id);
-            $destination->preference->budget_accommodation = FeatureBudgetAccommodation::find($destination->preference->budget_accommodation_id);
+            $destination->preference->wellness_goals = FeatureWellnessGoal::whereIn('id', $destination->preference->wellness_goals ?? [])->get();
+            $destination->preference->activities = FeatureActivity::whereIn('id', $destination->preference->activities ?? [])->get();
+            $destination->preference->environments = FeatureEnvironment::whereIn('id', $destination->preference->environments ?? [])->get();
+            $destination->preference->duration_intensity = FeatureDurationIntensity::find($destination->preference->duration_intensity_id) ?? null;
+            $destination->preference->budget_accommodation = FeatureBudgetAccommodation::find($destination->preference->budget_accommodation_id) ?? null;
         }
 
         return Inertia::render('Admin/Destinations/Show', [

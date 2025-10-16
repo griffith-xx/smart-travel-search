@@ -25,7 +25,7 @@ class DestinationPreferenceController extends Controller
         $featureBudgetAccommodations = FeatureBudgetAccommodation::get();
 
         return Inertia::render('Admin/Destinations/Preferences/Edit', [
-            'destination' => $destination->with('preference')->first(),
+            'destination' => $destination->load('preference'),
             'featureWellnessGoals' => $featureWellnessGoals,
             'featureActivities' => $featureActivities,
             'featureEnvironments' => $FeatureEnvironments,

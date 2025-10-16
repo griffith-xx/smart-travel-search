@@ -239,6 +239,9 @@ const getFeaturedSeverity = (isFeatured) => {
             currentPageReportTemplate="แสดง {first} ถึง {last} จาก {totalRecords} รายการ"
             stripedRows
         >
+            <!-- ID Column -->
+            <Column field="id" header="#" sortable="" />
+            
             <!-- Cover Image Column -->
             <Column header="รูปภาพ" style="width: 200px">
                 <template #body="{ data }">
