@@ -18,4 +18,8 @@ class Category extends Model
     protected $casts = [
         'is_popular' => 'boolean',
     ];
+
+    public function destinations(){
+        return $this->hasMany(Destination::class);
+    }
 }
