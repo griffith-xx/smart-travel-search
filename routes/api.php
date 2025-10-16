@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\DestinationController;
-use App\Http\Controllers\Api\DestinationScraperController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\DestinationController;
+use App\Http\Controllers\Api\DestinationScraperController;
+use App\Http\Controllers\Api\ProvinceController;
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -17,3 +20,6 @@ Route::prefix('destinations')->group(function () {
     Route::post('/history/scraper', [DestinationScraperController::class, 'store']);
     Route::delete('/history/scraper/{id}', [DestinationScraperController::class, 'destroy']);
 });
+
+Route::get('/provinces', [ProvinceController::class, 'index']);
+Route::get('/categories', [CategoryController::class, 'index']);
