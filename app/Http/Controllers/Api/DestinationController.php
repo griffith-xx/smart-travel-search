@@ -7,13 +7,19 @@ use App\Models\Destination;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cache;
 
 class DestinationController extends Controller
 {
     public function index()
     {
         try {
-            $destinations = Destination::with(['province', 'category'])->get();
+            $destinations = Cache::remember('destinations', 3600, function () {
+                return Destination::with(['province', 'category'])
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            });
+
             return response()->json($destinations);
         } catch (Exception $e) {
             return response()->json([
@@ -84,6 +90,9 @@ class DestinationController extends Controller
             $data = $validator->validated();
             $destination = Destination::create($data);
 
+            // Clear cache หลังจากสร้างข้อมูลใหม่
+            Cache::forget('destinations');
+
             return response()->json([
                 'success' => true,
                 'message' => 'Destination created successfully',
@@ -102,6 +111,10 @@ class DestinationController extends Controller
     {
         try {
             Destination::destroy($id);
+
+            // Clear cache หลังจากลบข้อมูล
+            Cache::forget('destinations');
+
             return response()->json([
                 'success' => true,
                 'message' => 'Destination deleted successfully'

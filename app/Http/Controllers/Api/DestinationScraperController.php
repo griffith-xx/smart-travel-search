@@ -7,13 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Models\DestinationScraper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cache;
 
 class DestinationScraperController extends Controller
 {
     public function index()
     {
         try {
-            $destinationScrapers = DestinationScraper::get();
+            $destinationScrapers = Cache::remember('destination_scrapers', 3600, function () {
+                return DestinationScraper::orderBy('created_at', 'desc')->get();
+            });
+
             return response()->json($destinationScrapers);
         } catch (Exception $e) {
             return response()->json([
@@ -47,6 +51,9 @@ class DestinationScraperController extends Controller
             $data = $validator->validated();
             $destinationScraper = DestinationScraper::create($data);
 
+            // Clear cache หลังจากสร้างข้อมูลใหม่
+            Cache::forget('destination_scrapers');
+
             return response()->json([
                 'success' => true,
                 'message' => 'DestinationScraper created successfully',
@@ -65,6 +72,10 @@ class DestinationScraperController extends Controller
     {
         try {
             DestinationScraper::destroy($id);
+
+            // Clear cache หลังจากลบข้อมูล
+            Cache::forget('destination_scrapers');
+
             return response()->json([
                 'success' => true,
                 'message' => 'DestinationScraper deleted successfully'
