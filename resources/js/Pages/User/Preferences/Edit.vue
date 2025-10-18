@@ -4,7 +4,11 @@ import { Link, useForm } from "@inertiajs/vue3";
 import { Checkbox, Button, RadioButton } from "primevue";
 import InputError from "@/Components/InputError.vue";
 
-defineProps({
+const props = defineProps({
+    preference: {
+        type: Object,
+        required: true,
+    },
     featureWellnessGoals: {
         type: Object,
         required: true,
@@ -32,21 +36,21 @@ defineProps({
 });
 
 const form = useForm({
-    wellnessGoals: [],
-    activities: [],
-    environments: [],
-    durationIntensity: null,
-    budgetAccommodation: null,
-    wellnessExperience: null,
+    wellnessGoals: props.preference.wellness_goals || [],
+    activities: props.preference.activities || [],
+    environments: props.preference.environments || [],
+    durationIntensity: props.preference.duration_intensity_id || null,
+    budgetAccommodation: props.preference.budget_accommodation_id || null,
+    wellnessExperience: props.preference.wellness_experience_id || null,
 });
 
 const submit = () => {
-    form.post(route("preferences.store"));
+    form.put(route("preferences.update"));
 };
 </script>
 
 <template>
-    <UserLayout title="แบบสำรวจความชอบของคุณ">
+    <UserLayout title="แก้ไขความชอบของฉัน">
         <!-- Hero Section -->
         <div
             class="bg-gradient-to-br from-[var(--p-primary-color)] to-[var(--p-primary-600)] text-white"
@@ -54,13 +58,13 @@ const submit = () => {
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
                 <div class="text-center max-w-3xl mx-auto">
                     <div class="mb-4">
-                        <i class="pi pi-heart text-5xl opacity-90"></i>
+                        <i class="pi pi-pencil text-5xl opacity-90"></i>
                     </div>
                     <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                        แบบสำรวจความชอบของคุณ
+                        แก้ไขความชอบของฉัน
                     </h1>
                     <p class="text-lg md:text-xl opacity-90">
-                        ช่วยเราทำความเข้าใจความต้องการของคุณเพื่อแนะนำสถานที่ท่องเที่ยวที่เหมาะสมที่สุด
+                        ปรับปรุงความชอบของคุณเพื่อรับคำแนะนำที่ดีที่สุด
                     </p>
                 </div>
             </div>
@@ -404,22 +408,35 @@ const submit = () => {
                 <div
                     class="mt-10 pt-8 border-t border-surface-300 dark:border-surface-700 flex flex-col sm:flex-row items-center justify-between gap-4"
                 >
-                    <Button
-                        type="submit"
-                        label="ส่งแบบสอบถาม"
-                        icon="pi pi-check"
-                        size="large"
-                        :disabled="form.processing"
-                        :loading="form.processing"
-                        class="w-full sm:w-auto"
-                    />
+                    <div class="flex gap-3 w-full sm:w-auto">
+                        <Button
+                            type="submit"
+                            label="บันทึกการเปลี่ยนแปลง"
+                            icon="pi pi-check"
+                            size="large"
+                            :disabled="form.processing"
+                            :loading="form.processing"
+                            class="flex-1 sm:flex-initial"
+                        />
 
-                    <Link
-                        :href="route('destinations.index')"
-                        class="text-sm opacity-70 hover:opacity-100 underline transition-all"
-                    >
-                        ข้ามขั้นตอนนี้ไปก่อน
-                    </Link>
+                        <Button
+                            label="ยกเลิก"
+                            severity="secondary"
+                            outlined
+                            size="large"
+                            class="flex-1 sm:flex-initial"
+                            asChild
+                            v-slot="slotProps"
+                        >
+                            <Link
+                                :class="slotProps.class"
+                                :href="route('preferences.index')"
+                            >
+                                <i class="pi pi-times"></i>
+                                ยกเลิก
+                            </Link>
+                        </Button>
+                    </div>
                 </div>
             </form>
         </div>

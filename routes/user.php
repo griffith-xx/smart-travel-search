@@ -12,7 +12,6 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    // Destinations
     Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations.index');
     Route::get('/destinations/recommended', [DestinationController::class, 'recommended'])->name('destinations.recommended');
     Route::get('/destinations/saved', [DestinationController::class, 'saved'])->name('destinations.saved');
@@ -29,4 +28,6 @@ Route::middleware([
     Route::get('/preferences', [UserPreferenceController::class, 'index'])->name('preferences.index');
     Route::get('/preferences/create', [UserPreferenceController::class, 'create'])->name('preferences.create');
     Route::post('/preferences/store', [UserPreferenceController::class, 'store'])->name('preferences.store');
+    Route::get('/preferences/edit', [UserPreferenceController::class, 'edit'])->name('preferences.edit');
+    Route::put('/preferences/update', [UserPreferenceController::class, 'update'])->name('preferences.update');
 });

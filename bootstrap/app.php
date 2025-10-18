@@ -17,11 +17,6 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\HandleCors::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
-
-        // Middleware สำหรับ admin routes
-        $middleware->alias([
-            'share.admin' => \App\Http\Middleware\ShareAdminDataMiddleware::class,
-        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

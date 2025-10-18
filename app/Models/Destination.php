@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Destination extends Model
 {
@@ -157,7 +159,6 @@ class Destination extends Model
         return $this->hasOne(DestinationPreference::class);
     }
 
-
     /**
      * Get the province that owns the destination.
      */
@@ -169,6 +170,23 @@ class Destination extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Get all comments for this destination.
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(DestinationComment::class);
+    }
+
+    /**
+     * Get the users who liked this destination.
+     */
+    public function likes(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'destination_likes')
+            ->withTimestamps();
     }
 
     /**
@@ -195,7 +213,7 @@ class Destination extends Model
             ->where('id', '!=', $this->id ?? 0)
             ->count();
 
-        return $count ? "{$slug}-" . ($count + 1) : $slug;
+        return $count ? "{$slug}-".($count + 1) : $slug;
     }
 
     public function getGalleryImagesArrayAttribute()

@@ -28,4 +28,19 @@ class UserPreference extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function durationIntensity()
+    {
+        return $this->belongsTo(FeatureDurationIntensity::class);
+    }
+
+    public function budgetAccommodation()
+    {
+        return $this->belongsTo(FeatureBudgetAccommodation::class);
+    }
+
+    public function wellnessExperience()
+    {
+        return $this->belongsTo(FeatureWellnessExperience::class);
+    }
 }

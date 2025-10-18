@@ -29,7 +29,14 @@
       "Bash(vendor/bin/pint app/Http/Controllers/User/DestinationLikeController.php app/Http/Controllers/User/DestinationCommentController.php app/Http/Controllers/User/CommentLikeController.php routes/user.php)",
       "Bash(vendor/bin/pint app/Models/User.php app/Http/Controllers/User/DestinationController.php)",
       "Bash(vendor/bin/pint app/Http/Controllers/User/DestinationController.php app/Http/Controllers/User/DestinationLikeController.php app/Http/Middleware/HandleInertiaRequests.php)",
-      "Bash(vendor/bin/pint app/Http/Controllers/User/DestinationController.php app/Http/Controllers/User/DestinationLikeController.php app/Http/Controllers/User/DestinationCommentController.php app/Http/Controllers/User/CommentLikeController.php app/Http/Middleware/HandleInertiaRequests.php)"
+      "Bash(vendor/bin/pint app/Http/Controllers/User/DestinationController.php app/Http/Controllers/User/DestinationLikeController.php app/Http/Controllers/User/DestinationCommentController.php app/Http/Controllers/User/CommentLikeController.php app/Http/Middleware/HandleInertiaRequests.php)",
+      "Bash(mkdir -p \"resources/js/Components/User\")",
+      "mcp__laravel-boost__read-log-entries",
+      "Bash(vendor/bin/pint app/Models/UserPreference.php app/Http/Controllers/User/UserPreferenceController.php)",
+      "Bash(vendor/bin/pint app/Http/Controllers/User/UserPreferenceController.php routes/user.php)",
+      "Bash(vendor/bin/pint app/Models/Destination.php app/Models/DestinationComment.php)",
+      "Bash(vendor/bin/pint app/Models/DestinationComment.php)",
+      "Bash(vendor/bin/pint app/Http/Controllers/WelcomeController.php)"
     ],
     "deny": [],
     "ask": []

@@ -1,9 +1,9 @@
 <script setup>
 import UserLayout from "@/Layouts/UserLayout.vue";
-import DestinationCard from "@/Components/DestinationCard.vue";
-import { Link, router } from "@inertiajs/vue3";
-import Paginator from "primevue/paginator";
+import DestinationCard from "@/Components/User/DestinationCard.vue";
+import { Button } from "primevue";
 import { computed } from "vue";
+import { router, Link } from "@inertiajs/vue3";
 
 const props = defineProps({
     destinations: {
@@ -12,72 +12,80 @@ const props = defineProps({
     },
 });
 
-const currentPage = computed(() => props.destinations.current_page);
-const totalRecords = computed(() => props.destinations.total);
-const perPage = computed(() => props.destinations.per_page);
-
-const onPageChange = (event) => {
-    router.get(
-        route("destinations.saved", { page: event.page + 1 }),
-        {},
-        {
-            preserveScroll: true,
-            preserveState: true,
-        }
-    );
-};
+const hasDestinations = computed(
+    () => props.destinations.data && props.destinations.data.length > 0
+);
 </script>
 
 <template>
-    <UserLayout title="สถานที่ท่องเที่ยวที่บันทึกไว้">
-        <div class="container">
-            <div class="mb-6">
-                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
-                    สถานที่ที่บันทึกไว้
-                </h1>
-                <p class="mt-2 text-gray-600 dark:text-gray-400">
-                    สถานที่ท่องเที่ยวที่คุณบันทึกไว้ทั้งหมด
-                    {{ destinations.total }} แห่ง
-                </p>
+    <UserLayout title="สถานที่ที่บันทึกไว้">
+        <!-- Hero Section -->
+        <div
+            class="bg-gradient-to-br from-pink-500 to-rose-600 text-white"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+                <div class="text-center max-w-3xl mx-auto">
+                    <div class="mb-4">
+                        <i class="pi pi-heart-fill text-5xl opacity-90"></i>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                        สถานที่ที่บันทึกไว้
+                    </h1>
+                    <p class="text-lg md:text-xl opacity-90">
+                        สถานที่ท่องเที่ยวที่คุณถูกใจและบันทึกไว้
+                    </p>
+                </div>
             </div>
+        </div>
 
-            <div
-                v-if="destinations.data.length === 0"
-                class="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 py-12 dark:border-gray-700"
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="mb-4 h-16 w-16 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                </svg>
-                <h3
-                    class="mb-2 text-lg font-semibold text-gray-900 dark:text-white"
-                >
-                    ยังไม่มีสถานที่ที่บันทึกไว้
-                </h3>
-                <p class="mb-4 text-gray-600 dark:text-gray-400">
-                    เริ่มต้นค้นหาและบันทึกสถานที่ท่องเที่ยวที่คุณสนใจ
-                </p>
-                <Link
-                    :href="route('destinations.index')"
-                    class="rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
-                >
-                    ค้นหาสถานที่ท่องเที่ยว
-                </Link>
-            </div>
+        <!-- Content Section -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            <!-- Has Saved Destinations -->
+            <div v-if="hasDestinations">
+                <!-- Stats -->
+                <div class="mb-8">
+                    <div
+                        class="bg-[var(--p-content-background)] rounded-xl border border-surface-300 dark:border-surface-700 p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+                    >
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-16 h-16 rounded-full bg-pink-500/10 flex items-center justify-center"
+                            >
+                                <i
+                                    class="pi pi-heart-fill text-3xl text-pink-500"
+                                ></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold">
+                                    {{ destinations.total }} สถานที่
+                                </h2>
+                                <p class="text-sm opacity-70">
+                                    ที่คุณบันทึกไว้ทั้งหมด
+                                </p>
+                            </div>
+                        </div>
 
-            <div v-else>
+                        <Button
+                            label="สำรวจสถานที่เพิ่มเติม"
+                            severity="secondary"
+                            outlined
+                            asChild
+                            v-slot="slotProps"
+                        >
+                            <Link
+                                :class="slotProps.class"
+                                :href="route('destinations.index')"
+                            >
+                                <i class="pi pi-compass"></i>
+                                สำรวจสถานที่เพิ่มเติม
+                            </Link>
+                        </Button>
+                    </div>
+                </div>
+
+                <!-- Destinations Grid -->
                 <div
-                    class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8"
                 >
                     <DestinationCard
                         v-for="destination in destinations.data"
@@ -86,13 +94,138 @@ const onPageChange = (event) => {
                     />
                 </div>
 
-                <div v-if="destinations.last_page > 1" class="mt-8">
-                    <Paginator
-                        :rows="perPage"
-                        :total-records="totalRecords"
-                        :first="(currentPage - 1) * perPage"
-                        @page="onPageChange"
-                    />
+                <!-- Pagination -->
+                <div
+                    v-if="destinations.data.length > 0 && destinations.last_page > 1"
+                    class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-surface-300 dark:border-surface-700"
+                >
+                    <!-- Page Info -->
+                    <div class="text-sm opacity-70">
+                        หน้า {{ destinations.current_page }} จาก
+                        {{ destinations.last_page }}
+                    </div>
+
+                    <!-- Pagination Buttons -->
+                    <div class="flex gap-2">
+                        <Button
+                            v-for="link in destinations.links"
+                            :key="link.label"
+                            :label="
+                                link.label
+                                    .replace('&laquo;', '')
+                                    .replace('&raquo;', '')
+                            "
+                            :disabled="!link.url || link.active"
+                            :severity="link.active ? 'primary' : 'secondary'"
+                            :outlined="!link.active"
+                            @click="
+                                link.url &&
+                                    router.get(
+                                        link.url,
+                                        {},
+                                        { preserveState: true }
+                                    )
+                            "
+                            size="small"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div v-else>
+                <div
+                    class="bg-[var(--p-content-background)] rounded-xl border border-surface-300 dark:border-surface-700 p-8 md:p-12 text-center"
+                >
+                    <div
+                        class="w-32 h-32 mx-auto mb-6 rounded-full bg-pink-500/10 flex items-center justify-center"
+                    >
+                        <i class="pi pi-heart text-6xl text-pink-500 opacity-50"></i>
+                    </div>
+
+                    <h2 class="text-2xl md:text-3xl font-bold mb-3">
+                        ยังไม่มีสถานที่ที่บันทึกไว้
+                    </h2>
+
+                    <p class="text-lg opacity-70 mb-8 max-w-2xl mx-auto">
+                        เริ่มสำรวจสถานที่ท่องเที่ยวและกดปุ่ม
+                        <i class="pi pi-heart"></i>
+                        เพื่อบันทึกสถานที่ที่คุณชอบ
+                    </p>
+
+                    <!-- Features -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="flex flex-col items-center p-6 rounded-xl border border-surface-300 dark:border-surface-700 hover:bg-[var(--p-content-hover-background)] transition">
+                            <div
+                                class="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mb-4"
+                            >
+                                <i class="pi pi-bookmark text-3xl text-blue-500"></i>
+                            </div>
+                            <h3 class="font-semibold mb-2">บันทึกง่าย</h3>
+                            <p class="text-sm opacity-70 text-center">
+                                กดปุ่มหัวใจเพื่อบันทึกสถานที่ที่ชอบ
+                            </p>
+                        </div>
+
+                        <div class="flex flex-col items-center p-6 rounded-xl border border-surface-300 dark:border-surface-700 hover:bg-[var(--p-content-hover-background)] transition">
+                            <div
+                                class="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-4"
+                            >
+                                <i class="pi pi-sync text-3xl text-green-500"></i>
+                            </div>
+                            <h3 class="font-semibold mb-2">ซิงค์อัตโนมัติ</h3>
+                            <p class="text-sm opacity-70 text-center">
+                                เข้าถึงได้ทุกที่ทุกเวลา
+                            </p>
+                        </div>
+
+                        <div class="flex flex-col items-center p-6 rounded-xl border border-surface-300 dark:border-surface-700 hover:bg-[var(--p-content-hover-background)] transition">
+                            <div
+                                class="w-16 h-16 rounded-full bg-purple-500/10 flex items-center justify-center mb-4"
+                            >
+                                <i class="pi pi-list text-3xl text-purple-500"></i>
+                            </div>
+                            <h3 class="font-semibold mb-2">จัดการง่าย</h3>
+                            <p class="text-sm opacity-70 text-center">
+                                เรียกดูและจัดการรายการของคุณ
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <Button
+                            label="สำรวจสถานที่ท่องเที่ยว"
+                            size="large"
+                            asChild
+                            v-slot="slotProps"
+                        >
+                            <Link
+                                :class="slotProps.class"
+                                :href="route('destinations.index')"
+                            >
+                                <i class="pi pi-compass"></i>
+                                สำรวจสถานที่ท่องเที่ยว
+                            </Link>
+                        </Button>
+
+                        <Button
+                            label="ดูสถานที่แนะนำ"
+                            severity="secondary"
+                            outlined
+                            size="large"
+                            asChild
+                            v-slot="slotProps"
+                        >
+                            <Link
+                                :class="slotProps.class"
+                                :href="route('destinations.recommended')"
+                            >
+                                <i class="pi pi-star"></i>
+                                ดูสถานที่แนะนำ
+                            </Link>
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>

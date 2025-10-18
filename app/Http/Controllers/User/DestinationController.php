@@ -67,12 +67,72 @@ class DestinationController extends Controller
 
     public function show(string $slug): Response
     {
+        $user = auth()->user();
+
         $destination = Destination::where('slug', $slug)
             ->with(['province', 'category'])
             ->firstOrFail();
 
+        // Load comments with user and likes information
+        $comments = $destination->comments()
+            ->whereNull('parent_id')
+            ->with([
+                'user',
+                'replies.user',
+                'replies.likes' => function ($query) use ($user) {
+                    if ($user) {
+                        $query->where('user_id', $user->id);
+                    }
+                },
+                'likes' => function ($query) use ($user) {
+                    if ($user) {
+                        $query->where('user_id', $user->id);
+                    }
+                },
+            ])
+            ->orderByDesc('created_at')
+            ->get()
+            ->map(function ($comment) {
+                return [
+                    'id' => $comment->id,
+                    'content' => $comment->content,
+                    'images' => $comment->images,
+                    'likes_count' => $comment->likes_count,
+                    'replies_count' => $comment->replies_count,
+                    'is_edited' => $comment->is_edited,
+                    'edited_at' => $comment->edited_at,
+                    'created_at' => $comment->created_at,
+                    'user' => $comment->user,
+                    'is_liked' => $comment->likes->isNotEmpty(),
+                    'replies' => $comment->replies->map(function ($reply) {
+                        return [
+                            'id' => $reply->id,
+                            'content' => $reply->content,
+                            'likes_count' => $reply->likes_count,
+                            'is_edited' => $reply->is_edited,
+                            'edited_at' => $reply->edited_at,
+                            'created_at' => $reply->created_at,
+                            'user' => $reply->user,
+                            'is_liked' => $reply->likes->isNotEmpty(),
+                        ];
+                    }),
+                ];
+            });
+
+        // Check if user has liked this destination
+        $isLiked = false;
+        $likeCount = $destination->favorite_count ?? 0;
+
+        if ($user) {
+            $isLiked = $destination->likes()->where('user_id', $user->id)->exists();
+        }
+
         return Inertia::render('User/Destinations/Show', [
-            'destination' => $destination,
+            'destination' => array_merge($destination->toArray(), [
+                'is_liked' => $isLiked,
+                'like_count' => $likeCount,
+            ]),
+            'comments' => $comments,
         ]);
     }
 }

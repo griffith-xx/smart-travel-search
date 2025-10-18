@@ -39,7 +39,7 @@ class RecommendationService
                 'match_percentage' => round($score * 100, 2),
             ];
         })
-            ->filter(fn ($item) => $item !== null && $item['score'] > 0)
+            ->filter(fn($item) => $item !== null && $item['score'] > 0)
             ->sortByDesc('score')
             ->take($limit)
             ->values();
@@ -253,7 +253,7 @@ class RecommendationService
         // Calculate final scores
         $recommendations = collect($combinedScores)->map(function ($item) use ($personalizedWeight, $collaborativeWeight) {
             $finalScore = ($item['personalized_score'] * $personalizedWeight) +
-                         ($item['collaborative_score'] * $collaborativeWeight);
+                ($item['collaborative_score'] * $collaborativeWeight);
 
             return [
                 'destination' => $item['destination'],
