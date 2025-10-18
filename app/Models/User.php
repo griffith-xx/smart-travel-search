@@ -16,6 +16,7 @@ class User extends Authenticatable
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
@@ -68,5 +69,16 @@ class User extends Authenticatable
     public function preference()
     {
         return $this->hasOne(UserPreference::class);
+    }
+
+    public function likedDestinations()
+    {
+        return $this->belongsToMany(Destination::class, 'destination_likes')
+            ->withTimestamps();
+    }
+
+    public function destinationLikes()
+    {
+        return $this->hasMany(DestinationLike::class);
     }
 }

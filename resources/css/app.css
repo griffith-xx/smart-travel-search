@@ -37,6 +37,10 @@
     display: none;
 }
 
+.container {
+    @apply mx-auto px-4 lg:px-6;
+}
+
 .card {
     @apply w-full p-5 bg-[var(--p-content-background)] border border-[var(--p-menu-border-color)] rounded-[var(--p-menu-border-radius)];
 }

@@ -134,10 +134,10 @@ class Destination extends Model
             if (empty($destination->slug)) {
                 $destination->slug = $destination->generateSlug();
             }
+        });
 
-            static::created(function ($destination) {
-                $destination->preference()->create([]);
-            });
+        static::created(function ($destination) {
+            $destination->preference()->create([]);
         });
 
         static::updating(function ($destination) {

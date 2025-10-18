@@ -8,6 +8,7 @@ class Category extends Model
 {
     protected $fillable = [
         'name',
+        'name_en',
         'slug',
         'description',
         'image_url',
@@ -19,7 +20,8 @@ class Category extends Model
         'is_popular' => 'boolean',
     ];
 
-    public function destinations(){
+    public function destinations()
+    {
         return $this->hasMany(Destination::class);
     }
 }

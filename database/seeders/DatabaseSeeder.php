@@ -22,6 +22,13 @@ class DatabaseSeeder extends Seeder
             FeatureDurationIntensitySeeder::class,
             FeatureEnvironmentSeeder::class,
             FeatureWellnessExperienceSeeder::class,
+            FeatureKeywordSeeder::class,
+            UserPreferenceSeeder::class,
+            DestinationSeeder::class,
+            DestinationPreferenceSeeder::class,
+            DestinationLikeSeeder::class,
+            DestinationCommentSeeder::class,
+            CommentLikeSeeder::class,
         ]);
     }
 }

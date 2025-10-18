@@ -187,6 +187,7 @@ Route::get('/users', function () {
 
 ### Authentication & Authorization
 - Use Laravel's built-in authentication and authorization features (gates, policies, Sanctum, etc.).
+- Always use `auth()->user()` instead of `$request->user()` for getting the authenticated user.
 
 ### URL Generation
 - When generating links to other pages, prefer named routes and the `route()` function.
