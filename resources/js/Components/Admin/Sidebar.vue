@@ -1,5 +1,5 @@
 <script setup>
-import { Menu, Badge, Button } from "primevue";
+import { Menu, Button } from "primevue";
 import { ref, computed } from "vue";
 import { Link, usePage, router } from "@inertiajs/vue3";
 
@@ -14,25 +14,21 @@ const navigations = ref([
         label: "จังหวัด",
         icon: "pi pi-map",
         route: "admin.provinces.index",
-        badge: page.props.adminStats.provinces_count,
     },
     {
-        label:'หมวดหมู่',
+        label: "หมวดหมู่",
         icon: "pi pi-folder",
         route: "admin.categories.index",
-        badge: page.props.adminStats.categories_count,
     },
     {
         label: "สถานที่ท่องเที่ยว",
         icon: "pi pi-globe",
         route: "admin.destinations.index",
-        badge: page.props.adminStats.destinations_count,
     },
     {
         label: "ผู้ใช้งาน",
         icon: "pi pi-user",
         route: "admin.users.index",
-        badge: page.props.adminStats.users_count,
     },
 ]);
 
@@ -72,12 +68,6 @@ const logout = () => {
                 >
                     <span :class="item.icon" />
                     <span>{{ item.label }}</span>
-                    <Badge
-                        v-if="item.badge"
-                        severity="contrast"
-                        class="ml-auto"
-                        :value="item.badge"
-                    />
                 </Link>
             </template>
         </Menu>

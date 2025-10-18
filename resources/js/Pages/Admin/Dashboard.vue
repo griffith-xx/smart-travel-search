@@ -1,12 +1,7 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import { Card } from "primevue";
-defineProps({
-    adminStats: {
-        type: Object,
-        required: true,
-    },
-});
+defineProps({});
 </script>
 
 <template>
@@ -34,7 +29,7 @@ defineProps({
                                 จังหวัดทั้งหมด
                             </p>
                             <p class="text-4xl font-bold text-blue-600 mb-2">
-                                {{ $page.props.adminStats.provinces_count }}
+                               
                             </p>
                             <p class="text-xs opacity-60">
                                 <i
@@ -63,7 +58,7 @@ defineProps({
                                 สถานที่ท่องเที่ยว
                             </p>
                             <p class="text-4xl font-bold text-green-600 mb-2">
-                                {{ $page.props.adminStats.destinations_count }}
+                                
                             </p>
                             <p class="text-xs opacity-60">
                                 <i
@@ -92,7 +87,7 @@ defineProps({
                                 ผู้ใช้งาน
                             </p>
                             <p class="text-4xl font-bold text-purple-600 mb-2">
-                                {{ $page.props.adminStats.users_count || 0 }}
+                                
                             </p>
                             <p class="text-xs opacity-60">
                                 <i
@@ -121,7 +116,7 @@ defineProps({
                                 รีวิวทั้งหมด
                             </p>
                             <p class="text-4xl font-bold text-orange-600 mb-2">
-                                {{ $page.props.adminStats.reviews_count || 0 }}
+                                
                             </p>
                             <p class="text-xs opacity-60">
                                 <i

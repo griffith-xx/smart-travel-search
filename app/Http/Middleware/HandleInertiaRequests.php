@@ -44,7 +44,6 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'adminStats' => fn () => $request->get('inertia_admin_stats'),
         ];
     }
 }
