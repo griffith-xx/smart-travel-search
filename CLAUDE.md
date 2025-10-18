@@ -30,7 +30,8 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - Check for existing components to reuse before writing a new one.
 
 ## Verification Scripts
-- Do not create verification scripts or tinker when tests cover that functionality and prove it works. Unit and feature tests are more important.
+- Do not create verification scripts automatically.
+- Only create verification scripts if explicitly requested by the user.
 
 ## Application Structure & Architecture
 - Stick to existing directory structure - don't create new base folders without approval.
@@ -171,7 +172,8 @@ Route::get('/users', function () {
 - Use Laravel's query builder for very complex database operations.
 
 ### Model Creation
-- When creating new models, create useful factories and seeders for them too. Ask the user if they need any other things, using `list-artisan-commands` to check the available options to `php artisan make:model`.
+- When creating new models, DO NOT create factories or seeders automatically.
+- Only create factories and seeders if explicitly requested by the user.
 
 ### APIs & Eloquent Resources
 - For APIs, default to using Eloquent API Resources and API versioning unless existing API routes do not, then you should follow existing application convention.
@@ -193,7 +195,9 @@ Route::get('/users', function () {
 - Use environment variables only in configuration files - never use the `env()` function directly outside of config files. Always use `config('app.name')`, not `env('APP_NAME')`.
 
 ### Testing
-- not create a Testing
+- DO NOT create any tests automatically.
+- DO NOT write or update test files unless explicitly requested by the user.
+- Skip all testing requirements when implementing features.
 
 ### Vite Error
 - If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `npm run build` or ask the user to run `npm run dev` or `composer run dev`.
@@ -233,10 +237,13 @@ Route::get('/users', function () {
 
 ## PHPUnit Core
 
-- Not do a PHPUnit
+- DO NOT use PHPUnit for testing.
+- DO NOT create or run any PHPUnit tests.
+- DO NOT generate test files automatically.
 
 ### Running Tests
-- Not run test
+- DO NOT run tests automatically after making changes.
+- Only run tests if explicitly requested by the user.
 
 
 === tailwindcss/core rules ===
@@ -359,6 +366,8 @@ Route::get('/users', function () {
 
 ## Test Enforcement
 
-- Every change must be programmatically tested. Write a new test or update an existing test, then run the affected tests to make sure they pass.
-- Run the minimum number of tests needed to ensure code quality and speed. Use `php artisan test` with a specific filename or filter.
+- DO NOT create or write any tests automatically.
+- DO NOT require tests for any changes or new features.
+- Skip all test enforcement and testing requirements.
+- Only create, update, or run tests if explicitly requested by the user.
 </laravel-boost-guidelines>
