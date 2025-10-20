@@ -36,7 +36,7 @@ class DirectPasswordResetController extends Controller
             ]);
         }
 
-        return back()->with([
+        return Inertia::render('Auth/ForgotPassword', [
             'emailValidated' => true,
             'email' => $request->email,
         ]);

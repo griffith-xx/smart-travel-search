@@ -3,7 +3,8 @@ import UserLayout from "@/Layouts/UserLayout.vue";
 import CommentItem from "@/Components/User/CommentItem.vue";
 import { Button, Textarea } from "primevue";
 import { ref, computed } from "vue";
-import { router, useForm } from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3";
+import axios from "axios";
 
 const props = defineProps({
     destination: {
@@ -21,9 +22,9 @@ const likeCount = ref(props.destination.like_count || 0);
 const isTogglingLike = ref(false);
 const replyingTo = ref(null);
 
-const commentForm = useForm({
-    content: "",
-});
+const commentContent = ref("");
+const isSubmittingComment = ref(false);
+const commentError = ref("");
 
 const priceRange = computed(() => {
     if (!props.destination.price_from && !props.destination.price_to) {
@@ -73,23 +74,45 @@ const toggleLike = async () => {
     }
 };
 
-const submitComment = () => {
-    const url = replyingTo.value
-        ? route("destinations.comments.store", props.destination.id)
-        : route("destinations.comments.store", props.destination.id);
+const submitComment = async () => {
+    if (!commentContent.value.trim() || isSubmittingComment.value) {
+        return;
+    }
 
-    const data = replyingTo.value
-        ? { content: commentForm.content, parent_id: replyingTo.value.id }
-        : { content: commentForm.content };
+    isSubmittingComment.value = true;
+    commentError.value = "";
 
-    commentForm.post(url, {
-        data,
-        preserveScroll: true,
-        onSuccess: () => {
-            commentForm.reset();
-            replyingTo.value = null;
-        },
-    });
+    try {
+        const data = {
+            content: commentContent.value.trim(),
+        };
+
+        if (replyingTo.value) {
+            data.parent_id = replyingTo.value.id;
+        }
+
+        await axios.post(
+            route("destinations.comments.store", props.destination.id),
+            data
+        );
+
+        // Reset form
+        commentContent.value = "";
+        replyingTo.value = null;
+
+        // Reload the page to show new comment
+        router.reload({ preserveScroll: true });
+    } catch (error) {
+        if (error.response?.data?.errors?.content) {
+            commentError.value = error.response.data.errors.content[0];
+        } else if (error.response?.data?.message) {
+            commentError.value = error.response.data.message;
+        } else {
+            commentError.value = "เกิดข้อผิดพลาดในการโพสต์ความคิดเห็น";
+        }
+    } finally {
+        isSubmittingComment.value = false;
+    }
 };
 
 const handleReply = (comment) => {
@@ -157,7 +180,7 @@ const cancelReply = () => {
                     </h1>
                     <p class="text-lg opacity-90 flex items-center gap-2">
                         <i class="pi pi-map-marker"></i>
-                        {{ destination.province?.name_th || "ไม่ระบุจังหวัด" }}
+                        {{ destination.province?.name || "ไม่ระบุจังหวัด" }}
                     </p>
                 </div>
             </div>
@@ -216,20 +239,24 @@ const cancelReply = () => {
 
                             <form @submit.prevent="submitComment">
                                 <Textarea
-                                    v-model="commentForm.content"
+                                    v-model="commentContent"
                                     rows="3"
                                     placeholder="แบ่งปันความคิดเห็นของคุณ..."
                                     class="w-full mb-3"
                                     autoResize
+                                    :class="{ 'border-red-500': commentError }"
                                 />
+                                <div v-if="commentError" class="text-red-500 text-sm mb-3">
+                                    {{ commentError }}
+                                </div>
                                 <div class="flex justify-end">
                                     <Button
                                         type="submit"
                                         label="โพสต์ความคิดเห็น"
                                         icon="pi pi-send"
-                                        :loading="commentForm.processing"
+                                        :loading="isSubmittingComment"
                                         :disabled="
-                                            !commentForm.content || commentForm.processing
+                                            !commentContent.trim() || isSubmittingComment
                                         "
                                     />
                                 </div>

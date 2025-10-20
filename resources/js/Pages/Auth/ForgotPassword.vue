@@ -1,16 +1,23 @@
 <script setup>
-import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Button, InputText, Card, Message, Password } from "primevue";
 import { computed, watch } from "vue";
 
-const page = usePage();
+const props = defineProps({
+    emailValidated: {
+        type: Boolean,
+        default: false,
+    },
+    email: {
+        type: String,
+        default: "",
+    },
+});
 
-// Check if email is validated from server
-const emailValidated = computed(() => page.props.emailValidated || false);
-const validatedEmail = computed(() => page.props.email || "");
+const emailValidated = computed(() => props.emailValidated);
+const validatedEmail = computed(() => props.email);
 
-// Step 1: Email validation form
 const emailForm = useForm({
     email: validatedEmail.value,
 });

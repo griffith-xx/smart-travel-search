@@ -2,6 +2,7 @@
 import { Button, Textarea } from "primevue";
 import { ref, computed } from "vue";
 import { router } from "@inertiajs/vue3";
+import axios from "axios";
 
 const props = defineProps({
     comment: {
@@ -26,6 +27,9 @@ const isTogglingLike = ref(false);
 const isEditing = ref(false);
 const editContent = ref(props.comment.content);
 const showReplies = ref(true);
+const isSavingEdit = ref(false);
+const editError = ref("");
+const isDeleting = ref(false);
 
 const userInitials = computed(() => {
     const name = props.comment.user?.name || "";
@@ -92,29 +96,64 @@ const handleReply = () => {
     emit("reply", props.comment);
 };
 
-const saveEdit = () => {
-    router.put(
-        route("comments.update", props.comment.id),
-        { content: editContent.value },
-        {
-            preserveScroll: true,
-            onSuccess: () => {
-                isEditing.value = false;
-            },
+const saveEdit = async () => {
+    if (!editContent.value.trim() || isSavingEdit.value) {
+        return;
+    }
+
+    isSavingEdit.value = true;
+    editError.value = "";
+
+    try {
+        await axios.put(route("comments.update", props.comment.id), {
+            content: editContent.value.trim(),
+        });
+
+        // Reload page to show updated comment
+        router.reload({ preserveScroll: true });
+        isEditing.value = false;
+    } catch (error) {
+        if (error.response?.data?.errors?.content) {
+            editError.value = error.response.data.errors.content[0];
+        } else if (error.response?.data?.message) {
+            editError.value = error.response.data.message;
+        } else {
+            editError.value = "เกิดข้อผิดพลาดในการแก้ไขความคิดเห็น";
         }
-    );
+    } finally {
+        isSavingEdit.value = false;
+    }
 };
 
 const cancelEdit = () => {
     editContent.value = props.comment.content;
+    editError.value = "";
     isEditing.value = false;
 };
 
-const deleteComment = () => {
-    if (confirm("คุณต้องการลบความคิดเห็นนี้หรือไม่?")) {
-        router.delete(route("comments.destroy", props.comment.id), {
-            preserveScroll: true,
-        });
+const deleteComment = async () => {
+    if (!confirm("คุณต้องการลบความคิดเห็นนี้หรือไม่?")) {
+        return;
+    }
+
+    if (isDeleting.value) {
+        return;
+    }
+
+    isDeleting.value = true;
+
+    try {
+        await axios.delete(route("comments.destroy", props.comment.id));
+
+        // Reload page to show updated comments
+        router.reload({ preserveScroll: true });
+    } catch (error) {
+        alert(
+            error.response?.data?.message ||
+                "เกิดข้อผิดพลาดในการลบความคิดเห็น"
+        );
+    } finally {
+        isDeleting.value = false;
     }
 };
 </script>
@@ -155,13 +194,19 @@ const deleteComment = () => {
                     rows="3"
                     class="w-full mb-2"
                     autoResize
+                    :class="{ 'border-red-500': editError }"
                 />
+                <div v-if="editError" class="text-red-500 text-sm mb-2">
+                    {{ editError }}
+                </div>
                 <div class="flex gap-2">
                     <Button
                         @click="saveEdit"
                         label="บันทึก"
                         size="small"
                         icon="pi pi-check"
+                        :loading="isSavingEdit"
+                        :disabled="!editContent.trim() || isSavingEdit"
                     />
                     <Button
                         @click="cancelEdit"
@@ -170,6 +215,7 @@ const deleteComment = () => {
                         severity="secondary"
                         outlined
                         icon="pi pi-times"
+                        :disabled="isSavingEdit"
                     />
                 </div>
             </div>
@@ -212,10 +258,12 @@ const deleteComment = () => {
                 <button
                     v-if="comment.user?.id === $page.props.auth.user?.id"
                     @click="deleteComment"
+                    :disabled="isDeleting"
                     class="flex items-center gap-1 opacity-70 hover:opacity-100 hover:text-red-500 transition"
+                    :class="{ 'cursor-wait opacity-50': isDeleting }"
                 >
-                    <i class="pi pi-trash"></i>
-                    <span>ลบ</span>
+                    <i :class="isDeleting ? 'pi pi-spin pi-spinner' : 'pi pi-trash'"></i>
+                    <span>{{ isDeleting ? 'กำลังลบ...' : 'ลบ' }}</span>
                 </button>
 
                 <button

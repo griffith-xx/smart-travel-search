@@ -118,7 +118,7 @@ const toggleLike = async (event) => {
                     @click="toggleLike"
                     :disabled="isTogglingLike"
                     rounded
-                    :severity="isLiked ? 'danger' : 'secondary'"
+                    severity="secondary"
                     :class="{
                         'bg-white/90 hover:bg-white': !isLiked,
                         'animate-pulse': isTogglingLike,
@@ -128,7 +128,7 @@ const toggleLike = async (event) => {
                     <i
                         :class="
                             isLiked
-                                ? 'pi pi-heart-fill text-red-500'
+                                ? 'pi pi-heart-fill text-red-500 '
                                 : 'pi pi-heart'
                         "
                     ></i>
@@ -171,7 +171,7 @@ const toggleLike = async (event) => {
             <div class="flex items-center gap-1.5 text-sm opacity-60 mb-3">
                 <i class="pi pi-map-marker text-xs"></i>
                 <span>
-                    {{ destination.province?.name_th || "ไม่ระบุจังหวัด" }}
+                    {{ destination.province?.name || "ไม่ระบุจังหวัด" }}
                 </span>
             </div>
 

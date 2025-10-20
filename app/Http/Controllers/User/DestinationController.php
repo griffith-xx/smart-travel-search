@@ -16,15 +16,71 @@ class DestinationController extends Controller
 
     public function index(): Response
     {
-        $destinations = Destination::query()
+        $search = request('search');
+        $sort = request('sort', 'latest');
+
+        $query = Destination::query()
             ->where('is_active', true)
             ->whereNotNull('published_at')
-            ->with(['province', 'category'])
-            ->orderByDesc('published_at')
-            ->paginate(12);
+            ->with(['province', 'category']);
+
+        // Apply search filter
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('name_en', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('short_description', 'like', "%{$search}%")
+                    ->orWhere('address', 'like', "%{$search}%")
+                    ->orWhereHas('province', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%")
+                            ->orWhere('name_en', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('category', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%")
+                            ->orWhere('name_en', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        // Apply sort
+        switch ($sort) {
+            case 'oldest':
+                $query->orderBy('published_at');
+                break;
+            case 'name_asc':
+                $query->orderBy('name');
+                break;
+            case 'name_desc':
+                $query->orderByDesc('name');
+                break;
+            case 'rating_desc':
+                $query->orderByDesc('average_rating');
+                break;
+            case 'popular':
+                $query->orderByDesc('view_count')
+                    ->orderByDesc('favorite_count');
+                break;
+            case 'price_asc':
+                $query->orderBy('price_from');
+                break;
+            case 'price_desc':
+                $query->orderByDesc('price_from');
+                break;
+            case 'latest':
+            default:
+                $query->orderByDesc('published_at');
+                break;
+        }
+
+        $destinations = $query->paginate(12);
 
         return Inertia::render('User/Destinations/Index', [
             'destinations' => $destinations,
+            'filters' => [
+                'search' => $search,
+                'sort' => $sort,
+            ],
         ]);
     }
 

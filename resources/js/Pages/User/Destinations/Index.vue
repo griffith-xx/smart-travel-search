@@ -1,7 +1,7 @@
 <script setup>
 import UserLayout from "@/Layouts/UserLayout.vue";
 import DestinationCard from "@/Components/User/DestinationCard.vue";
-import { Button, InputText } from "primevue";
+import { Button, InputText, Select } from "primevue";
 import { ref, computed } from "vue";
 import { router } from "@inertiajs/vue3";
 
@@ -107,7 +107,16 @@ const hasFilters = computed(() => {
 
                     <!-- Sort -->
                     <div class="flex gap-2">
-                       
+                        <Select
+                            v-model="sortBy"
+                            :options="sortOptions"
+                            optionLabel="label"
+                            optionValue="value"
+                            placeholder="เรียงตาม"
+                            class="w-full sm:w-48"
+                            @change="applyFilters"
+                        />
+
                         <Button
                             @click="applyFilters"
                             icon="pi pi-filter"

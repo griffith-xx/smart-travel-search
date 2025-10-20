@@ -156,10 +156,10 @@ const recommendationType = computed(() => {
 
                         <!-- Match Score Badge -->
                         <div
-                            class="absolute top-2 right-2 z-10 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-md"
+                            class="absolute top-14 right-2 z-10 bg-white/95 dark:bg-surface-800 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-md"
                         >
                             <div class="flex items-center gap-1.5">
-                                <i class="pi pi-percentage text-xs text-amber-500"></i>
+                                <i class="pi pi-percentage text-xs text-amber-600"></i>
                                 <span class="font-semibold text-sm">
                                     {{ Math.round(item.final_score * 100) }}
                                 </span>
@@ -199,7 +199,6 @@ const recommendationType = computed(() => {
                             <Button
                                 label="แก้ไขความชอบ"
                                 severity="secondary"
-                                outlined
                                 asChild
                                 v-slot="slotProps"
                             >

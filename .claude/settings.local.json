@@ -41,7 +41,10 @@
       "Bash(php artisan route:list --name=password)",
       "Bash(php artisan make:controller Auth/DirectPasswordResetController --no-interaction)",
       "Bash(vendor/bin/pint app/Http/Controllers/Auth/DirectPasswordResetController.php routes/web.php resources/js/Pages/Auth/ForgotPassword.vue)",
-      "Bash(php artisan make:controller User/MapController --no-interaction)"
+      "Bash(php artisan make:controller User/MapController --no-interaction)",
+      "Bash(vendor/bin/pint app/Http/Controllers/Auth/DirectPasswordResetController.php)",
+      "Bash(npm install leaflet)",
+      "Bash(vendor/bin/pint app/Http/Controllers/User/MapController.php)"
     ],
     "deny": [],
     "ask": []
