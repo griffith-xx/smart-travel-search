@@ -58,10 +58,22 @@ const hasFilters = computed(() => {
 <template>
     <UserLayout title="สำรวจสถานที่ท่องเที่ยว">
         <!-- Hero Section -->
-        <div
-            class="bg-gradient-to-br from-[var(--p-primary-color)] to-[var(--p-primary-600)] text-white"
-        >
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div class="relative text-white overflow-hidden">
+            <!-- Background Image -->
+            <div
+                class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style="
+                    background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070');
+                "
+            ></div>
+
+            <!-- Black Opacity Overlay -->
+            <div class="absolute inset-0 bg-black/60"></div>
+
+            <!-- Content -->
+            <div
+                class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16"
+            >
                 <div class="text-center">
                     <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
                         สำรวจสถานที่ท่องเที่ยว

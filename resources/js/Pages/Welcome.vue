@@ -2,7 +2,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Button, Card, Chip, Tag } from "primevue";
 import { Link, usePage } from "@inertiajs/vue3";
-import { computed } from "vue";
+import { computed, ref, onMounted, onUnmounted } from "vue";
 
 const props = defineProps({
     featuredDestinations: {
@@ -22,6 +22,21 @@ const props = defineProps({
 const page = usePage();
 const isAuthenticated = computed(() => page.props.auth.user);
 
+// Navbar scroll effect
+const isScrolled = ref(false);
+
+const handleScroll = () => {
+    isScrolled.value = window.scrollY > 50;
+};
+
+onMounted(() => {
+    window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll);
+});
+
 const categoryIcons = {
     สปาและนวด: "pi-heart",
     โยคะและสมาธิ: "pi-sun",
@@ -40,11 +55,159 @@ const getCategoryIcon = (categoryName) => {
 
 <template>
     <AppLayout title="ค้นพบการเดินทางเพื่อสุขภาพและความสุขของคุณ">
-        <!-- Hero Section -->
-        <div
-            class="bg-gradient-to-br from-[var(--p-primary-color)] to-[var(--p-primary-600)] text-white"
+        <!-- Navbar -->
+        <nav
+            :class="[
+                'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+                isScrolled
+                    ? 'bg-white/95 dark:bg-[var(--p-surface-900)]/95 backdrop-blur-md shadow-md'
+                    : 'bg-transparent',
+            ]"
         >
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16 md:h-20">
+                    <!-- Logo -->
+                    <Link
+                        :href="route('welcome')"
+                        class="flex items-center gap-2"
+                    >
+                        <i
+                            :class="[
+                                'pi pi-compass text-2xl',
+                                isScrolled
+                                    ? 'text-[var(--p-primary-color)]'
+                                    : 'text-white',
+                            ]"
+                        ></i>
+                        <span
+                            :class="[
+                                'text-xl md:text-2xl font-bold transition-colors',
+                                isScrolled
+                                    ? 'text-[var(--p-text-color)]'
+                                    : 'text-white',
+                            ]"
+                        >
+                            Smart Travel
+                        </span>
+                    </Link>
+
+                    <!-- Navigation Links -->
+                    <div class="hidden md:flex items-center gap-6">
+                        <Link
+                            :href="route('welcome')"
+                            :class="[
+                                'font-medium transition-colors hover:text-[var(--p-primary-color)]',
+                                isScrolled
+                                    ? 'text-[var(--p-text-color)]'
+                                    : 'text-white',
+                            ]"
+                        >
+                            หน้าแรก
+                        </Link>
+                        <Link
+                            :href="route('destinations.index')"
+                            :class="[
+                                'font-medium transition-colors hover:text-[var(--p-primary-color)]',
+                                isScrolled
+                                    ? 'text-[var(--p-text-color)]'
+                                    : 'text-white',
+                            ]"
+                        >
+                            สำรวจสถานที่
+                        </Link>
+                        <a
+                            href="#"
+                            :class="[
+                                'font-medium transition-colors hover:text-[var(--p-primary-color)]',
+                                isScrolled
+                                    ? 'text-[var(--p-text-color)]'
+                                    : 'text-white',
+                            ]"
+                        >
+                            เกี่ยวกับเรา
+                        </a>
+                        <a
+                            href="#"
+                            :class="[
+                                'font-medium transition-colors hover:text-[var(--p-primary-color)]',
+                                isScrolled
+                                    ? 'text-[var(--p-text-color)]'
+                                    : 'text-white',
+                            ]"
+                        >
+                            ติดต่อเรา
+                        </a>
+                    </div>
+
+                    <!-- Auth Buttons -->
+                    <div class="flex items-center gap-3">
+                        <template v-if="!isAuthenticated">
+                            <Button
+                                label="เข้าสู่ระบบ"
+                                :text="!isScrolled"
+                                :outlined="isScrolled"
+                                size="small"
+                                asChild
+                                v-slot="slotProps"
+                            >
+                                <Link
+                                    :class="slotProps.class"
+                                    :href="route('login')"
+                                >
+                                    เข้าสู่ระบบ
+                                </Link>
+                            </Button>
+                            <Button
+                                label="สมัครสมาชิก"
+                                size="small"
+                                asChild
+                                v-slot="slotProps"
+                            >
+                                <Link
+                                    :class="slotProps.class"
+                                    :href="route('register')"
+                                >
+                                    สมัครสมาชิก
+                                </Link>
+                            </Button>
+                        </template>
+                        <template v-else>
+                            <Button
+                                label="แดชบอร์ด"
+                                size="small"
+                                asChild
+                                v-slot="slotProps"
+                            >
+                                <Link
+                                    :class="slotProps.class"
+                                    :href="route('dashboard')"
+                                >
+                                    แดชบอร์ด
+                                </Link>
+                            </Button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="relative text-white overflow-hidden">
+            <!-- Background Image -->
+            <div
+                class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style="
+                    background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070');
+                "
+            ></div>
+
+            <!-- Black Opacity Overlay -->
+            <div class="absolute inset-0 bg-black/60"></div>
+
+            <!-- Content -->
+            <div
+                class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24"
+            >
                 <div class="text-center max-w-4xl mx-auto">
                     <!-- Badge -->
                     <Chip
@@ -225,7 +388,7 @@ const getCategoryIcon = (categoryName) => {
         </div>
 
         <!-- Featured Destinations Section -->
-        <div class="bg-[var(--p-surface-0)] py-12 md:py-16">
+        <div class="py-12 md:py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Section Header -->
                 <div class="text-center mb-10">
@@ -517,10 +680,22 @@ const getCategoryIcon = (categoryName) => {
         </div>
 
         <!-- CTA Section -->
-        <div
-            class="bg-gradient-to-br from-[var(--p-primary-color)] to-[var(--p-primary-600)] text-white py-12 md:py-16"
-        >
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="relative text-white overflow-hidden py-12 md:py-16">
+            <!-- Background Image -->
+            <div
+                class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style="
+                    background-image: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070');
+                "
+            ></div>
+
+            <!-- Black Opacity Overlay -->
+            <div class="absolute inset-0 bg-black/60"></div>
+
+            <!-- Content -->
+            <div
+                class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+            >
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">
                     พร้อมเริ่มการเดินทางของคุณแล้วหรือยัง?
                 </h2>
