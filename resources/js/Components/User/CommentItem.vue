@@ -71,23 +71,12 @@ const toggleLike = async () => {
     likeCount.value = isLiked.value ? likeCount.value + 1 : likeCount.value - 1;
 
     try {
-        router.post(
-            route("comments.like.toggle", props.comment.id),
-            {},
-            {
-                preserveScroll: true,
-                onError: () => {
-                    isLiked.value = previousLiked;
-                    likeCount.value = previousCount;
-                },
-                onFinish: () => {
-                    isTogglingLike.value = false;
-                },
-            }
-        );
+        await axios.post(route("comments.like.toggle", props.comment.id));
     } catch (error) {
         isLiked.value = previousLiked;
         likeCount.value = previousCount;
+        console.error("Error toggling comment like:", error);
+    } finally {
         isTogglingLike.value = false;
     }
 };

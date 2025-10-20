@@ -1,7 +1,8 @@
 <script setup>
-import { Link, router } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 import { Button } from "primevue";
 import { ref, computed } from "vue";
+import axios from "axios";
 
 const props = defineProps({
     destination: {
@@ -14,7 +15,12 @@ const props = defineProps({
     },
 });
 
-const isLiked = ref(props.destination.is_liked || false);
+const page = usePage();
+
+const isLiked = ref(
+    props.destination.is_liked ||
+    (page.props.userLikedDestinations || []).includes(props.destination.id)
+);
 const likeCount = ref(props.destination.like_count || 0);
 const isTogglingLike = ref(false);
 
@@ -56,25 +62,13 @@ const toggleLike = async (event) => {
     likeCount.value = isLiked.value ? likeCount.value + 1 : likeCount.value - 1;
 
     try {
-        router.post(
-            route("destinations.like.toggle", props.destination.id),
-            {},
-            {
-                preserveScroll: true,
-                onError: () => {
-                    // Revert on error
-                    isLiked.value = previousLiked;
-                    likeCount.value = previousCount;
-                },
-                onFinish: () => {
-                    isTogglingLike.value = false;
-                },
-            }
-        );
+        await axios.post(route("destinations.like.toggle", props.destination.id));
     } catch (error) {
         // Revert on error
         isLiked.value = previousLiked;
         likeCount.value = previousCount;
+        console.error("Error toggling destination like:", error);
+    } finally {
         isTogglingLike.value = false;
     }
 };

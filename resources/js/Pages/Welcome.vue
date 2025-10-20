@@ -171,21 +171,6 @@ const getCategoryIcon = (categoryName) => {
                                 </Link>
                             </Button>
                         </template>
-                        <template v-else>
-                            <Button
-                                label="แดชบอร์ด"
-                                size="small"
-                                asChild
-                                v-slot="slotProps"
-                            >
-                                <Link
-                                    :class="slotProps.class"
-                                    :href="route('dashboard')"
-                                >
-                                    แดชบอร์ด
-                                </Link>
-                            </Button>
-                        </template>
                     </div>
                 </div>
             </div>
