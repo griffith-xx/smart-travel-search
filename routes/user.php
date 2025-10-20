@@ -4,6 +4,7 @@ use App\Http\Controllers\User\CommentLikeController;
 use App\Http\Controllers\User\DestinationCommentController;
 use App\Http\Controllers\User\DestinationController;
 use App\Http\Controllers\User\DestinationLikeController;
+use App\Http\Controllers\User\MapController;
 use App\Http\Controllers\User\UserPreferenceController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,8 @@ Route::middleware([
     Route::get('/destinations/recommended', [DestinationController::class, 'recommended'])->name('destinations.recommended');
     Route::get('/destinations/saved', [DestinationController::class, 'saved'])->name('destinations.saved');
     Route::get('/destinations/{slug}', [DestinationController::class, 'show'])->name('destinations.show');
+
+    Route::get('/map', [MapController::class, 'index'])->name('map.index');
 
     Route::post('/destinations/{destination}/like', [DestinationLikeController::class, 'toggle'])->name('destinations.like.toggle');
 

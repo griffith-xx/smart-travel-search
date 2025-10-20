@@ -40,7 +40,8 @@
       "Bash(vendor/bin/pint resources/js/Pages/Auth/Register.vue)",
       "Bash(php artisan route:list --name=password)",
       "Bash(php artisan make:controller Auth/DirectPasswordResetController --no-interaction)",
-      "Bash(vendor/bin/pint app/Http/Controllers/Auth/DirectPasswordResetController.php routes/web.php resources/js/Pages/Auth/ForgotPassword.vue)"
+      "Bash(vendor/bin/pint app/Http/Controllers/Auth/DirectPasswordResetController.php routes/web.php resources/js/Pages/Auth/ForgotPassword.vue)",
+      "Bash(php artisan make:controller User/MapController --no-interaction)"
     ],
     "deny": [],
     "ask": []

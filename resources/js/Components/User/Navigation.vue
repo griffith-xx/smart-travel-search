@@ -15,6 +15,11 @@ const navigations = ref([
         route: "destinations.index",
     },
     {
+        label: "แผนที่",
+        icon: "pi pi-map",
+        route: "map.index",
+    },
+    {
         label: "แนะนำสำหรับคุณ",
         icon: "pi pi-star",
         route: "destinations.recommended",
@@ -77,9 +82,8 @@ const logout = () => {
                             :class="{
                                 'text-[var(--p-primary-color)] bg-[var(--p-primary-color)]/10':
                                     route().current(item.route),
-                                'opacity-70 hover:opacity-100': !route().current(
-                                    item.route,
-                                ),
+                                'opacity-70 hover:opacity-100':
+                                    !route().current(item.route),
                             }"
                         >
                             <i :class="item.icon" class="text-sm"></i>
@@ -96,9 +100,7 @@ const logout = () => {
                         severity="secondary"
                         text
                         rounded
-                        :icon="
-                            theme === 'light' ? 'pi pi-moon' : 'pi pi-sun'
-                        "
+                        :icon="theme === 'light' ? 'pi pi-moon' : 'pi pi-sun'"
                         class="hidden sm:flex"
                     />
 
@@ -137,13 +139,11 @@ const logout = () => {
                     <!-- Mobile Menu Button -->
                     <Button
                         @click="showMobileMenu = !showMobileMenu"
-                        :icon="
-                            showMobileMenu ? 'pi pi-times' : 'pi pi-bars'
-                        "
+                        :icon="showMobileMenu ? 'pi pi-times' : 'pi pi-bars'"
                         severity="secondary"
                         text
                         rounded
-                        class="md:hidden"
+                        class="md:hidden!"
                     />
                 </div>
             </div>
@@ -195,14 +195,10 @@ const logout = () => {
                 <!-- Mobile Actions -->
                 <div class="flex gap-2 pt-2">
                     <Button
-                        @click="
-                            setTheme(theme === 'light' ? 'dark' : 'light')
-                        "
+                        @click="setTheme(theme === 'light' ? 'dark' : 'light')"
                         severity="secondary"
                         outlined
-                        :icon="
-                            theme === 'light' ? 'pi pi-moon' : 'pi pi-sun'
-                        "
+                        :icon="theme === 'light' ? 'pi pi-moon' : 'pi pi-sun'"
                         :label="theme === 'light' ? 'โหมดมืด' : 'โหมดสว่าง'"
                         class="flex-1 sm:hidden"
                     />
