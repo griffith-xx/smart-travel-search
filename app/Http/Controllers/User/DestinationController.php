@@ -73,7 +73,7 @@ class DestinationController extends Controller
                 break;
         }
 
-        $destinations = $query->paginate(12);
+        $destinations = $query->paginate(15)->withQueryString();
 
         return Inertia::render('User/Destinations/Index', [
             'destinations' => $destinations,

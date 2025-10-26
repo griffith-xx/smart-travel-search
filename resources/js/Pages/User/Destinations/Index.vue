@@ -207,7 +207,7 @@ const hasFilters = computed(() => {
             <!-- Empty State -->
             <div
                 v-else
-                class="text-center py-16 bg-[var(--p-content-background)] rounded-xl border border-[var(--p-menu-border-color)]"
+                class="text-center py-16 bg-[var(--p-content-background)] rounded-xl border border-surface-300 dark:border-surface-700"
             >
                 <div class="w-24 h-24 mx-auto mb-4 opacity-20">
                     <i class="pi pi-inbox text-6xl"></i>
@@ -244,11 +244,6 @@ const hasFilters = computed(() => {
                     <Button
                         v-for="link in destinations.links"
                         :key="link.label"
-                        :label="
-                            link.label
-                                .replace('&laquo;', '')
-                                .replace('&raquo;', '')
-                        "
                         :disabled="!link.url || link.active"
                         :severity="link.active ? 'primary' : 'secondary'"
                         :outlined="!link.active"
@@ -261,7 +256,9 @@ const hasFilters = computed(() => {
                                 )
                         "
                         size="small"
-                    />
+                    >
+                        <span v-html="link.label"> </span>
+                    </Button>
                 </div>
             </div>
         </div>
