@@ -36,7 +36,8 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'userLikedDestinations' => fn() => $request->user()
+
+            'userLikedDestinations' => !auth()->guard('admin')->check() && $request->user()
                 ? $request->user()->likedDestinations()->pluck('destinations.id')->toArray()
                 : [],
         ];
