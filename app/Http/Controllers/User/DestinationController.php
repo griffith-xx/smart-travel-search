@@ -129,6 +129,9 @@ class DestinationController extends Controller
             ->with(['province', 'category'])
             ->firstOrFail();
 
+        // Increment view count
+        $destination->increment('view_count');
+
         // Load comments with user and likes information
         $comments = $destination->comments()
             ->whereNull('parent_id')

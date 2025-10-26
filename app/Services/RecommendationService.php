@@ -39,7 +39,7 @@ class RecommendationService
                 'match_percentage' => round($score * 100, 2),
             ];
         })
-            ->filter(fn($item) => $item !== null && $item['score'] > 0)
+            ->filter(fn ($item) => $item !== null && $item['score'] > 0)
             ->sortByDesc('score')
             ->take($limit)
             ->values();
@@ -95,14 +95,6 @@ class RecommendationService
                 $score += $durationWeight;
             }
             $maxScore += $durationWeight;
-        }
-
-        // Keywords (weight: 2)
-        $keywordsWeight = 2;
-        if (is_array($userPref->keywords) && is_array($destinationPref->keywords)) {
-            $keywordsMatches = count(array_intersect($userPref->keywords, $destinationPref->keywords));
-            $score += $keywordsMatches * $keywordsWeight;
-            $maxScore += count($userPref->keywords) * $keywordsWeight;
         }
 
         return $maxScore > 0 ? $score / $maxScore : 0;

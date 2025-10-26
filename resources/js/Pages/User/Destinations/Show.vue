@@ -3,7 +3,7 @@ import UserLayout from "@/Layouts/UserLayout.vue";
 import CommentItem from "@/Components/User/CommentItem.vue";
 import { Button, Textarea } from "primevue";
 import { ref, computed } from "vue";
-import { router } from "@inertiajs/vue3";
+import { router, Link } from "@inertiajs/vue3";
 import axios from "axios";
 
 const props = defineProps({
@@ -32,14 +32,36 @@ const priceRange = computed(() => {
     }
     if (props.destination.price_from && props.destination.price_to) {
         if (props.destination.price_from === props.destination.price_to) {
-            return `${Number(props.destination.price_from).toLocaleString()} บาท`;
+            return `${Number(
+                props.destination.price_from
+            ).toLocaleString()} บาท`;
         }
-        return `${Number(props.destination.price_from).toLocaleString()} - ${Number(props.destination.price_to).toLocaleString()} บาท`;
+        return `${Number(
+            props.destination.price_from
+        ).toLocaleString()} - ${Number(
+            props.destination.price_to
+        ).toLocaleString()} บาท`;
     }
     if (props.destination.price_from) {
-        return `เริ่มต้น ${Number(props.destination.price_from).toLocaleString()} บาท`;
+        return `เริ่มต้น ${Number(
+            props.destination.price_from
+        ).toLocaleString()} บาท`;
     }
     return `สูงสุด ${Number(props.destination.price_to).toLocaleString()} บาท`;
+});
+
+const googleMapsUrl = computed(() => {
+    if (props.destination.latitude && props.destination.longitude) {
+        return `https://www.google.com/maps?q=${props.destination.latitude},${props.destination.longitude}`;
+    }
+    return null;
+});
+
+const hasOnlineBooking = computed(() => {
+    return (
+        props.destination.accepts_online_booking &&
+        props.destination.booking_url
+    );
 });
 
 const toggleLike = async () => {
@@ -53,7 +75,9 @@ const toggleLike = async () => {
     likeCount.value = isLiked.value ? likeCount.value + 1 : likeCount.value - 1;
 
     try {
-        await axios.post(route("destinations.like.toggle", props.destination.id));
+        await axios.post(
+            route("destinations.like.toggle", props.destination.id)
+        );
     } catch (error) {
         isLiked.value = previousLiked;
         likeCount.value = previousCount;
@@ -107,7 +131,9 @@ const submitComment = async () => {
 const handleReply = (comment) => {
     replyingTo.value = comment;
     // Scroll to comment form
-    document.getElementById("comment-form")?.scrollIntoView({ behavior: "smooth" });
+    document
+        .getElementById("comment-form")
+        ?.scrollIntoView({ behavior: "smooth" });
 };
 
 const cancelReply = () => {
@@ -134,15 +160,13 @@ const cancelReply = () => {
                     @click="toggleLike"
                     :disabled="isTogglingLike"
                     rounded
-                    :severity="isLiked ? 'danger' : 'secondary'"
-                    class="backdrop-blur-sm"
-                    :class="{
-                        'bg-white/90': !isLiked,
-                    }"
+                    severity="secondary"
                 >
                     <i
                         :class="
-                            isLiked ? 'pi pi-heart-fill text-red-500' : 'pi pi-heart'
+                            isLiked
+                                ? 'pi pi-heart-fill text-red-500'
+                                : 'pi pi-heart'
                         "
                     ></i>
                 </Button>
@@ -210,11 +234,17 @@ const cancelReply = () => {
 
                         <!-- Comment Form -->
                         <div id="comment-form" class="mb-6">
-                            <div v-if="replyingTo" class="mb-3 p-3 bg-blue-500/10 rounded-lg">
+                            <div
+                                v-if="replyingTo"
+                                class="mb-3 p-3 bg-blue-500/10 rounded-lg"
+                            >
                                 <div class="flex items-center justify-between">
                                     <span class="text-sm">
                                         <i class="pi pi-reply"></i>
-                                        ตอบกลับ <strong>{{ replyingTo.user?.name }}</strong>
+                                        ตอบกลับ
+                                        <strong>{{
+                                            replyingTo.user?.name
+                                        }}</strong>
                                     </span>
                                     <Button
                                         @click="cancelReply"
@@ -235,7 +265,10 @@ const cancelReply = () => {
                                     autoResize
                                     :class="{ 'border-red-500': commentError }"
                                 />
-                                <div v-if="commentError" class="text-red-500 text-sm mb-3">
+                                <div
+                                    v-if="commentError"
+                                    class="text-red-500 text-sm mb-3"
+                                >
                                     {{ commentError }}
                                 </div>
                                 <div class="flex justify-end">
@@ -245,7 +278,8 @@ const cancelReply = () => {
                                         icon="pi pi-send"
                                         :loading="isSubmittingComment"
                                         :disabled="
-                                            !commentContent.trim() || isSubmittingComment
+                                            !commentContent.trim() ||
+                                            isSubmittingComment
                                         "
                                     />
                                 </div>
@@ -264,7 +298,9 @@ const cancelReply = () => {
                         </div>
                         <div v-else class="text-center py-8 opacity-70">
                             <i class="pi pi-comments text-4xl mb-3"></i>
-                            <p>ยังไม่มีความคิดเห็น เป็นคนแรกที่แสดงความคิดเห็น!</p>
+                            <p>
+                                ยังไม่มีความคิดเห็น เป็นคนแรกที่แสดงความคิดเห็น!
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -278,9 +314,15 @@ const cancelReply = () => {
                         <h3 class="text-xl font-bold mb-4">ข้อมูลสถานที่</h3>
 
                         <!-- Price -->
-                        <div class="mb-4 pb-4 border-b border-surface-300 dark:border-surface-700">
-                            <div class="text-sm opacity-70 mb-1">ค่าใช้จ่าย</div>
-                            <div class="text-2xl font-bold text-[var(--p-primary-color)]">
+                        <div
+                            class="mb-4 pb-4 border-b border-surface-300 dark:border-surface-700"
+                        >
+                            <div class="text-sm opacity-70 mb-1">
+                                ค่าใช้จ่าย
+                            </div>
+                            <div
+                                class="text-2xl font-bold text-[var(--p-primary-color)]"
+                            >
                                 {{ priceRange }}
                             </div>
                         </div>
@@ -292,7 +334,11 @@ const cancelReply = () => {
                                     <i class="pi pi-eye"></i> ยอดดู
                                 </span>
                                 <span class="font-semibold">
-                                    {{ (destination.view_count || 0).toLocaleString() }}
+                                    {{
+                                        (
+                                            destination.view_count || 0
+                                        ).toLocaleString()
+                                    }}
                                 </span>
                             </div>
                             <div class="flex items-center justify-between">
@@ -308,10 +354,17 @@ const cancelReply = () => {
                                 class="flex items-center justify-between"
                             >
                                 <span class="text-sm opacity-70">
-                                    <i class="pi pi-star-fill text-yellow-500"></i> คะแนน
+                                    <i
+                                        class="pi pi-star-fill text-yellow-500"
+                                    ></i>
+                                    คะแนน
                                 </span>
                                 <span class="font-semibold">
-                                    {{ Number(destination.average_rating).toFixed(1) }}
+                                    {{
+                                        Number(
+                                            destination.average_rating
+                                        ).toFixed(1)
+                                    }}
                                     <span class="text-sm opacity-60">
                                         ({{ destination.total_reviews || 0 }})
                                     </span>
@@ -329,7 +382,9 @@ const cancelReply = () => {
                             "
                             class="pt-4 border-t border-surface-300 dark:border-surface-700"
                         >
-                            <div class="text-sm font-semibold mb-3">สิ่งอำนวยความสะดวก</div>
+                            <div class="text-sm font-semibold mb-3">
+                                สิ่งอำนวยความสะดวก
+                            </div>
                             <div class="flex flex-wrap gap-2">
                                 <span
                                     v-if="destination.has_parking"
@@ -353,9 +408,49 @@ const cancelReply = () => {
                                     v-if="destination.pet_friendly"
                                     class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-pink-500/10 text-pink-600 dark:text-pink-400 rounded-full text-xs"
                                 >
-                                    <i class="pi pi-heart"></i> สัตว์เลี้ยงเข้าได้
+                                    <i class="pi pi-heart"></i>
+                                    สัตว์เลี้ยงเข้าได้
                                 </span>
                             </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div
+                            v-if="googleMapsUrl || hasOnlineBooking"
+                            class="mt-4 pt-4 border-t border-surface-300 dark:border-surface-700 space-y-3"
+                        >
+                            <!-- Google Maps Button -->
+                            <a
+                                v-if="googleMapsUrl"
+                                :href="googleMapsUrl"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="block w-full"
+                            >
+                                <Button
+                                    label="ดูบน Google Maps"
+                                    icon="pi pi-map-marker"
+                                    class="w-full"
+                                    outlined
+                                    severity="success"
+                                />
+                            </a>
+
+                            <!-- Online Booking Button -->
+                            <a
+                                v-if="hasOnlineBooking"
+                                :href="destination.booking_url"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="block w-full"
+                            >
+                                <Button
+                                    label="จองออนไลน์"
+                                    icon="pi pi-calendar"
+                                    class="w-full"
+                                    severity="primary"
+                                />
+                            </a>
                         </div>
                     </div>
                 </div>

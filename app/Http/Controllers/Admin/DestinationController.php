@@ -9,6 +9,7 @@ use App\Models\FeatureActivity;
 use App\Models\FeatureBudgetAccommodation;
 use App\Models\FeatureDurationIntensity;
 use App\Models\FeatureEnvironment;
+use App\Models\FeatureKeyword;
 use App\Models\FeatureWellnessGoal;
 use App\Models\Province;
 use Illuminate\Http\Request;
@@ -120,6 +121,7 @@ class DestinationController extends Controller
             $destination->preference->environments = FeatureEnvironment::whereIn('id', $destination->preference->environments ?? [])->get();
             $destination->preference->duration_intensity = FeatureDurationIntensity::find($destination->preference->duration_intensity_id) ?? null;
             $destination->preference->budget_accommodation = FeatureBudgetAccommodation::find($destination->preference->budget_accommodation_id) ?? null;
+            $destination->preference->keywords = FeatureKeyword::whereIn('id', $destination->preference->keywords ?? [])->get();
         }
 
         return Inertia::render('Admin/Destinations/Show', [

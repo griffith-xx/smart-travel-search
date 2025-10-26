@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
-use Inertia\Inertia;
-use Illuminate\Http\Request;
-
 use App\Models\Destination;
-use App\Models\FeatureWellnessGoal;
 use App\Models\FeatureActivity;
-use App\Models\FeatureEnvironment;
-use App\Models\FeatureDurationIntensity;
 use App\Models\FeatureBudgetAccommodation;
+use App\Models\FeatureDurationIntensity;
+use App\Models\FeatureEnvironment;
+use App\Models\FeatureKeyword;
+use App\Models\FeatureWellnessGoal;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class DestinationPreferenceController extends Controller
 {
@@ -23,6 +22,7 @@ class DestinationPreferenceController extends Controller
         $FeatureEnvironments = FeatureEnvironment::get();
         $featureDurationIntensities = FeatureDurationIntensity::get();
         $featureBudgetAccommodations = FeatureBudgetAccommodation::get();
+        $featureKeywords = FeatureKeyword::get();
 
         return Inertia::render('Admin/Destinations/Preferences/Edit', [
             'destination' => $destination->load('preference'),
@@ -31,6 +31,7 @@ class DestinationPreferenceController extends Controller
             'featureEnvironments' => $FeatureEnvironments,
             'featureDurationIntensities' => $featureDurationIntensities,
             'featureBudgetAccommodations' => $featureBudgetAccommodations,
+            'featureKeywords' => $featureKeywords,
         ]);
     }
 
@@ -46,8 +47,10 @@ class DestinationPreferenceController extends Controller
             'durationIntensity' => 'exists:feature_duration_intensities,id',
             'budgetAccommodation' => 'exists:feature_budget_accommodations,id',
             'keywords' => 'required|array',
-            'keywords.*' => 'string',
+            'keywords.*' => 'exists:feature_keywords,id',
         ]);
+
+        dd([$validated, $request->all()]);
 
         $preferences = [
             'wellness_goals' => $validated['wellnessGoals'],

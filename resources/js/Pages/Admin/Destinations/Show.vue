@@ -294,10 +294,10 @@ const getRegionColor = (region) => {
                         </h3>
                         <div class="flex flex-wrap gap-2">
                             <Tag
-                                v-for="(keyword, index) in destination
-                                    .preference.keywords"
-                                :key="index"
-                                :value="keyword"
+                                v-for="keyword in destination.preference
+                                    .keywords"
+                                :key="keyword.id"
+                                :value="keyword.name"
                                 severity="secondary"
                                 class="text-sm px-3 py-1"
                             />

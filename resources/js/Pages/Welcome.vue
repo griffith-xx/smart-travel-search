@@ -234,7 +234,7 @@ const getCategoryIcon = (categoryName) => {
                         >
                             <Link
                                 :class="slotProps.class"
-                                :href="route('register')"
+                                :href="route('login')"
                             >
                                 <i class="pi pi-compass"></i>
                                 เริ่มต้นการเดินทาง

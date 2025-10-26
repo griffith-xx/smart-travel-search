@@ -1,10 +1,9 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import { Checkbox, RadioButton, Textarea } from "primevue";
+import { Checkbox, RadioButton } from "primevue";
 import InputSection from "@/Components/Admin/InputSection.vue";
 import FormControl from "@/Components/Admin/FormControl.vue";
 import { useForm } from "@inertiajs/vue3";
-import { computed } from "vue";
 
 const props = defineProps({
     destination: {
@@ -31,6 +30,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    featureKeywords: {
+        type: Object,
+        required: true,
+    },
 });
 
 const form = useForm({
@@ -41,7 +44,7 @@ const form = useForm({
         props.destination.preference.duration_intensity_id || null,
     budgetAccommodation:
         props.destination.preference.budget_accommodation_id || null,
-    keywords: props.destination.preference.keywords,
+    keywords: props.destination.preference.keywords || [],
 });
 
 const submit = () => {
@@ -49,18 +52,6 @@ const submit = () => {
         route("admin.destinations.preferences.update", props.destination.id)
     );
 };
-
-const handleKeywords = computed({
-    get() {
-        return Array.isArray(form.keywords) ? form.keywords.join(",") : "";
-    },
-    set(value) {
-        form.keywords = value
-            .split(",")
-            .map((keyword) => keyword.trim())
-            .filter((keyword) => keyword.length > 0);
-    },
-});
 </script>
 
 <template>
@@ -285,7 +276,7 @@ const handleKeywords = computed({
                         Keywords
                     </h2>
                     <p class="text-sm opacity-75 mt-1">
-                        กรอก Keywords ที่ใช้ในการค้นหาสถานที่ท่องเที่ยวแห่งนี้
+                        เลือก Keywords ที่ใช้ในการค้นหาสถานที่ท่องเที่ยวแห่งนี้
                     </p>
                 </div>
 
@@ -297,13 +288,23 @@ const handleKeywords = computed({
                         required
                         noLabel
                     >
-                        <Textarea
-                            id="keywords"
-                            name="keywords"
-                            v-model="handleKeywords"
-                            rows="10"
-                            placeholder="ภูเขา, ท่องเที่ยว, ที่พัก"
-                        />
+                        <div
+                            v-for="feature in featureKeywords"
+                            :key="feature.id"
+                            class="flex items-center gap-2"
+                        >
+                            <Checkbox
+                                v-model="form.keywords"
+                                :inputId="feature.slug"
+                                :name="feature.name"
+                                :value="feature.id"
+                            />
+                            <label :for="feature.slug">
+                                <span class="opacity-80">
+                                    {{ feature.name }}
+                                </span>
+                            </label>
+                        </div>
                     </InputSection>
                 </div>
             </div>
