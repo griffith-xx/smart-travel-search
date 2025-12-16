@@ -181,6 +181,14 @@ class Destination extends Model
     }
 
     /**
+     * Get all reviews for this destination.
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    /**
      * Get the users who liked this destination.
      */
     public function likes(): BelongsToMany

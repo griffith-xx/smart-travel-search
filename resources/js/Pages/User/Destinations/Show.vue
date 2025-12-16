@@ -1,6 +1,7 @@
 <script setup>
 import UserLayout from "@/Layouts/UserLayout.vue";
 import CommentItem from "@/Components/User/CommentItem.vue";
+import ReviewList from "@/Components/User/ReviewList.vue";
 import { Button, Textarea } from "primevue";
 import { ref, computed } from "vue";
 import { router, Link } from "@inertiajs/vue3";
@@ -223,6 +224,9 @@ const cancelReply = () => {
                         </div>
                     </div>
 
+                    <!-- Reviews Section -->
+                    <ReviewList :destination="destination" />
+
                     <!-- Comments Section -->
                     <div
                         id="comments-section"
@@ -360,11 +364,7 @@ const cancelReply = () => {
                                     คะแนน
                                 </span>
                                 <span class="font-semibold">
-                                    {{
-                                        Number(
-                                            destination.average_rating
-                                        ).toFixed(1)
-                                    }}
+                                    {{ destination.average_rating }}
                                     <span class="text-sm opacity-60">
                                         ({{ destination.total_reviews || 0 }})
                                     </span>

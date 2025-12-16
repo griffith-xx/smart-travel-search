@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             UserPreferenceSeeder::class,
             DestinationSeeder::class,
             DestinationPreferenceSeeder::class,
+            ReviewSeeder::class,
             DestinationLikeSeeder::class,
             DestinationCommentSeeder::class,
             CommentLikeSeeder::class,

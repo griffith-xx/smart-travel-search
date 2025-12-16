@@ -5,6 +5,7 @@ use App\Http\Controllers\User\DestinationCommentController;
 use App\Http\Controllers\User\DestinationController;
 use App\Http\Controllers\User\DestinationLikeController;
 use App\Http\Controllers\User\MapController;
+use App\Http\Controllers\User\ReviewController;
 use App\Http\Controllers\User\UserPreferenceController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,12 @@ Route::middleware([
     Route::delete('/comments/{comment}', [DestinationCommentController::class, 'destroy'])->name('comments.destroy');
 
     Route::post('/comments/{comment}/like', [CommentLikeController::class, 'toggle'])->name('comments.like.toggle');
+
+    Route::get('/destinations/{destination}/reviews', [ReviewController::class, 'index'])->name('destinations.reviews.index');
+    Route::post('/destinations/{destination}/reviews', [ReviewController::class, 'store'])->name('destinations.reviews.store');
+    Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+    Route::post('/reviews/{review}/helpful', [ReviewController::class, 'helpful'])->name('reviews.helpful');
 
     Route::get('/preferences', [UserPreferenceController::class, 'index'])->name('preferences.index');
     Route::get('/preferences/create', [UserPreferenceController::class, 'create'])->name('preferences.create');
