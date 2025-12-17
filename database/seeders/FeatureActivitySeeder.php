@@ -37,7 +37,7 @@ class FeatureActivitySeeder extends Seeder
                 'name' => 'การดูแลสุขภาพด้วยสมุนไพรและวิธีธรรมชาติ',
                 'slug' => 'herbal_natural_healing',
                 'description' => 'การรักษาด้วยสมุนไพรไทย การอบสมุนไพร และธรรมชาติบำบัด',
-            ]
+            ],
         ];
 
         foreach ($activities as $activity) {

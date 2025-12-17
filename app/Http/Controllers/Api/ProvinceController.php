@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use Exception;
-use App\Models\Province;
 use App\Http\Controllers\Controller;
+use App\Models\Province;
+use Exception;
 use Illuminate\Support\Facades\Cache;
 
 class ProvinceController extends Controller
@@ -24,7 +24,7 @@ class ProvinceController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to fetch provinces',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }

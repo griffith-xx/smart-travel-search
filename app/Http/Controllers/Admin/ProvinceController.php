@@ -33,7 +33,7 @@ class ProvinceController extends Controller
     public function create()
     {
         return Inertia::render('Admin/Provinces/Create', [
-            'regions' => config('regions')
+            'regions' => config('regions'),
         ]);
     }
 
@@ -70,7 +70,7 @@ class ProvinceController extends Controller
     public function show(string $id)
     {
         return Inertia::render('Admin/Provinces/Show', [
-            'province' => Province::with('destinations')->find($id)
+            'province' => Province::with('destinations')->find($id),
         ]);
     }
 

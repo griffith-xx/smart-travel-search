@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class AdminAuthController extends Controller
 {
@@ -22,6 +22,7 @@ class AdminAuthController extends Controller
             if ($email && $password) {
                 if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $password], true)) {
                     request()->session()->regenerate();
+
                     return redirect()->intended(route('admin.dashboard'));
                 }
             }
@@ -49,6 +50,7 @@ class AdminAuthController extends Controller
     public function logout()
     {
         Auth::guard('admin')->logout();
+
         return redirect()->route('welcome');
     }
 }

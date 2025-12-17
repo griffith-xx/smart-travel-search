@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use Exception;
-use App\Models\Destination;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Destination;
+use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Validator;
 
 class DestinationController extends Controller
 {
@@ -25,7 +25,7 @@ class DestinationController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to fetch destinations',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -83,7 +83,7 @@ class DestinationController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Validation error',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -97,13 +97,13 @@ class DestinationController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Destination created successfully',
-                'data' => $destination->load('province')
+                'data' => $destination->load('province'),
             ], 201);
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to create destination',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -118,13 +118,13 @@ class DestinationController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Destination deleted successfully'
+                'message' => 'Destination deleted successfully',
             ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to delete destination',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }

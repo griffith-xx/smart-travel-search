@@ -22,7 +22,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'central',
                 'image_url' => 'https://i.natgeofe.com/n/e06ce9b7-4a57-4b95-a50e-346c21e51c1d/thailand-bangkok-temple.jpg',
                 'is_popular' => true,
-                'sort_order' => 1
+                'sort_order' => 1,
             ],
             [
                 'name' => 'เชียงใหม่',
@@ -33,7 +33,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'north',
                 'image_url' => 'https://www.holidify.com/images/bgImages/CHIANG-MAI.jpg',
                 'is_popular' => true,
-                'sort_order' => 2
+                'sort_order' => 2,
             ],
             [
                 'name' => 'ภูเก็ต',
@@ -44,7 +44,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'south',
                 'image_url' => 'https://media.timeout.com/images/105992925/750/422/image.jpg',
                 'is_popular' => true,
-                'sort_order' => 3
+                'sort_order' => 3,
             ],
             [
                 'name' => 'ชลบุรี',
@@ -55,7 +55,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'east',
                 'image_url' => 'https://www.dusit.com/dusitthani-pattaya/wp-content/uploads/sites/11/2021/04/Pattaya-Beach-scaled.jpg',
                 'is_popular' => true,
-                'sort_order' => 4
+                'sort_order' => 4,
             ],
             [
                 'name' => 'กระบี่',
@@ -66,7 +66,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'south',
                 'image_url' => 'https://a.cdn-hotels.com/gdcs/production16/d1223/04a35120-0382-4848-a0c8-113e61386d3b.jpg',
                 'is_popular' => true,
-                'sort_order' => 5
+                'sort_order' => 5,
             ],
             [
                 'name' => 'สุราษฎร์ธานี',
@@ -77,7 +77,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'south',
                 'image_url' => 'https://www.royalcoasttravel.com/wp-content/uploads/2023/11/Surat-Thani-Attractions.jpg',
                 'is_popular' => true,
-                'sort_order' => 6
+                'sort_order' => 6,
             ],
             [
                 'name' => 'พระนครศรีอยุธยา',
@@ -88,7 +88,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'central',
                 'image_url' => 'https://content.r9cdn.net/rimg/dimg/58/6a/d283623e-city-21695-1649983949.jpg?width=1366&height=768&xhint=1543&yhint=1097&crop=true',
                 'is_popular' => true,
-                'sort_order' => 7
+                'sort_order' => 7,
             ],
             [
                 'name' => 'เชียงราย',
@@ -99,7 +99,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'north',
                 'image_url' => 'https://media.cntraveller.in/wp-content/uploads/2019/04/GettyImages-627768514-866x487.jpg',
                 'is_popular' => true,
-                'sort_order' => 8
+                'sort_order' => 8,
             ],
             [
                 'name' => 'กาญจนบุรี',
@@ -110,7 +110,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'west',
                 'image_url' => 'https://www.tripsavvy.com/thmb/pXAZA-Y11Bpj34y-2KxJER1hJbY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/river-kwai-bridge-in-kanchanaburi--thailand-1209355382-7f7f3f26947047918a0b06253b2f5d96.jpg',
                 'is_popular' => true,
-                'sort_order' => 9
+                'sort_order' => 9,
             ],
             [
                 'name' => 'เพชรบุรี',
@@ -121,7 +121,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'west',
                 'image_url' => 'https://files.thailand-guide.com/wp-content/uploads/2023/10/26130959/phetchaburi-12.jpg',
                 'is_popular' => true,
-                'sort_order' => 10
+                'sort_order' => 10,
             ],
             [
                 'name' => 'ขอนแก่น',
@@ -132,7 +132,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'northeast',
                 'image_url' => 'https://i.ytimg.com/vi/fF_QQ91wa4w/maxresdefault.jpg',
                 'is_popular' => true,
-                'sort_order' => 11
+                'sort_order' => 11,
             ],
             [
                 'name' => 'หนองคาย',
@@ -143,7 +143,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'northeast',
                 'image_url' => 'https://www.ktc.co.th/pub/media/Article/11/nong-4.webp',
                 'is_popular' => true,
-                'sort_order' => 12
+                'sort_order' => 12,
             ],
             [
                 'name' => 'อุดรธานี',
@@ -154,7 +154,7 @@ class ProvinceSeeder extends Seeder
                 'region' => 'northeast',
                 'image_url' => 'https://static.smarttravelapp.com/data/pois/556_talaybuadang2_1582625906.jpg',
                 'is_popular' => true,
-                'sort_order' => 13
+                'sort_order' => 13,
             ],
         ];
 

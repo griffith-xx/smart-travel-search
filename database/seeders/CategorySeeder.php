@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -20,7 +19,7 @@ class CategorySeeder extends Seeder
                 'description' => 'สถานที่ให้บริการสปา นวดแผนไทย นวดน้ำมัน และทรีทเมนท์เพื่อการผ่อนคลาย',
                 'image_url' => '',
                 'is_popular' => true,
-                'sort_order' => 1
+                'sort_order' => 1,
             ],
             [
                 'name' => 'โยคะและสมาธิ',
@@ -28,7 +27,7 @@ class CategorySeeder extends Seeder
                 'description' => 'สตูดิโอโยคะ ศูนย์ปฏิบัติธรรม และสถานที่สำหรับฝึกสมาธิเพื่อความสงบของจิตใจ',
                 'image_url' => '',
                 'is_popular' => true,
-                'sort_order' => 2
+                'sort_order' => 2,
             ],
             [
                 'name' => 'บ่อน้ำพุร้อนและออนเซ็น',
@@ -36,7 +35,7 @@ class CategorySeeder extends Seeder
                 'description' => 'สถานที่ให้บริการแช่น้ำพุร้อนธรรมชาติหรือออนเซ็นสไตล์ญี่ปุ่นเพื่อสุขภาพและการผ่อนคลาย',
                 'image_url' => '',
                 'is_popular' => true,
-                'sort_order' => 3
+                'sort_order' => 3,
             ],
             [
                 'name' => 'ศูนย์สุขภาพและเวลเนสรีทรีท',
@@ -44,7 +43,7 @@ class CategorySeeder extends Seeder
                 'description' => 'โปรแกรมดูแลสุขภาพแบบองค์รวมที่พักค้างคืน เช่น โปรแกรมดีท็อกซ์ การควบคุมน้ำหนัก',
                 'image_url' => '',
                 'is_popular' => false,
-                'sort_order' => 4
+                'sort_order' => 4,
             ],
             [
                 'name' => 'คลินิกความงามและเสริมความงาม',
@@ -52,7 +51,7 @@ class CategorySeeder extends Seeder
                 'description' => 'คลินิกที่ให้บริการด้านความงาม การดูแลผิวพรรณ ทรีทเมนท์ใบหน้าและเรือนร่าง',
                 'image_url' => '',
                 'is_popular' => false,
-                'sort_order' => 5
+                'sort_order' => 5,
             ],
             [
                 'name' => 'ฟิตเนสและกิจกรรมกีฬา',
@@ -60,7 +59,7 @@ class CategorySeeder extends Seeder
                 'description' => 'ยิม ฟิตเนส สนามมวยไทย หรือกิจกรรมกีฬาต่างๆ เพื่อการออกกำลังกายและสุขภาพที่แข็งแรง',
                 'image_url' => '',
                 'is_popular' => false,
-                'sort_order' => 6
+                'sort_order' => 6,
             ],
             [
                 'name' => 'การบำบัดทางเลือก',
@@ -68,7 +67,7 @@ class CategorySeeder extends Seeder
                 'description' => 'ศาสตร์การบำบัดอื่นๆ เช่น การฝังเข็ม กายภาพบำบัด หรือการแพทย์แผนไทยประยุกต์',
                 'image_url' => '',
                 'is_popular' => false,
-                'sort_order' => 7
+                'sort_order' => 7,
             ],
             [
                 'name' => 'โรงแรมและที่พัก',
@@ -76,7 +75,7 @@ class CategorySeeder extends Seeder
                 'description' => 'โรงแรม รีสอร์ท และที่พักต่างๆ ที่มีบริการด้านสุขภาพ เช่น สปา ฟิตเนส หรืออาหารเพื่อสุขภาพ',
                 'image_url' => '',
                 'is_popular' => true,
-                'sort_order' => 8
+                'sort_order' => 8,
             ],
             [
                 'name' => 'โรงพยาบาลและศูนย์การแพทย์',
@@ -84,7 +83,7 @@ class CategorySeeder extends Seeder
                 'description' => 'โรงพยาบาลที่ให้บริการตรวจสุขภาพ โปรแกรมดูแลสุขภาพเฉพาะทาง หรือศูนย์การแพทย์ต่างๆ',
                 'image_url' => '',
                 'is_popular' => false,
-                'sort_order' => 9
+                'sort_order' => 9,
             ],
         ];
 

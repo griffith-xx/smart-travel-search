@@ -2,6 +2,7 @@
 import UserLayout from "@/Layouts/UserLayout.vue";
 import CommentItem from "@/Components/User/CommentItem.vue";
 import ReviewList from "@/Components/User/ReviewList.vue";
+import AddToPlanButton from "@/Components/User/AddToPlanButton.vue";
 import { Button, Textarea } from "primevue";
 import { ref, computed } from "vue";
 import { router, Link } from "@inertiajs/vue3";
@@ -416,9 +417,11 @@ const cancelReply = () => {
 
                         <!-- Action Buttons -->
                         <div
-                            v-if="googleMapsUrl || hasOnlineBooking"
                             class="mt-4 pt-4 border-t border-surface-300 dark:border-surface-700 space-y-3"
                         >
+                            <!-- Add to Plan Button -->
+                            <AddToPlanButton :destination="destination" />
+
                             <!-- Google Maps Button -->
                             <a
                                 v-if="googleMapsUrl"

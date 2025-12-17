@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use Exception;
 use App\Http\Controllers\Controller;
 use App\Models\DestinationScraper;
+use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Validator;
 
 class DestinationScraperController extends Controller
 {
@@ -23,7 +23,7 @@ class DestinationScraperController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to fetch destination scraper data',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -43,7 +43,7 @@ class DestinationScraperController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Validation error',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -63,7 +63,7 @@ class DestinationScraperController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to create DestinationScraper',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -78,13 +78,13 @@ class DestinationScraperController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'DestinationScraper deleted successfully'
+                'message' => 'DestinationScraper deleted successfully',
             ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to delete DestinationScraper',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }

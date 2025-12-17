@@ -30,6 +30,11 @@ const navigations = ref([
         route: "destinations.saved",
     },
     {
+        label: "แผนการท่องเที่ยว",
+        icon: "pi pi-calendar",
+        route: "travel-plan.index",
+    },
+    {
         label: "ความชอบของฉัน",
         icon: "pi pi-sliders-h",
         route: "preferences.index",

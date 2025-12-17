@@ -22,7 +22,7 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        $destinations  = Destination::with(['province', 'category'])->orderByDesc('id')->get();
+        $destinations = Destination::with(['province', 'category'])->orderByDesc('id')->get();
 
         return Inertia::render('Admin/Destinations/Index', [
             'destinations' => $destinations,
@@ -112,7 +112,7 @@ class DestinationController extends Controller
         $destination->load([
             'province',
             'category',
-            'preference'
+            'preference',
         ]);
 
         if ($destination->preference) {
@@ -231,7 +231,7 @@ class DestinationController extends Controller
     public function toggleActive(Destination $destination)
     {
         $destination->update([
-            'is_active' => !$destination->is_active,
+            'is_active' => ! $destination->is_active,
             'updated_by' => auth('admin')->id(),
         ]);
 
@@ -249,7 +249,7 @@ class DestinationController extends Controller
     public function toggleFeatured(Destination $destination)
     {
         $destination->update([
-            'is_featured' => !$destination->is_featured,
+            'is_featured' => ! $destination->is_featured,
             'updated_by' => auth('admin')->id(),
         ]);
 

@@ -6,6 +6,8 @@ use App\Http\Controllers\User\DestinationController;
 use App\Http\Controllers\User\DestinationLikeController;
 use App\Http\Controllers\User\MapController;
 use App\Http\Controllers\User\ReviewController;
+use App\Http\Controllers\User\TravelPlanController;
+use App\Http\Controllers\User\TravelPlanItemController;
 use App\Http\Controllers\User\UserPreferenceController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,4 +42,15 @@ Route::middleware([
     Route::post('/preferences/store', [UserPreferenceController::class, 'store'])->name('preferences.store');
     Route::get('/preferences/edit', [UserPreferenceController::class, 'edit'])->name('preferences.edit');
     Route::put('/preferences/update', [UserPreferenceController::class, 'update'])->name('preferences.update');
+
+    Route::get('/travel-plan', [TravelPlanController::class, 'index'])->name('travel-plan.index');
+    Route::post('/travel-plan', [TravelPlanController::class, 'store'])->name('travel-plan.store');
+    Route::put('/travel-plan/{travelPlan}', [TravelPlanController::class, 'update'])->name('travel-plan.update');
+    Route::delete('/travel-plan/{travelPlan}', [TravelPlanController::class, 'destroy'])->name('travel-plan.destroy');
+    Route::get('/travel-plan/active', [TravelPlanController::class, 'getActivePlan'])->name('travel-plan.active');
+
+    Route::post('/travel-plan/items', [TravelPlanItemController::class, 'store'])->name('travel-plan.items.store');
+    Route::put('/travel-plan/items/{travelPlanItem}', [TravelPlanItemController::class, 'update'])->name('travel-plan.items.update');
+    Route::delete('/travel-plan/items/{travelPlanItem}', [TravelPlanItemController::class, 'destroy'])->name('travel-plan.items.destroy');
+    Route::post('/travel-plan/{travelPlan}/items/reorder', [TravelPlanItemController::class, 'reorder'])->name('travel-plan.items.reorder');
 });

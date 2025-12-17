@@ -37,7 +37,7 @@ class FeatureWellnessExperienceSeeder extends Seeder
                 'name' => 'เป็นผู้เชี่ยวชาญ/ผู้สอน',
                 'slug' => 'expert_instructor',
                 'description' => 'เป็นผู้เชี่ยวชาญหรือผู้สอนด้าน wellness มีความรู้ลึกและประสบการณ์มากมาย',
-            ]
+            ],
         ];
 
         foreach ($wellnessExperiences as $experience) {

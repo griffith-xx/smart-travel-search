@@ -37,7 +37,7 @@ class FeatureDurationIntensitySeeder extends Seeder
                 'name' => 'การเปลี่ยนแปลงชีวิต',
                 'slug' => 'life_transformation',
                 'description' => 'โปรแกรมระยะยาว 1 เดือนขึ้นไป เปลี่ยนแปลงวิถีชีวิตอย่างถาวร',
-            ]
+            ],
         ];
 
         foreach ($durationIntensities as $duration) {

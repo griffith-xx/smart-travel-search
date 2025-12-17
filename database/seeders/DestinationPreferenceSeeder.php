@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Destination;
-use App\Models\DestinationPreference;
 use Illuminate\Database\Seeder;
 
 class DestinationPreferenceSeeder extends Seeder

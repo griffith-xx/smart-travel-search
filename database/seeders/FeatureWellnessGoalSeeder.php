@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\FeatureWellnessGoal;
+use Illuminate\Database\Seeder;
 
 class FeatureWellnessGoalSeeder extends Seeder
 {
