@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Destination;
+use App\Models\Province;
 use App\Services\RecommendationService;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,6 +18,20 @@ class DestinationController extends Controller
 
     public function index(): Response
     {
+        $validated = request()->validate([
+            'search' => 'nullable|string|max:255',
+            'sort' => 'nullable|in:latest,oldest,name_asc,name_desc,rating_desc,popular,price_asc,price_desc',
+            'price_min' => 'nullable|numeric|min:0',
+            'price_max' => 'nullable|numeric|min:0|gte:price_min',
+            'rating_min' => 'nullable|numeric|min:0|max:5',
+            'provinces' => 'nullable|array',
+            'provinces.*' => 'exists:provinces,id',
+            'categories' => 'nullable|array',
+            'categories.*' => 'exists:categories,id',
+            'features' => 'nullable|array',
+            'features.*' => 'in:parking,wifi,restaurant,pet_friendly,online_booking,featured',
+        ]);
+
         $search = request('search');
         $sort = request('sort', 'latest');
 
@@ -23,6 +39,54 @@ class DestinationController extends Controller
             ->where('is_active', true)
             ->whereNotNull('published_at')
             ->with(['province', 'category']);
+
+        // Price range filter
+        if (request()->filled('price_min')) {
+            $query->where(function ($q) {
+                $q->where('price_to', '>=', request('price_min'))
+                    ->orWhereNull('price_to');
+            });
+        }
+
+        if (request()->filled('price_max')) {
+            $query->where(function ($q) {
+                $q->where('price_from', '<=', request('price_max'))
+                    ->orWhereNull('price_from');
+            });
+        }
+
+        // Rating filter
+        if (request()->filled('rating_min')) {
+            $query->where('average_rating', '>=', request('rating_min'));
+        }
+
+        // Province filter (multi-select with OR logic)
+        if (request()->filled('provinces') && count(request('provinces')) > 0) {
+            $query->whereIn('province_id', request('provinces'));
+        }
+
+        // Category filter (multi-select with OR logic)
+        if (request()->filled('categories') && count(request('categories')) > 0) {
+            $query->whereIn('category_id', request('categories'));
+        }
+
+        // Feature filters (AND logic - ต้องมีครบทุกฟีเจอร์ที่เลือก)
+        if (request()->filled('features') && count(request('features')) > 0) {
+            $featureMap = [
+                'parking' => 'has_parking',
+                'wifi' => 'has_wifi',
+                'restaurant' => 'has_restaurant',
+                'pet_friendly' => 'pet_friendly',
+                'online_booking' => 'accepts_online_booking',
+                'featured' => 'is_featured',
+            ];
+
+            foreach (request('features') as $feature) {
+                if (isset($featureMap[$feature])) {
+                    $query->where($featureMap[$feature], true);
+                }
+            }
+        }
 
         // Apply search filter
         if ($search) {
@@ -80,6 +144,23 @@ class DestinationController extends Controller
             'filters' => [
                 'search' => $search,
                 'sort' => $sort,
+                'price_min' => request('price_min'),
+                'price_max' => request('price_max'),
+                'rating_min' => request('rating_min'),
+                'provinces' => request('provinces') ?? [],
+                'categories' => request('categories') ?? [],
+                'features' => request('features') ?? [],
+            ],
+            'filterOptions' => [
+                'provinces' => Province::orderBy('name')
+                    ->get(['id', 'name', 'name_en']),
+                'categories' => Category::orderBy('name')
+                    ->get(['id', 'name', 'name_en']),
+                'priceRange' => [
+                    'min' => 0,
+                    'max' => Destination::where('is_active', true)
+                        ->max('price_to') ?? 10000,
+                ],
             ],
         ]);
     }

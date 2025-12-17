@@ -1,6 +1,7 @@
 <script setup>
 import UserLayout from "@/Layouts/UserLayout.vue";
 import DestinationCard from "@/Components/User/DestinationCard.vue";
+import FilterSidebar from "@/Components/User/FilterSidebar.vue";
 import { Button, InputText, Select } from "primevue";
 import { ref, computed } from "vue";
 import { router } from "@inertiajs/vue3";
@@ -14,10 +15,15 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    filterOptions: {
+        type: Object,
+        required: true,
+    },
 });
 
 const search = ref(props.filters.search || "");
 const sortBy = ref(props.filters.sort || "latest");
+const isMobileFilterOpen = ref(false);
 
 const sortOptions = [
     { label: "ล่าสุด", value: "latest" },
@@ -30,12 +36,13 @@ const sortOptions = [
     { label: "ราคาสูงสุด", value: "price_desc" },
 ];
 
-const applyFilters = () => {
+const applyFilters = (additionalFilters = {}) => {
     router.get(
         route("destinations.index"),
         {
             search: search.value,
             sort: sortBy.value,
+            ...additionalFilters,
         },
         {
             preserveState: true,
@@ -50,8 +57,83 @@ const clearFilters = () => {
     router.get(route("destinations.index"), {}, { preserveState: false });
 };
 
+const removeFilter = (filterType, value = null) => {
+    const currentFilters = { ...props.filters };
+
+    switch (filterType) {
+        case "price":
+            delete currentFilters.price_min;
+            delete currentFilters.price_max;
+            break;
+        case "rating":
+            delete currentFilters.rating_min;
+            break;
+        case "province":
+            currentFilters.provinces = currentFilters.provinces.filter(
+                (id) => id !== value
+            );
+            break;
+        case "category":
+            currentFilters.categories = currentFilters.categories.filter(
+                (id) => id !== value
+            );
+            break;
+        case "feature":
+            currentFilters.features = currentFilters.features.filter(
+                (f) => f !== value
+            );
+            break;
+    }
+
+    router.get(
+        route("destinations.index"),
+        {
+            search: search.value,
+            sort: sortBy.value,
+            ...currentFilters,
+        },
+        {
+            preserveState: true,
+            preserveScroll: true,
+        }
+    );
+};
+
+const getFeatureLabel = (feature) => {
+    const labels = {
+        parking: "ที่จอดรถ",
+        wifi: "WiFi",
+        restaurant: "ร้านอาหาร",
+        pet_friendly: "สัตว์เลี้ยงเข้าได้",
+        online_booking: "จองออนไลน์ได้",
+        featured: "แนะนำพิเศษ",
+    };
+    return labels[feature] || feature;
+};
+
+const getFeatureIcon = (feature) => {
+    const icons = {
+        parking: "pi-car",
+        wifi: "pi-wifi",
+        restaurant: "pi-shopping-bag",
+        pet_friendly: "pi-heart",
+        online_booking: "pi-calendar",
+        featured: "pi-star-fill",
+    };
+    return icons[feature] || "pi-tag";
+};
+
 const hasFilters = computed(() => {
-    return search.value || sortBy.value !== "latest";
+    return (
+        search.value ||
+        sortBy.value !== "latest" ||
+        props.filters.price_min ||
+        props.filters.price_max ||
+        props.filters.rating_min ||
+        (props.filters.provinces && props.filters.provinces.length > 0) ||
+        (props.filters.categories && props.filters.categories.length > 0) ||
+        (props.filters.features && props.filters.features.length > 0)
+    );
 });
 </script>
 
@@ -181,84 +263,209 @@ const hasFilters = computed(() => {
             </div>
         </div>
 
-        <!-- Results Section -->
+        <!-- Main Content with Sidebar Layout -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- Results Count -->
-            <div class="mb-6">
-                <p class="text-sm opacity-70">
-                    พบ
-                    <span class="font-semibold">{{ destinations.total }}</span>
-                    สถานที่
-                </p>
-            </div>
-
-            <!-- Destinations Grid -->
-            <div
-                v-if="destinations.data.length > 0"
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8"
-            >
-                <DestinationCard
-                    v-for="destination in destinations.data"
-                    :key="destination.id"
-                    :destination="destination"
+            <div class="flex gap-6">
+                <!-- Filter Sidebar -->
+                <FilterSidebar
+                    :filters="filters"
+                    :filter-options="filterOptions"
+                    :is-mobile-open="isMobileFilterOpen"
+                    @apply="applyFilters"
+                    @close="isMobileFilterOpen = false"
                 />
-            </div>
 
-            <!-- Empty State -->
-            <div
-                v-else
-                class="text-center py-16 bg-[var(--p-content-background)] rounded-xl border border-surface-300 dark:border-surface-700"
-            >
-                <div class="w-24 h-24 mx-auto mb-4 opacity-20">
-                    <i class="pi pi-inbox text-6xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">
-                    ไม่พบสถานที่ท่องเที่ยว
-                </h3>
-                <p class="opacity-70 mb-6">
-                    ลองเปลี่ยนคำค้นหาหรือตัวกรองของคุณ
-                </p>
-                <Button
-                    @click="clearFilters"
-                    label="ล้างตัวกรอง"
-                    icon="pi pi-refresh"
-                    severity="secondary"
-                />
-            </div>
+                <!-- Main Content -->
+                <div class="flex-1 min-w-0">
+                    <!-- Mobile filter button -->
+                    <div class="lg:hidden mb-4">
+                        <Button
+                            @click="isMobileFilterOpen = true"
+                            icon="pi pi-filter"
+                            label="ตัวกรอง"
+                            outlined
+                            class="w-full"
+                        />
+                    </div>
 
-            <!-- Pagination -->
-            <div
-                v-if="
-                    destinations.data.length > 0 && destinations.last_page > 1
-                "
-                class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-surface-300 dark:border-surface-700"
-            >
-                <!-- Page Info -->
-                <div class="text-sm opacity-70">
-                    หน้า {{ destinations.current_page }} จาก
-                    {{ destinations.last_page }}
-                </div>
+                    <!-- Active filter chips -->
+                    <div v-if="hasFilters" class="mb-6 flex flex-wrap gap-2">
+                        <!-- Price chip -->
+                        <div
+                            v-if="filters.price_min || filters.price_max"
+                            class="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--p-primary-color)]/10 text-[var(--p-primary-color)] rounded-full text-sm"
+                        >
+                            <i class="pi pi-tag text-xs"></i>
+                            <span>
+                                ฿{{
+                                    (filters.price_min || 0).toLocaleString()
+                                }}
+                                -
+                                ฿{{
+                                    (
+                                        filters.price_max ||
+                                        filterOptions.priceRange.max
+                                    ).toLocaleString()
+                                }}
+                            </span>
+                            <button @click="removeFilter('price')">
+                                <i
+                                    class="pi pi-times text-xs hover:opacity-70"
+                                ></i>
+                            </button>
+                        </div>
 
-                <!-- Pagination Buttons -->
-                <div class="flex gap-2">
-                    <Button
-                        v-for="link in destinations.links"
-                        :key="link.label"
-                        :disabled="!link.url || link.active"
-                        :severity="link.active ? 'primary' : 'secondary'"
-                        :outlined="!link.active"
-                        @click="
-                            link.url &&
-                                router.get(
-                                    link.url,
-                                    {},
-                                    { preserveState: true }
-                                )
-                        "
-                        size="small"
+                        <!-- Rating chip -->
+                        <div
+                            v-if="filters.rating_min"
+                            class="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--p-primary-color)]/10 text-[var(--p-primary-color)] rounded-full text-sm"
+                        >
+                            <i class="pi pi-star-fill text-xs"></i>
+                            <span>{{ filters.rating_min }}+ ดาว</span>
+                            <button @click="removeFilter('rating')">
+                                <i
+                                    class="pi pi-times text-xs hover:opacity-70"
+                                ></i>
+                            </button>
+                        </div>
+
+                        <!-- Province chips -->
+                        <div
+                            v-for="provinceId in filters.provinces"
+                            :key="`province-${provinceId}`"
+                            class="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--p-primary-color)]/10 text-[var(--p-primary-color)] rounded-full text-sm"
+                        >
+                            <i class="pi pi-map-marker text-xs"></i>
+                            <span>{{
+                                filterOptions.provinces.find(
+                                    (p) => p.id === provinceId
+                                )?.name
+                            }}</span>
+                            <button @click="removeFilter('province', provinceId)">
+                                <i
+                                    class="pi pi-times text-xs hover:opacity-70"
+                                ></i>
+                            </button>
+                        </div>
+
+                        <!-- Category chips -->
+                        <div
+                            v-for="categoryId in filters.categories"
+                            :key="`category-${categoryId}`"
+                            class="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--p-primary-color)]/10 text-[var(--p-primary-color)] rounded-full text-sm"
+                        >
+                            <i class="pi pi-tag text-xs"></i>
+                            <span>{{
+                                filterOptions.categories.find(
+                                    (c) => c.id === categoryId
+                                )?.name
+                            }}</span>
+                            <button @click="removeFilter('category', categoryId)">
+                                <i
+                                    class="pi pi-times text-xs hover:opacity-70"
+                                ></i>
+                            </button>
+                        </div>
+
+                        <!-- Feature chips -->
+                        <div
+                            v-for="feature in filters.features"
+                            :key="`feature-${feature}`"
+                            class="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--p-primary-color)]/10 text-[var(--p-primary-color)] rounded-full text-sm"
+                        >
+                            <i
+                                :class="`pi ${getFeatureIcon(feature)} text-xs`"
+                            ></i>
+                            <span>{{ getFeatureLabel(feature) }}</span>
+                            <button @click="removeFilter('feature', feature)">
+                                <i
+                                    class="pi pi-times text-xs hover:opacity-70"
+                                ></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Results Count -->
+                    <div class="mb-6">
+                        <p class="text-sm opacity-70">
+                            พบ
+                            <span class="font-semibold">{{
+                                destinations.total
+                            }}</span>
+                            สถานที่
+                        </p>
+                    </div>
+
+                    <!-- Destinations Grid -->
+                    <div
+                        v-if="destinations.data.length > 0"
+                        class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-8"
                     >
-                        <span v-html="link.label"> </span>
-                    </Button>
+                        <DestinationCard
+                            v-for="destination in destinations.data"
+                            :key="destination.id"
+                            :destination="destination"
+                        />
+                    </div>
+
+                    <!-- Empty State -->
+                    <div
+                        v-else
+                        class="text-center py-16 bg-[var(--p-content-background)] rounded-xl border border-surface-300 dark:border-surface-700"
+                    >
+                        <div class="w-24 h-24 mx-auto mb-4 opacity-20">
+                            <i class="pi pi-inbox text-6xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">
+                            ไม่พบสถานที่ท่องเที่ยว
+                        </h3>
+                        <p class="opacity-70 mb-6">
+                            ลองเปลี่ยนคำค้นหาหรือตัวกรองของคุณ
+                        </p>
+                        <Button
+                            @click="clearFilters"
+                            label="ล้างตัวกรอง"
+                            icon="pi pi-refresh"
+                            severity="secondary"
+                        />
+                    </div>
+
+                    <!-- Pagination -->
+                    <div
+                        v-if="
+                            destinations.data.length > 0 &&
+                            destinations.last_page > 1
+                        "
+                        class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-surface-300 dark:border-surface-700"
+                    >
+                        <!-- Page Info -->
+                        <div class="text-sm opacity-70">
+                            หน้า {{ destinations.current_page }} จาก
+                            {{ destinations.last_page }}
+                        </div>
+
+                        <!-- Pagination Buttons -->
+                        <div class="flex gap-2">
+                            <Button
+                                v-for="link in destinations.links"
+                                :key="link.label"
+                                :disabled="!link.url || link.active"
+                                :severity="link.active ? 'primary' : 'secondary'"
+                                :outlined="!link.active"
+                                @click="
+                                    link.url &&
+                                        router.get(
+                                            link.url,
+                                            {},
+                                            { preserveState: true }
+                                        )
+                                "
+                                size="small"
+                            >
+                                <span v-html="link.label"> </span>
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
